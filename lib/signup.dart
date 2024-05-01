@@ -24,7 +24,7 @@ class _SignupState extends State<Signup>{
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.fromLTRB(
-              20, height * 0.1, 20, height * 0.1),
+              20, height * 0.1, 20, 0),
             child: Column(
               children: [
                 bigLogo("assets/logo_full.png"),
@@ -43,7 +43,6 @@ class _SignupState extends State<Signup>{
                 textField("Confirm Password", "Enter your password again", true, passwordController),
                 const SizedBox(height: 30),
                 mainBtn(context, "Sign up", true, (){}),
-                const SizedBox(height: 20),
                 textLink(context, "Have an account? ", "Log in here", (){})
               ],
             ), 

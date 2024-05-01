@@ -31,7 +31,7 @@ class _LoginState extends State<Login>{
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.fromLTRB(
-              20, height * 0.1, 20, height * 0.1),
+              20, height * 0.1, 20, 0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -47,9 +47,12 @@ class _LoginState extends State<Login>{
                 textField("UTM Email", "Enter your registered email", false, emailController),
                 const SizedBox(height: 20),
                 textField("Password", "Enter your password", true, passwordController),
-                const SizedBox(height: 130),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: textLink(context, "Forgot password?", "", (){})
+                ),
+                const SizedBox(height: 100),
                 mainBtn(context, "Login", true, (){}),
-                const SizedBox(height: 20),
                 textLink(context, "No account? ", "Sign up here", (){})
               ],
             ), 
