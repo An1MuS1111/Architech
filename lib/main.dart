@@ -1,5 +1,5 @@
-import 'package:architech/home.dart';
 import 'package:architech/login.dart';
+import 'package:architech/signup.dart';
 import 'package:flutter/material.dart';
 
 void main() async {

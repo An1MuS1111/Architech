@@ -3,26 +3,19 @@ import 'package:architech/components/logos.dart';
 import 'package:architech/config/theme.dart';
 import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget{
-  const Login({super.key});
+class Signup extends StatefulWidget{
+  const Signup({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Signup> createState() => _SignupState();
 }
 
-class _LoginState extends State<Login>{
+class _SignupState extends State<Signup>{
   TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-
-  bool isInputFilled = true;
+  TextEditingController passwordController= TextEditingController();
 
   @override
-  void initState(){
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
 
     return GestureDetector(
@@ -33,12 +26,11 @@ class _LoginState extends State<Login>{
             padding: EdgeInsets.fromLTRB(
               20, height * 0.1, 20, height * 0.1),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
               children: [
                 bigLogo("assets/logo_full.png"),
                 const SizedBox(height: 30),
                 Text(
-                  "Log into your account",
+                  "Sign up an account",
                   style: TextStyle(
                     fontSize: mainTitle,
                   ),
@@ -47,14 +39,16 @@ class _LoginState extends State<Login>{
                 textField("UTM Email", "Enter your registered email", false, emailController),
                 const SizedBox(height: 20),
                 textField("Password", "Enter your password", true, passwordController),
-                const SizedBox(height: 130),
-                mainBtn(context, "Login", true, (){}),
                 const SizedBox(height: 20),
-                textLink(context, "No account? ", "Sign up here", (){})
+                textField("Confirm Password", "Enter your password again", true, passwordController),
+                const SizedBox(height: 30),
+                mainBtn(context, "Sign up", true, (){}),
+                const SizedBox(height: 20),
+                textLink(context, "Have an account? ", "Log in here", (){})
               ],
             ), 
           ),
-        ), 
+        ),
       ),
     );
   }
