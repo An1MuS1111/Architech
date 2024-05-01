@@ -1,4 +1,5 @@
 import 'package:architech/config/theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -160,6 +161,24 @@ Container mainBtn(BuildContext context, String text, bool isLogin, Function onTa
         style: const TextStyle(
           color: Colors.white
         ),
+      ),
+    ),
+  );
+}
+
+// Outlined button
+Container outlinedBtn(String text){
+  return Container(
+    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+    decoration: BoxDecoration(
+      border: Border.all(color: primaryColour),
+      borderRadius: BorderRadius.circular(40)
+    ),
+    child: Text(
+      text,
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: primaryColour
       ),
     ),
   );
