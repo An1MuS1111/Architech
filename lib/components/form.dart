@@ -60,6 +60,58 @@ Container textField(String text, String hintText, bool isPassword, TextEditingCo
   );
 }
 
+// Double-sided textfield
+Container duoTextField(String text, String hintText, bool isPassword, TextEditingController controller){
+  return Container(
+    child: Row(
+      children: [
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 15),
+          width: 140,
+          child: Text(
+            text
+          ),
+        ),
+        Expanded(
+          child: TextField(
+            controller: controller,
+            obscureText: isPassword,
+            enableSuggestions: !isPassword,
+            autocorrect: !isPassword,
+            cursorColor: primaryColour,
+            decoration: InputDecoration(
+              hintText: hintText,
+              hintStyle: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.normal,
+                color: Colors.grey,
+              ),
+              suffixIcon: isPassword ? const Padding(
+                padding: EdgeInsets.only(right: 10),
+                child: Icon(
+                  Icons.remove_red_eye,
+                  color: Colors.grey,
+                  size: 24
+                ),
+              ) : null,
+              isDense: true, 
+              contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+              border: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  width: 1,
+                  style: BorderStyle.solid
+                ),
+                borderRadius: BorderRadius.circular(4)
+              )
+            ),
+            keyboardType: isPassword ? TextInputType.visiblePassword : TextInputType.emailAddress,
+          ),
+        ),
+      ],
+    )
+  );
+}
+
 // Clickable texts
 Container textLink(BuildContext context, String firstText, String secondText, Color colour){
   return Container(
@@ -113,9 +165,51 @@ Container mainBtn(BuildContext context, String text, bool isLogin, Function onTa
   );
 }
 
+// Full button
+Container fullBtn(IconData icon, String text, Color colour){
+  return Container(
+    height: 55,
+    decoration: BoxDecoration(
+      border: Border.all(
+        color: lightGrey,
+      ),
+      borderRadius: BorderRadius.circular(4)
+    ),
+    child: TextButton(
+      onPressed: () => {}, 
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            size: 24,
+            color: colour
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: Text(
+                text,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.normal
+                )
+              ),
+            ),
+          ),
+          const Icon(
+            Icons.arrow_forward_ios_rounded,
+            size: 16,
+            color: Colors.black
+          )
+        ],
+      )
+    ),
+  );
+}
+
 // Logout Button
-ElevatedButton logoutBtn(){
-  return ElevatedButton(
+TextButton logoutBtn(){
+  return TextButton(
     onPressed: () => {},
     style: ButtonStyle(
       padding: MaterialStateProperty.all<EdgeInsets>(
@@ -124,7 +218,7 @@ ElevatedButton logoutBtn(){
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(4),
-          side: BorderSide(color: greyColour)
+          side: BorderSide(color: lightGrey)
         ),
       ),
     ),
