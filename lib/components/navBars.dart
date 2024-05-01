@@ -1,6 +1,10 @@
 import 'package:architech/components/logos.dart';
+import 'package:architech/config/theme.dart';
 import 'package:architech/models/bottomAppBarModel.dart';
 import 'package:architech/pages/home.dart';
+import 'package:architech/pages/orders.dart';
+import 'package:architech/pages/profile.dart';
+import 'package:architech/pages/support.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -19,6 +23,30 @@ AppBar topBar(BuildContext context){
   );
 }
 
+AppBar titleBar(BuildContext context, String text){
+  return AppBar(
+    leading: IconButton(
+      icon: const Icon(
+        Icons.arrow_back_ios_new_rounded,
+        size: 24,
+        color: Colors.black
+      ),
+      onPressed: (){
+        Navigator.pop(context);
+      }
+    ),
+    title: Container(
+      margin: const EdgeInsets.only(left: 55),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: mainTitle
+        )
+      ),
+    )
+  );
+}
+
 // Temporary
 Container bottomBar(BuildContext context){
   return Container(
@@ -34,16 +62,42 @@ Container bottomBar(BuildContext context){
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: List.generate(
-        4, (index) => SizedBox(
-          child: InkWell(
-            onTap: () => {
-              Navigator.of(context).push(barItems[index].route)
-            },
-            child: barItems[index].icon,
-          )
-        )
-      ),
+      children: [
+        InkWell(
+          onTap: () => {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Home()))
+          },
+          child: barItems[0].icon
+        ),
+        InkWell(
+          onTap: () => {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Orders()))
+          },
+          child: barItems[1].icon
+        ),
+        InkWell(
+          onTap: () => {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Support()))
+          },
+          child: barItems[2].icon
+        ),
+        InkWell(
+          onTap: () => {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Profile()))
+          },
+          child: barItems[3].icon
+        ),
+        // List.generate(
+        //   4, (index) => SizedBox(
+        //     child: InkWell(
+        //       onTap: () => {
+        //         Navigator.of(context).push(barItems[index].route)
+        //       },
+        //       child: barItems[index].icon,
+        //     )
+        //   )
+        // ),
+      ]
     ),
   );
 }
