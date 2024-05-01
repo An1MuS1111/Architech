@@ -1,6 +1,7 @@
 import 'package:architech/config/theme.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 // Textfields
 Container textField(String text, String hintText, bool isPassword, TextEditingController controller){
@@ -60,13 +61,13 @@ Container textField(String text, String hintText, bool isPassword, TextEditingCo
 }
 
 // Clickable texts
-Container textLink(BuildContext context, String firstText, String secondText){
+Container textLink(BuildContext context, String firstText, String secondText, Color colour){
   return Container(
     margin: const EdgeInsets.only(top: 15),
     child: RichText(
       text: TextSpan(
-        style: const TextStyle(
-          color: Colors.black
+        style: TextStyle(
+          color: colour
         ),
         children: <TextSpan>[
           TextSpan(
@@ -85,7 +86,6 @@ Container textLink(BuildContext context, String firstText, String secondText){
 }
 
 // Buttons
-// TODO: Add eye icon
 Container mainBtn(BuildContext context, String text, bool isLogin, Function onTap){
   return Container(
     width: MediaQuery.of(context).size.width,
@@ -109,6 +109,42 @@ Container mainBtn(BuildContext context, String text, bool isLogin, Function onTa
           color: Colors.white
         ),
       ),
+    ),
+  );
+}
+
+// Logout Button
+ElevatedButton logoutBtn(){
+  return ElevatedButton(
+    onPressed: () => {},
+    style: ButtonStyle(
+      padding: MaterialStateProperty.all<EdgeInsets>(
+        const EdgeInsets.symmetric(vertical: 12, horizontal: 25)
+      ),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(4),
+          side: BorderSide(color: greyColour)
+        ),
+      ),
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        const Text(
+          "Log out",
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.normal
+          ),
+        ),
+        const SizedBox(width: 110),
+        Icon(
+          Icons.logout_outlined,
+          size: 24,
+          color: greyColour
+        )
+      ]
     ),
   );
 }

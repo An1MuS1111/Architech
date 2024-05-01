@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
-Center bigLogo(String logoName){
-  return Center(
-    child: Image.asset(
-      logoName,
-      fit: BoxFit.fitWidth,
-      width: 300,
-    )
+Image appLogo(String logoName, double width){
+  return Image.asset(
+    logoName,
+    fit: BoxFit.fitWidth,
+    width: width,
   );
 }

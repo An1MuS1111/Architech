@@ -1,4 +1,4 @@
-import 'package:architech/login.dart';
+import 'package:architech/pages/login.dart';
 import 'package:go_router/go_router.dart';
 
 final _routers = GoRouter(

@@ -1,5 +1,52 @@
+import 'package:architech/components/logos.dart';
+import 'package:architech/models/bottomAppBarModel.dart';
+import 'package:architech/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+
+AppBar topBar(BuildContext context){
+  return AppBar(
+    leading: Padding(
+      padding: const EdgeInsets.only(left: 20),
+      child: InkWell(
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const Home()));
+        },
+        child: appLogo("assets/logo_small.png", 130)
+      ),
+    ),
+    leadingWidth: 160,
+  );
+}
+
+// Temporary
+Container bottomBar(BuildContext context){
+  return Container(
+    height: 80,
+    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+    margin: const EdgeInsets.symmetric(horizontal: 20),
+    decoration: const BoxDecoration(
+      color: Colors.black,
+      borderRadius: BorderRadius.only(
+        topRight: Radius.circular(20),
+        topLeft: Radius.circular(20)
+      ),
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: List.generate(
+        4, (index) => SizedBox(
+          child: InkWell(
+            onTap: () => {
+              Navigator.of(context).push(barItems[index].route)
+            },
+            child: barItems[index].icon,
+          )
+        )
+      ),
+    ),
+  );
+}
 
 class BottomAppBarDemo extends StatefulWidget {
   const BottomAppBarDemo({super.key});

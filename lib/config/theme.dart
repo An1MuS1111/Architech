@@ -17,3 +17,6 @@ Color semanticInfo = const Color(0xFF5fbff9);
 double mainTitle = 20;
 double subTitle = 18; 
 double regular = 14;
+
+// Icon size
+double iconSize = 35;
