@@ -1,6 +1,6 @@
-import 'package:architech/components/bottomAppBar.dart';
-import 'package:architech/login.dart';
-import 'package:architech/signup.dart';
+import 'package:architech/pages/login.dart';
+import 'package:architech/pages/profile.dart';
+import 'package:architech/pages/signup.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // routerConfig: _routers
       routes: {
-        '/': (context) => const Login()
+        '/': (context) => const Profile()
       }
     );
   }
