@@ -1,3 +1,4 @@
+import 'package:architech/components/bottomAppBar.dart';
 import 'package:architech/login.dart';
 import 'package:architech/signup.dart';
 import 'package:flutter/material.dart';

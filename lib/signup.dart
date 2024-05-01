@@ -1,6 +1,7 @@
 import 'package:architech/components/form.dart';
 import 'package:architech/components/logos.dart';
 import 'package:architech/config/theme.dart';
+import 'package:architech/login.dart';
 import 'package:flutter/material.dart';
 
 class Signup extends StatefulWidget{
@@ -43,7 +44,10 @@ class _SignupState extends State<Signup>{
                 textField("Confirm Password", "Enter your password again", true, passwordController),
                 const SizedBox(height: 30),
                 mainBtn(context, "Sign up", true, (){}),
-                textLink(context, "Have an account? ", "Log in here", (){})
+                InkWell(
+                  child: textLink(context, "Have an account? ", "Log in here"),
+                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const Login())),
+                )
               ],
             ), 
           ),

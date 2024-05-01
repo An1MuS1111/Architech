@@ -1,6 +1,8 @@
 import 'package:architech/components/form.dart';
 import 'package:architech/components/logos.dart';
 import 'package:architech/config/theme.dart';
+import 'package:architech/home.dart';
+import 'package:architech/signup.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget{
@@ -49,11 +51,21 @@ class _LoginState extends State<Login>{
                 textField("Password", "Enter your password", true, passwordController),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: textLink(context, "Forgot password?", "", (){})
+                  child: InkWell(
+                    child: textLink(context, "Forgot password?", ""),
+                    onTap: () => {},
+                  )
                 ),
                 const SizedBox(height: 100),
-                mainBtn(context, "Login", true, (){}),
-                textLink(context, "No account? ", "Sign up here", (){})
+                mainBtn(context, "Login", true, (){
+                  Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => const Home())
+                  );
+                }),
+                InkWell(
+                  child: textLink(context, "No account? ", "Sign up here"),
+                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const Signup())),
+                ),
               ],
             ), 
           ),

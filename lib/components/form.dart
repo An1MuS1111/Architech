@@ -60,7 +60,7 @@ Container textField(String text, String hintText, bool isPassword, TextEditingCo
 }
 
 // Clickable texts
-Container textLink(BuildContext context, String firstText, String secondText, Function onTap){
+Container textLink(BuildContext context, String firstText, String secondText){
   return Container(
     margin: const EdgeInsets.only(top: 15),
     child: RichText(
@@ -68,10 +68,6 @@ Container textLink(BuildContext context, String firstText, String secondText, Fu
         style: const TextStyle(
           color: Colors.black
         ),
-        recognizer: TapGestureRecognizer()
-        ..onTap = (){
-          onTap();
-        },
         children: <TextSpan>[
           TextSpan(
             text: firstText
