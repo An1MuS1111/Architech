@@ -1,4 +1,6 @@
 import 'package:architech/pages/login.dart';
+import 'package:architech/pages/orders.dart';
+import 'package:architech/pages/placeOrder.dart';
 import 'package:architech/pages/profile.dart';
 import 'package:architech/pages/signup.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // routerConfig: _routers
       routes: {
-        '/': (context) => const Profile()
+        // '/': (context) => const Home()
+        '/': (context) => Orders()
       }
     );
   }
