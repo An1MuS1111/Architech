@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 class User extends ChangeNotifier {
-  bool _isLoggedIn = false;
-  String _email = '';
+  static const bool _defaultIsLoggedIn = false;
+  static const String _defaultEmail = '';
+
+  bool _isLoggedIn = _defaultIsLoggedIn;
+  String _email = _defaultEmail;
 
   bool get isLoggedIn => _isLoggedIn;
   String get email => _email;
@@ -10,8 +13,8 @@ class User extends ChangeNotifier {
   void login(String email, String password) {
     // Implement your login logic here
     // Set isLoggedIn to true if login is successful
-    _isLoggedIn = true;
-    _email = email;
+    _isLoggedIn = true; // Example implementation, replace with actual logic
+    _email = email; // Example implementation, replace with actual logic
     notifyListeners();
   }
 
@@ -23,4 +26,6 @@ class User extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+
 
