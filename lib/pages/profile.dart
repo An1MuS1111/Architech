@@ -70,7 +70,7 @@ class _ProfileState extends State<Profile>{
                   "Full Name"
                 ),
               ),
-              Center(child: status("User", 1)),
+              Center(child: status("User", 0)),
               const SizedBox(height: 10),
               Text(
                 "Personal Details",

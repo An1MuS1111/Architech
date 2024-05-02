@@ -1,4 +1,6 @@
+import 'package:architech/pages/displayverification.dart';
 import 'package:architech/pages/login.dart';
+import 'package:architech/pages/logout.dart';
 import 'package:architech/pages/orders.dart';
 import 'package:architech/pages/placeOrder.dart';
 import 'package:architech/pages/profile.dart';
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
       // routerConfig: _routers
       routes: {
         // '/': (context) => const Home()
-        '/': (context) => Orders()
+        '/': (context) => Login()
       }
     );
   }
