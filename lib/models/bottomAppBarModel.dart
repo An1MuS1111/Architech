@@ -1,12 +1,15 @@
 import 'package:architech/config/theme.dart';
 import 'package:architech/pages/home.dart';
+import 'package:architech/pages/profile.dart';
 import 'package:flutter/material.dart';
 
 class BottomAppBarModel{
   final Icon icon;
-  final Route route;
+  final bool isActive;
+  // final Route route;
   
-  BottomAppBarModel({required this.icon, required this.route});
+  // BottomAppBarModel({required this.icon, required this.route});
+  BottomAppBarModel({required this.icon, this.isActive = false});
 }
 
 List<BottomAppBarModel> barItems = [
@@ -16,7 +19,7 @@ List<BottomAppBarModel> barItems = [
       color: greyColour,
       size: iconSize
     ),
-    route: MaterialPageRoute(builder: (_) => const Home()) 
+    // route: MaterialPageRoute(builder: (_) => const Home()) 
   ),
 
   BottomAppBarModel(
@@ -25,7 +28,7 @@ List<BottomAppBarModel> barItems = [
       color: greyColour,
       size: iconSize
     ),
-    route: MaterialPageRoute(builder: (_) => const Home()) 
+    // route: MaterialPageRoute(builder: (_) => const Home()) 
   ),
 
   BottomAppBarModel(
@@ -34,7 +37,7 @@ List<BottomAppBarModel> barItems = [
       color: greyColour,
       size: iconSize
     ),
-    route: MaterialPageRoute(builder: (_) => const Home()) 
+    // route: MaterialPageRoute(builder: (_) => const Home()) 
   ),
 
   BottomAppBarModel(
@@ -43,6 +46,6 @@ List<BottomAppBarModel> barItems = [
       color: greyColour,
       size: iconSize
     ),
-    route: MaterialPageRoute(builder: (_) => const Home()) 
+    // route: MaterialPageRoute(builder: (_) => const Profile()) 
   ),
 ];

@@ -1,10 +1,17 @@
 import 'package:architech/pages/login.dart';
+import 'package:architech/pages/orders.dart';
+import 'package:architech/pages/placeOrder.dart';
 import 'package:architech/pages/profile.dart';
 import 'package:architech/pages/signup.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => User(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -13,7 +20,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // routerConfig: _routers
       routes: {
-        '/': (context) => const Profile()
+        // '/': (context) => const Home()
+        '/': (context) => Orders()
       }
     );
   }
