@@ -6,7 +6,12 @@ import 'package:architech/pages/signup.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => User(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
