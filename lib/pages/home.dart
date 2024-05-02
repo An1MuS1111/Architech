@@ -3,10 +3,11 @@ import 'package:architech/components/navBars.dart';
 import 'package:architech/config/theme.dart';
 import 'package:architech/models/bottomAppBarModel.dart';
 import 'package:flutter/material.dart';
+import 'package:architech/models/user.dart';
 
 class Home extends StatelessWidget{
   // const Home({super.key, required this.email});
-  const Home({super.key});
+  const Home({super.key}) : super(key: key);
 
   // final String email;
 
@@ -34,11 +35,31 @@ class Home extends StatelessWidget{
                     "You have no updates yet"
                   ),
                 ],
-              )
+              ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                user.logout(); // Call the logout method
+              },
+              child: Text('Logout'),  
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class LogoutButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
+
+    return ElevatedButton(
+      onPressed: () {
+        user.logout();
+      },
+      child: Text('Logout'),
     );
   }
 }
