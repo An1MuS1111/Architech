@@ -4,8 +4,11 @@ import 'package:architech/pages/placeOrder.dart';
 import 'package:architech/pages/profile.dart';
 import 'package:architech/pages/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() async {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(
     ChangeNotifierProvider(
       create: (context) => User(),
@@ -16,13 +19,12 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return MaterialApp(
-      // routerConfig: _routers
-      routes: {
-        // '/': (context) => const Home()
-        '/': (context) => Orders()
-      }
-    );
+        // routerConfig: _routers
+        routes: {
+          // '/': (context) => const Home()
+          '/': (context) => Orders()
+        });
   }
 }

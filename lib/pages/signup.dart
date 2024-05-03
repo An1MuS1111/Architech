@@ -4,6 +4,9 @@ import 'package:architech/config/theme.dart';
 import 'package:architech/pages/login.dart';
 import 'package:flutter/material.dart';
 
+import '../auth.dart'
+import 'package:firebase_auth/firebase_auth.dart'
+
 class Signup extends StatefulWidget{
   const Signup({super.key});
 
@@ -49,10 +52,11 @@ class _SignupState extends State<Signup>{
                   onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const Login())),
                 )
               ],
-            ), 
+            ),
           ),
         ),
       ),
     );
   }
 }
+
