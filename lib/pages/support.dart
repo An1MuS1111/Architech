@@ -2,7 +2,6 @@ import 'package:architech/components/navBars.dart';
 import 'package:architech/config/theme.dart';
 import 'package:architech/pages/home.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class Support extends StatelessWidget{
   const Support({super.key});
@@ -39,10 +38,10 @@ class Support extends StatelessWidget{
                       child: Container(
                         alignment: Alignment.topCenter,
                         width: width,
-                        padding: EdgeInsets.fromLTRB(30, 20, 30, 0),
+                        padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
                         height: 100,
                         decoration: BoxDecoration(
-                          color: Color(0xFFFFD6B8),
+                          color: const Color(0xFFFFD6B8),
                           borderRadius: BorderRadius.circular(20)
                         ),
                         child: const Row(
@@ -70,10 +69,10 @@ class Support extends StatelessWidget{
                         child: Container(
                           alignment: Alignment.topCenter,
                           width: width,
-                          padding: EdgeInsets.fromLTRB(30, 20, 30, 0),
+                          padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
                           height: 100,
                           decoration: BoxDecoration(
-                            color: Color(0xFFFFC397),
+                            color: const Color(0xFFFFC397),
                             borderRadius: BorderRadius.circular(20)
                           ),
                           child: const Row(
@@ -102,10 +101,10 @@ class Support extends StatelessWidget{
                         child: Container(
                           alignment: Alignment.topCenter,
                           width: width,
-                          padding: EdgeInsets.fromLTRB(30, 20, 30, 0),
+                          padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
                           height: 100,
                           decoration: BoxDecoration(
-                            color: Color(0xFFFF9446),
+                            color: const Color(0xFFFF9446),
                             borderRadius: BorderRadius.circular(20)
                           ),
                           child: const Row(
@@ -134,18 +133,18 @@ class Support extends StatelessWidget{
                         child: Container(
                           alignment: Alignment.topCenter,
                           width: width,
-                          padding: EdgeInsets.fromLTRB(30, 20, 0, 0),
+                          padding: const EdgeInsets.fromLTRB(30, 20, 0, 0),
                           height: 260,
                           decoration: BoxDecoration(
-                            color: Color(0xFFFF6B00),
+                            color: const Color(0xFFFF6B00),
                             borderRadius: BorderRadius.circular(20)
                           ),
-                          child: Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
+                              SizedBox(
                                 width: 200,
-                                child: const Text(
+                                child: Text(
                                   "Visit Our Help Pages",
                                   style: TextStyle(
                                     fontSize: 46,
@@ -158,7 +157,7 @@ class Support extends StatelessWidget{
                               //   size: 130,
                               //   color: Colors.white
                               // ),
-                              const SizedBox(width: 15),
+                              SizedBox(width: 15),
                             ],
                           ),
                         ),

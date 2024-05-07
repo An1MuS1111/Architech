@@ -1,11 +1,11 @@
-import 'package:architech/pages/login.dart';
-import 'package:go_router/go_router.dart';
+// import 'package:architech/pages/login.dart';
+// import 'package:go_router/go_router.dart';
 
-final _routers = GoRouter(
-  routes: [
-    GoRoute(
-      path: '/',
-      builder: (context, state) => Login()
-    )
-  ]
-);
+// GoRouter _router= GoRouter(
+//   routes: [
+//     GoRoute(
+//       path: '/',
+//       builder: (context, state) => Login(),
+//     ),
+//   ],
+// );
