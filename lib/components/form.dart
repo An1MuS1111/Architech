@@ -24,7 +24,7 @@ Container textField(String text, String hintText, bool isPassword, TextEditingCo
             ),
           ),
         ),
-        TextField(
+        TextFormField(
           controller: controller,
           obscureText: isPassword,
           enableSuggestions: !isPassword,
@@ -74,7 +74,7 @@ Container duoTextField(String text, String hintText, bool isPassword, TextEditin
           ),
         ),
         Expanded(
-          child: TextField(
+          child: TextFormField(
             controller: controller,
             obscureText: isPassword,
             enableSuggestions: !isPassword,
