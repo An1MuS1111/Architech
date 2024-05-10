@@ -5,6 +5,8 @@ import 'package:architech/models/bottomAppBarModel.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'package:architech/pages/login.dart';
+
 // class Home extends StatelessWidget{
 //   // const Home({super.key, required this.email});
 //   const Home({super.key});
@@ -87,7 +89,11 @@ class Home extends StatelessWidget {
                 'Sign out',
                 style: TextStyle(fontSize: 24),
               ),
-              onPressed: () => FirebaseAuth.instance.signOut(),
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Login()));
+              },
             )
           ],
         ),

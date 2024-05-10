@@ -74,33 +74,7 @@ class _LoginState extends State<Login> {
                 //   Navigator.push(context,
                 //       MaterialPageRoute(builder: (context) => const Home()));
                 // }),
-                mainBtn(context, "Login", true, () async {
-                  try {
-                    final userCredential =
-                        await _auth.signInWithEmailAndPassword(
-                      emailController.text,
-                      passwordController.text,
-                    );
-
-                    if (userCredential != null) {
-                      // Navigate to home screen or show success message
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Home()));
-                    } else {
-                      // Handle login failure (should never happen in this case)
-                    }
-                  } on FirebaseAuthException catch (e) {
-                    if (e.code == 'user-not-found') {
-                      // Display error: "User not found"
-                    } else if (e.code == 'wrong-password') {
-                      // Display error: "Invalid password"
-                    } else {
-                      // Display generic error message
-                    }
-                  }
-                }),
+                mainBtn(context, "Login", true, _signIn),
 
                 InkWell(
                   child: textLink(
@@ -114,6 +88,21 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  void _signIn() async {
+    String email = emailController.text;
+    String password = passwordController.text;
+
+    User? user = await _auth.signInWithEmailAndPassword(email, password);
+
+    if (user != null) {
+      print("User is successfully created");
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const Home()));
+    } else {
+      print("some error");
+    }
   }
 
   String? validateEmail(String? email) {

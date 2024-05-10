@@ -4,6 +4,8 @@ import 'package:architech/config/theme.dart';
 import 'package:architech/pages/login.dart';
 import 'package:flutter/material.dart';
 import 'package:architech/services/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:architech/pages/home.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -17,6 +19,15 @@ class _SignupState extends State<Signup> {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +59,7 @@ class _SignupState extends State<Signup> {
                 textFormField("Confirm Password", "Enter your password again",
                     true, passwordController, validateConfirmPassword),
                 const SizedBox(height: 30),
-                mainBtn(context, "Sign up", true,
-                    _auth.registerWithEmailAndPassword),
+                mainBtn(context, "Sign up", true, _signUp),
                 InkWell(
                   child: textLink(context, "Have an account? ", "Log in here",
                       Colors.black),
@@ -62,6 +72,21 @@ class _SignupState extends State<Signup> {
         ),
       ),
     );
+  }
+
+  void _signUp() async {
+    String email = emailController.text;
+    String password = passwordController.text;
+
+    User? user = await _auth.registerWithEmailAndPassword(email, password);
+
+    if (user != null) {
+      print("User is successfully created");
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const Home()));
+    } else {
+      print("some error");
+    }
   }
 
   validateEmail(String? email) {

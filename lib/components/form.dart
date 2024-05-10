@@ -125,7 +125,7 @@ Container mainBtn(
     height: 50,
     decoration: BoxDecoration(borderRadius: BorderRadius.circular(50)),
     child: ElevatedButton(
-      onPressed: () async => onTap,
+      onPressed: () => onTap(),
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(primaryColour),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
