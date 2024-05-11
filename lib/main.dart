@@ -1,7 +1,11 @@
+import 'package:architech/components/processStatus.dart';
 import 'package:architech/pages/login.dart';
 import 'package:architech/pages/home.dart';
+import 'package:architech/pages/order/orderConfirm.dart';
+import 'package:architech/pages/order/orderCriteria.dart';
+import 'package:architech/pages/order/orderSchedule.dart';
 import 'package:architech/pages/orders.dart';
-import 'package:architech/pages/placeOrder.dart';
+import 'package:architech/pages/order/orderPlace.dart';
 import 'package:architech/pages/profile.dart';
 import 'package:architech/pages/signup.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +32,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Architech',
-      home: MainPage(),
+      // home: LoadingPage(title: "Processing order...", note: "Please do not close the window or exit the application"),
+      home: OrderCriteria()
     );
   }
 }
@@ -48,6 +53,7 @@ class MainPage extends StatelessWidget {
         } else {
           return Login();
         }
-      }),
+      }
+    ),
   );
 }
