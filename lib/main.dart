@@ -33,7 +33,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Architech',
       // home: LoadingPage(title: "Processing order...", note: "Please do not close the window or exit the application"),
-      home: OrderCriteria()
+      // home: OrderCriteria()
+      home: MainPage(),
     );
   }
 }
@@ -41,19 +42,18 @@ class MyApp extends StatelessWidget {
 class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
-    body: StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return Center(child: Text('Something went Wrong'));
-        } else if (snapshot.hasData) {
-          return Home();
-        } else {
-          return Login();
-        }
-      }
-    ),
-  );
+        body: StreamBuilder<User?>(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Something went Wrong'));
+              } else if (snapshot.hasData) {
+                return Home();
+              } else {
+                return Login();
+              }
+            }),
+      );
 }

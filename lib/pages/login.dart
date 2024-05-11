@@ -58,55 +58,29 @@ class _LoginState extends State<Login> {
                 ),
                 const SizedBox(height: 30),
                 textFormField("UTM Email", "Enter your registered email", false,
-                  emailController, validateEmail),
+                    emailController, validateEmail),
                 textFormField("Password", "Enter your password", true,
                     passwordController, validatePassword),
                 Align(
-                  alignment: Alignment.centerRight,
-                  child: InkWell(
-                    child: textLink(context, "Forgot password?", "", Colors.black),
-                    onTap: () => {},
-                  )
-                ),
+                    alignment: Alignment.centerRight,
+                    child: InkWell(
+                      child: textLink(
+                          context, "Forgot password?", "", Colors.black),
+                      onTap: () => {},
+                    )),
                 const SizedBox(height: 80),
                 // mainBtn(context, "Login", true, () {
                 //   Navigator.push(context,
                 //       MaterialPageRoute(builder: (context) => const Home()));
                 // }),
                 // mainBtn(context, "Login", true, _signIn),
-                mainBtn(context, "Login", true, () async {
-                  try {
-                    final userCredential =
-                        await _auth.signInWithEmailAndPassword(
-                      emailController.text,
-                      passwordController.text,
-                    );
-
-                    if (userCredential != null) {
-                      // Navigate to home screen or show success message
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Home()));
-                    } else {
-                      // Handle login failure (should never happen in this case)
-                    }
-                  } on FirebaseAuthException catch (e) {
-                    if (e.code == 'user-not-found') {
-                      // Display error: "User not found"
-                    } else if (e.code == 'wrong-password') {
-                      // Display error: "Invalid password"
-                    } else {
-                      // Display generic error message
-                    }
-                  }
-                }),
+                mainBtn(context, "Login", true, _signIn),
 
                 InkWell(
                   child: textLink(
-                    context, "No account? ", "Sign up here", Colors.black),
+                      context, "No account? ", "Sign up here", Colors.black),
                   onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Signup())),
+                      MaterialPageRoute(builder: (context) => const Signup())),
                 ),
               ],
             ),

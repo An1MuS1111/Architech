@@ -2,6 +2,7 @@ import 'package:architech/components/form.dart';
 import 'package:architech/components/logos.dart';
 import 'package:architech/config/theme.dart';
 import 'package:architech/pages/login.dart';
+import 'package:architech/pages/verifyEmail.dart';
 import 'package:flutter/material.dart';
 import 'package:architech/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -83,8 +84,8 @@ class _SignupState extends State<Signup> {
 
     if (user != null) {
       print("User is successfully created");
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const Home()));
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const VerifyEmail()));
     } else {
       print("some error");
     }
