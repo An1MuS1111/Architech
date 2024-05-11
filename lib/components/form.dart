@@ -8,6 +8,7 @@ import 'package:flutter/widgets.dart';
 Container textFormField(String text, String hintText, bool isPassword, 
   TextEditingController controller, Function validatorFunction) {
   return Container(
+    margin: const EdgeInsets.only(bottom: 20),
     alignment: Alignment.bottomLeft,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.start, 
@@ -129,11 +130,11 @@ Container textLink(BuildContext context, String firstText, String secondText, Co
 // Buttons
 Container mainBtn(BuildContext context, String text, bool isLogin, Function onTap) {
   return Container(
-    width: MediaQuery.of(context).size.width,
+    width: MediaQuery.of(context).size.width * 0.92,
     height: 50,
     decoration: BoxDecoration(borderRadius: BorderRadius.circular(50)),
     child: ElevatedButton(
-      onPressed: () async => onTap,
+      onPressed: () => onTap,
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(primaryColour),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -149,18 +150,86 @@ Container mainBtn(BuildContext context, String text, bool isLogin, Function onTa
 }
 
 // Outlined button
-Container outlinedBtn(String text) {
-  return Container(
-    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-    decoration: BoxDecoration(
-      border: Border.all(color: primaryColour),
-      borderRadius: BorderRadius.circular(40)),
-    child: Text(
-      text,
-      textAlign: TextAlign.center,
-      style: TextStyle(color: primaryColour),
-    ),
-  );
+Container outlinedBtn(BuildContext context, String? text, IconData? icon, Function onTap) {
+  Widget child = Container();
+  
+  if (text != null && icon != null){
+    child = OutlinedButton(
+      onPressed: (){},
+      style: OutlinedButton.styleFrom(
+        side: BorderSide(
+          color: primaryColour
+        )
+      ),
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              text,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: primaryColour),
+            ),
+            Icon(
+              icon,
+              size: 14,
+              color: primaryColour
+            ),
+          ]
+        )
+      ),
+    );
+  }else if (icon == null){
+    child = OutlinedButton(
+      onPressed: (){},
+      style: OutlinedButton.styleFrom(
+        side: BorderSide(
+          color: primaryColour
+        )
+      ),
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              text!,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: primaryColour),
+            ),
+          ]
+        )
+      )
+    );
+  }else if (text == null){
+    child = OutlinedButton(
+      onPressed: (){},
+      style: OutlinedButton.styleFrom(
+        side: BorderSide(
+          color: primaryColour
+        )
+      ),
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: 14,
+              color: primaryColour
+            ),
+          ]
+        )
+      ),
+    );
+  }
+
+  return Container (child: child);
 }
 
 // Full button

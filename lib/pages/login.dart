@@ -58,18 +58,17 @@ class _LoginState extends State<Login> {
                 ),
                 const SizedBox(height: 30),
                 textFormField("UTM Email", "Enter your registered email", false,
-                    emailController, validateEmail),
-                const SizedBox(height: 20),
+                  emailController, validateEmail),
                 textFormField("Password", "Enter your password", true,
                     passwordController, validatePassword),
                 Align(
-                    alignment: Alignment.centerRight,
-                    child: InkWell(
-                      child: textLink(
-                          context, "Forgot password?", "", Colors.black),
-                      onTap: () => {},
-                    )),
-                const SizedBox(height: 100),
+                  alignment: Alignment.centerRight,
+                  child: InkWell(
+                    child: textLink(context, "Forgot password?", "", Colors.black),
+                    onTap: () => {},
+                  )
+                ),
+                const SizedBox(height: 80),
                 // mainBtn(context, "Login", true, () {
                 //   Navigator.push(context,
                 //       MaterialPageRoute(builder: (context) => const Home()));
@@ -85,9 +84,9 @@ class _LoginState extends State<Login> {
                     if (userCredential != null) {
                       // Navigate to home screen or show success message
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Home()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Home()));
                     } else {
                       // Handle login failure (should never happen in this case)
                     }
@@ -104,9 +103,9 @@ class _LoginState extends State<Login> {
 
                 InkWell(
                   child: textLink(
-                      context, "No account? ", "Sign up here", Colors.black),
+                    context, "No account? ", "Sign up here", Colors.black),
                   onTap: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Signup())),
+                    MaterialPageRoute(builder: (context) => const Signup())),
                 ),
               ],
             ),
