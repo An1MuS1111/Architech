@@ -1,7 +1,7 @@
 import 'package:architech/components/form.dart';
 import 'package:architech/components/navBars.dart';
 import 'package:architech/config/theme.dart';
-import 'package:architech/pages/placeOrder.dart';
+import 'package:architech/pages/order/orderPlace.dart';
 import 'package:flutter/material.dart';
 
 class Orders extends StatefulWidget{
@@ -17,17 +17,11 @@ class _OrdersState extends State<Orders>{
     return Scaffold(
       appBar: topBar(context),
       bottomNavigationBar: bottomBar(context),
-      floatingActionButton: InkWell(
-        onTap: () => {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const PlaceOrder())
-          ),
-        },
-        child: SizedBox(
-          width: width,
-          child: outlinedBtn("Place a new order")
-        ),
+      floatingActionButton: SizedBox(
+        width: width,
+        child: outlinedBtn(context, "Place a new order", null, (){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const OrderPlace()));
+        })
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -83,5 +77,4 @@ class _OrdersState extends State<Orders>{
       ),
     );
   }
-
 }
