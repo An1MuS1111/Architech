@@ -18,8 +18,6 @@ class _ProfileState extends State<Profile>{
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-
     return Scaffold(
       appBar: topBar(context),
       bottomNavigationBar: bottomBar(context),

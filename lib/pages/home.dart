@@ -47,7 +47,7 @@ import 'package:architech/pages/login.dart';
 // }
 
 // For test purpose
-class Home extends StatelessWidget {
+class Home extends StatelessWidget{
   // const Home({super.key, required this.email});
   const Home({super.key});
 
@@ -55,8 +55,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
-
     return Scaffold(
       appBar: topBar(context),
       bottomNavigationBar: bottomBar(context),
@@ -67,11 +65,9 @@ class Home extends StatelessWidget {
           children: [
             Text(
               "Welcome, User",
-              style: TextStyle(fontSize: mainTitle),
-            ),
-            Text(
-              user.email!,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+              style: TextStyle(
+                fontSize: mainTitle
+              ),
             ),
             Container(
                 padding: const EdgeInsets.symmetric(vertical: 10),
@@ -91,8 +87,10 @@ class Home extends StatelessWidget {
               ),
               onPressed: () {
                 FirebaseAuth.instance.signOut();
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Login()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Login())
+                );
               },
             )
           ],
@@ -101,3 +99,52 @@ class Home extends StatelessWidget {
     );
   }
 }
+
+// For test purpose
+// class Home extends StatelessWidget {
+//   const Home({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final user = FirebaseAuth.instance.currentUser!;
+
+//     return Scaffold(
+//       appBar: topBar(context),
+//       bottomNavigationBar: bottomBar(context),
+//       body: Padding(
+//         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             Text(
+//               "Welcome, User",
+//               style: TextStyle(fontSize: mainTitle),
+//             ),
+//             Text(
+//               user.email!,
+//               style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+//             ),
+//             Container(
+//                 padding: const EdgeInsets.symmetric(vertical: 10),
+//                 child: const Column(
+//                   children: [
+//                     Text("You have no updates yet"),
+//                   ],
+//                 )),
+//             ElevatedButton.icon(
+//               style: ElevatedButton.styleFrom(
+//                 minimumSize: Size.fromHeight(50),
+//               ),
+//               icon: Icon(Icons.lock_open, size: 32),
+//               label: Text(
+//                 'Sign out',
+//                 style: TextStyle(fontSize: 24),
+//               ),
+//               onPressed: () => FirebaseAuth.instance.signOut(),
+//             )
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

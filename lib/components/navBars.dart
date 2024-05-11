@@ -23,7 +23,7 @@ AppBar topBar(BuildContext context){
   );
 }
 
-AppBar titleBar(BuildContext context, String text){
+AppBar titleBar(BuildContext context, String text, double margin){
   return AppBar(
     leading: IconButton(
       icon: const Icon(
@@ -36,14 +36,15 @@ AppBar titleBar(BuildContext context, String text){
       }
     ),
     title: Container(
-      margin: const EdgeInsets.only(left: 55),
+      margin: EdgeInsets.only(left: margin),
       child: Text(
         text,
+        textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: mainTitle
         )
       ),
-    )
+    ),
   );
 }
 
