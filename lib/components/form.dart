@@ -140,18 +140,86 @@ Container mainBtn(
 }
 
 // Outlined button
-Container outlinedBtn(String text) {
-  return Container(
-    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-    decoration: BoxDecoration(
-        border: Border.all(color: primaryColour),
-        borderRadius: BorderRadius.circular(40)),
-    child: Text(
-      text,
-      textAlign: TextAlign.center,
-      style: TextStyle(color: primaryColour),
-    ),
-  );
+Container outlinedBtn(BuildContext context, String? text, IconData? icon, Function onTap) {
+  Widget child = Container();
+  
+  if (text != null && icon != null){
+    child = OutlinedButton(
+      onPressed: (){},
+      style: OutlinedButton.styleFrom(
+        side: BorderSide(
+          color: primaryColour
+        )
+      ),
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              text,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: primaryColour),
+            ),
+            Icon(
+              icon,
+              size: 14,
+              color: primaryColour
+            ),
+          ]
+        )
+      ),
+    );
+  }else if (icon == null){
+    child = OutlinedButton(
+      onPressed: (){},
+      style: OutlinedButton.styleFrom(
+        side: BorderSide(
+          color: primaryColour
+        )
+      ),
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              text!,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: primaryColour),
+            ),
+          ]
+        )
+      )
+    );
+  }else if (text == null){
+    child = OutlinedButton(
+      onPressed: (){},
+      style: OutlinedButton.styleFrom(
+        side: BorderSide(
+          color: primaryColour
+        )
+      ),
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: 14,
+              color: primaryColour
+            ),
+          ]
+        )
+      ),
+    );
+  }
+
+  return Container (child: child);
 }
 
 // Full button
