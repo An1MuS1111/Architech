@@ -2,11 +2,12 @@ import 'package:architech/components/form.dart';
 import 'package:architech/components/logos.dart';
 import 'package:architech/config/theme.dart';
 import 'package:architech/pages/login.dart';
-import 'package:architech/pages/verifyEmail.dart';
+import 'package:architech/pages/verify_email.dart';
 import 'package:flutter/material.dart';
 import 'package:architech/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:architech/pages/home.dart';
+import 'package:architech/controllers/form_validator.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -18,8 +19,11 @@ class Signup extends StatefulWidget {
 class _SignupState extends State<Signup> {
   final AuthService _auth = AuthService();
 
+  final FormValidator _formValidator = FormValidator();
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
 
   @override
   void dispose() {
@@ -51,12 +55,21 @@ class _SignupState extends State<Signup> {
                   ),
                 ),
                 const SizedBox(height: 30),
-                textFormField("UTM Email", "Enter your registered email", false,
-                    emailController, validateEmail),
+                textFormField(
+                  "UTM Email",
+                  "Enter your registered email",
+                  false,
+                  emailController,
+                  _emailValidator,
+                ),
                 textFormField("Password", "Enter your password", true,
-                    passwordController, validatePassword),
-                textFormField("Confirm Password", "Enter your password again",
-                    true, passwordController, validateConfirmPassword),
+                    passwordController, _passwordValidator),
+                textFormField(
+                    "Confirm Password",
+                    "Enter your password again",
+                    true,
+                    confirmPasswordController,
+                    _consfirmPasswordValidator),
                 const SizedBox(height: 30),
                 mainBtn(context, "Sign up", true, _signUp),
                 const SizedBox(height: 10),
@@ -76,6 +89,25 @@ class _SignupState extends State<Signup> {
     );
   }
 
+  void _emailValidator() async {
+    String email = emailController.text;
+
+    _formValidator.validateEmail(email);
+  }
+
+  void _passwordValidator() async {
+    String password = passwordController.text;
+
+    _formValidator.validateEmail(password);
+  }
+
+  void _consfirmPasswordValidator() async {
+    String password = passwordController.text;
+    String confirmPassword = confirmPasswordController.text;
+
+    _formValidator.validateConfirmPassword(confirmPassword, password);
+  }
+
   void _signUp() async {
     String email = emailController.text;
     String password = passwordController.text;
@@ -91,35 +123,35 @@ class _SignupState extends State<Signup> {
     }
   }
 
-  validateEmail(String? email) {
-    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+  // validateEmail(String? email) {
+  //   final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 
-    if (email!.isEmpty) {
-      return 'Please enter your email address.';
-    } else if (!emailRegex.hasMatch(email)) {
-      return 'Please enter a valid email address.';
-    }
-    return null;
-  }
+  //   if (email!.isEmpty) {
+  //     return 'Please enter your email address.';
+  //   } else if (!emailRegex.hasMatch(email)) {
+  //     return 'Please enter a valid email address.';
+  //   }
+  //   return null;
+  // }
 
-  validatePassword(String? password) {
-    if (password!.isEmpty) {
-      return 'Please enter your password.';
-    } else if (password.length < 6) {
-      return 'Password must be at least 6 characters long.';
-    }
+  // validatePassword(String? password) {
+  //   if (password!.isEmpty) {
+  //     return 'Please enter your password.';
+  //   } else if (password.length < 6) {
+  //     return 'Password must be at least 6 characters long.';
+  //   }
 
-    return null;
-  }
+  //   return null;
+  // }
 
-  validateConfirmPassword(String? password) {
-    if (password!.isEmpty) {
-      return 'Please enter your password.';
-    } else if (password != passwordController.text) {
-      return 'Password must match';
-    }
-    return null;
-  }
+  // validateConfirmPassword(String? confirmPassword) {
+  //   if (confirmPassword!.isEmpty) {
+  //     return 'Please enter your password.';
+  //   } else if (confirmPassword != passwordController.text) {
+  //     return 'Password must match';
+  //   }
+  //   return null;
+  // }
 }
 
 // ***after the implementation***

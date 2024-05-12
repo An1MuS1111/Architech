@@ -117,6 +117,34 @@ Container textLink(
   );
 }
 
+// Container textLink(BuildContext context, String firstText, String secondText,
+//     Color colour, Function anotherPage) {
+//   return Container(
+//     margin: const EdgeInsets.only(top: 15),
+//     child: GestureDetector(
+//       onTap: () {
+//         // Navigate to another page here
+//         Navigator.push(
+//           context,
+//           MaterialPageRoute(builder: (context) => anotherPage()),
+//         );
+//       },
+//       child: RichText(
+//         text: TextSpan(
+//           style: TextStyle(color: colour),
+//           children: <TextSpan>[
+//             TextSpan(text: firstText),
+//             TextSpan(
+//               text: secondText,
+//               style: TextStyle(color: primaryColour),
+//             ),
+//           ],
+//         ),
+//       ),
+//     ),
+//   );
+// }
+
 // Buttons
 Container mainBtn(
     BuildContext context, String text, bool isLogin, Function onTap) {
@@ -140,86 +168,54 @@ Container mainBtn(
 }
 
 // Outlined button
-Container outlinedBtn(BuildContext context, String? text, IconData? icon, Function onTap) {
+Container outlinedBtn(
+    BuildContext context, String? text, IconData? icon, Function onTap) {
   Widget child = Container();
-  
-  if (text != null && icon != null){
+
+  if (text != null && icon != null) {
     child = OutlinedButton(
-      onPressed: (){},
-      style: OutlinedButton.styleFrom(
-        side: BorderSide(
-          color: primaryColour
-        )
-      ),
+      onPressed: () {},
+      style: OutlinedButton.styleFrom(side: BorderSide(color: primaryColour)),
       child: Container(
-        width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          width: MediaQuery.of(context).size.width,
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Text(
               text,
               textAlign: TextAlign.center,
               style: TextStyle(color: primaryColour),
             ),
-            Icon(
-              icon,
-              size: 14,
-              color: primaryColour
-            ),
-          ]
-        )
-      ),
+            Icon(icon, size: 14, color: primaryColour),
+          ])),
     );
-  }else if (icon == null){
+  } else if (icon == null) {
     child = OutlinedButton(
-      onPressed: (){},
-      style: OutlinedButton.styleFrom(
-        side: BorderSide(
-          color: primaryColour
-        )
-      ),
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              text!,
-              textAlign: TextAlign.center,
-              style: TextStyle(color: primaryColour),
-            ),
-          ]
-        )
-      )
-    );
-  }else if (text == null){
+        onPressed: () {},
+        style: OutlinedButton.styleFrom(side: BorderSide(color: primaryColour)),
+        child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text(
+                text!,
+                textAlign: TextAlign.center,
+                style: TextStyle(color: primaryColour),
+              ),
+            ])));
+  } else if (text == null) {
     child = OutlinedButton(
-      onPressed: (){},
-      style: OutlinedButton.styleFrom(
-        side: BorderSide(
-          color: primaryColour
-        )
-      ),
+      onPressed: () {},
+      style: OutlinedButton.styleFrom(side: BorderSide(color: primaryColour)),
       child: Container(
-        width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              size: 14,
-              color: primaryColour
-            ),
-          ]
-        )
-      ),
+          width: MediaQuery.of(context).size.width,
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Icon(icon, size: 14, color: primaryColour),
+          ])),
     );
   }
 
-  return Container (child: child);
+  return Container(child: child);
 }
 
 // Full button

@@ -1,11 +1,14 @@
 import 'package:architech/components/form.dart';
 import 'package:architech/components/logos.dart';
 import 'package:architech/config/theme.dart';
+import 'package:architech/controllers/form_validator.dart';
 import 'package:architech/pages/home.dart';
 import 'package:architech/pages/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:architech/services/auth.dart';
+import 'package:architech/controllers/form_validator.dart';
+import 'package:architech/pages/forgot_password.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -16,6 +19,8 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final AuthService _auth = AuthService();
+
+  final FormValidator _formValidator = FormValidator();
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -58,15 +63,22 @@ class _LoginState extends State<Login> {
                 ),
                 const SizedBox(height: 30),
                 textFormField("UTM Email", "Enter your registered email", false,
-                    emailController, validateEmail),
+                    emailController, _emailValidator),
                 textFormField("Password", "Enter your password", true,
-                    passwordController, validatePassword),
+                    passwordController, _passwordValidator),
                 Align(
                     alignment: Alignment.centerRight,
                     child: InkWell(
                       child: textLink(
                           context, "Forgot password?", "", Colors.black),
-                      onTap: () => {},
+                      onTap: () => {
+                        // Navigate to Forgot Password
+
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ForgotPassword()))
+                      },
                     )),
                 const SizedBox(height: 80),
                 // mainBtn(context, "Login", true, () {
@@ -90,6 +102,18 @@ class _LoginState extends State<Login> {
     );
   }
 
+  void _emailValidator() async {
+    String email = emailController.text;
+
+    _formValidator.validateEmail(email);
+  }
+
+  void _passwordValidator() async {
+    String password = passwordController.text;
+
+    _formValidator.validateEmail(password);
+  }
+
   void _signIn() async {
     String email = emailController.text;
     String password = passwordController.text;
@@ -105,24 +129,24 @@ class _LoginState extends State<Login> {
     }
   }
 
-  String? validateEmail(String? email) {
-    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+  // String? validateEmail(String? email) {
+  //   final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 
-    if (email!.isEmpty) {
-      return 'Please enter your email address.';
-    } else if (!emailRegex.hasMatch(email)) {
-      return 'Please enter a valid email address.';
-    }
-    return null;
-  }
+  //   if (email!.isEmpty) {
+  //     return 'Please enter your email address.';
+  //   } else if (!emailRegex.hasMatch(email)) {
+  //     return 'Please enter a valid email address.';
+  //   }
+  //   return null;
+  // }
 
-  String? validatePassword(String? password) {
-    if (password!.isEmpty) {
-      return 'Please enter your password.';
-    } else if (password.length < 6) {
-      return 'Password must be at least 6 characters long.';
-    }
+  // String? validatePassword(String? password) {
+  //   if (password!.isEmpty) {
+  //     return 'Please enter your password.';
+  //   } else if (password.length < 6) {
+  //     return 'Password must be at least 6 characters long.';
+  //   }
 
-    return null;
-  }
+  //   return null;
+  // }
 }

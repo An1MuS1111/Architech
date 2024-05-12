@@ -3,11 +3,7 @@ import 'dart:async';
 import 'package:architech/pages/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/widgets.dart';
 import 'package:architech/config/theme.dart';
-
-
-
 
 class VerifyEmail extends StatefulWidget {
   const VerifyEmail({super.key});
@@ -20,7 +16,6 @@ class _VerifyEmailState extends State<VerifyEmail> {
   bool isEmailVerified = false;
   bool canResendEmail = false;
   Timer? timer;
-
 
   @override
   void initState() {
