@@ -4,6 +4,10 @@ import 'package:architech/pages/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
+import 'package:architech/config/theme.dart';
+
+
+
 
 class VerifyEmail extends StatefulWidget {
   const VerifyEmail({super.key});
@@ -16,6 +20,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
   bool isEmailVerified = false;
   bool canResendEmail = false;
   Timer? timer;
+
 
   @override
   void initState() {
@@ -68,69 +73,37 @@ class _VerifyEmailState extends State<VerifyEmail> {
 
       // else go to the email verification page
       : Scaffold(
-          body: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Email photo
-                  const Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Icon(
-                      Icons.email,
-                      size: 80.0, // Adjust size as needed (medium size)
-                    ),
-                  ),
-
-                  // Verify your email address heading
-                  Text(
-                    "Verify your email address",
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-
-                  // Description text
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      "We have just sent an email verification link to your email. Please check your email and click on that link to verify your Email address. If not auto redirected after verification, click on the Continue button.",
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-
-                  // Continue button
-                  ElevatedButton(
-                    onPressed: () {
-                      // Handle continue button press
-                    },
-                    child: Text("Continue"),
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(3.0),
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 16.0), // Add some spacing
-
-                  // Resend email link
-                  TextButton(
-                    onPressed:
-                        canResendEmail ? sendVerificationEmail : () => {},
-                    child: Text("Resend email link"),
-                  ),
-
-                  const SizedBox(height: 16.0), // Add some spacing
-
-                  // Back to login button
-                  TextButton(
-                    onPressed: () {
-                      // Handle back to login press (navigate back)
-                      Navigator.pop(context);
-                    },
-                    child: Text("Back to Login"),
-                  ),
-                ],
-              ),
+          appBar: AppBar(
+            title: Text('Verify Email'),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.email,
+                  size: 100.0,
+                  color: primaryColour,
+                ),
+                SizedBox(height: 20.0),
+                Text(
+                  'Please verify your email address',
+                  style: TextStyle(fontSize: 20.0),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 20.0),
+                Text(
+                  'A verification link has been sent to your email. Please check your inbox and click on the link to verify your email address.',
+                  style: TextStyle(fontSize: 16.0),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 20.0),
+                ElevatedButton(
+                  onPressed: canResendEmail ? sendVerificationEmail : () => {},
+                  child: Text('Resend Verification Email'),
+                ),
+              ],
             ),
           ),
         );
