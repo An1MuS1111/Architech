@@ -33,8 +33,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Architech',
       // home: LoadingPage(title: "Processing order...", note: "Please do not close the window or exit the application"),
-      // home: OrderCriteria()
-      home: MainPage(),
+      home: OrderSchedule()
     );
   }
 }
