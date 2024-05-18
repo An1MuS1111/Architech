@@ -2,17 +2,27 @@ import 'package:architech/components/cards.dart';
 import 'package:architech/components/customCalendar.dart';
 import 'package:architech/components/form.dart';
 import 'package:architech/components/navBars.dart';
+import 'package:architech/components/timePicker.dart';
 import 'package:architech/config/theme.dart';
+import 'package:architech/models/orderModel.dart';
+import 'package:architech/models/parcelModel.dart';
 import 'package:architech/pages/order/orderConfirm.dart';
 import 'package:flutter/material.dart';
 
 class OrderSchedule extends StatefulWidget{
+  // OrderSchedule({super.key, required this.order});
+  // final OrderModel order;
+
+  OrderSchedule({super.key});
+
   @override
   State<OrderSchedule> createState() => _OrderScheduleState();
 }
 
-class _OrderScheduleState extends State<OrderSchedule> {
+class _OrderScheduleState extends State<OrderSchedule>{
   int current = 0;
+
+  OrderModel order = OrderModel();
 
   PageController pageController = PageController();
 
@@ -21,11 +31,44 @@ class _OrderScheduleState extends State<OrderSchedule> {
     "Time",
   ];
 
-  /// List of body icon
+  // List of body icon
   List<IconData> icons = [
     Icons.home,
     Icons.explore,
   ];
+
+  // List of times available
+  List<Object> times = [
+    // ["10:30:00", 1],
+    // ["11:30:00", 0],
+    // ["14:30:00", 0],
+    // ["15:30:00", 0],
+    // ["14:30:00", 1],
+    {"time" : "10:30:00", "charge" : 1},
+    {"time" : "11:30:00", "charge" : 0},
+    {"time" : "14:30:00", "charge" : 0},
+    {"time" : "15:30:00", "charge" : 0},
+    {"time" : "14:30:00", "charge" : 1}
+  ];
+
+  // Testing
+  @override
+  void initState(){
+    super.initState();
+    order.name = "Hello";
+    order.phoneNumber = "012345";
+    order.pickupLocation = "KTC";
+    order.deliveryCentre = "OPC";
+    order.parcels = [
+      ParcelModel("01jaksd")
+    ];
+  }
+
+  @override
+  void dispose(){
+    pageController;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +82,7 @@ class _OrderScheduleState extends State<OrderSchedule> {
         },
         child: SizedBox(
           child: mainBtn(context, "Proceed", false, (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => OrderConfirm()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => OrderConfirm(order: order)));
           })
         ),
       ),
@@ -62,6 +105,7 @@ class _OrderScheduleState extends State<OrderSchedule> {
                           onTap: () {
                             setState(() {
                               current = index;
+                              order.selectedDate!;                        
                             });
                             pageController.animateToPage(
                               current,
@@ -128,7 +172,7 @@ class _OrderScheduleState extends State<OrderSchedule> {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                           child: Text(
-                            "Suggested date",
+                            "Suggested Date",
                             style: TextStyle(
                               fontSize: regular,
                               color: Colors.black
@@ -138,50 +182,51 @@ class _OrderScheduleState extends State<OrderSchedule> {
                         suggestedCard(),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                          child: CustomCalendar(),
+                          child: CustomCalendar(order: order),
                         )
                       ],
-                    ): SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                            child: Text(
-                              "Suggested time",
-                              style: TextStyle(
-                                fontSize: regular,
-                                color: Colors.black
-                              ),
-                            ),
-                          ),
-                          suggestedCard(),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            child: Text(
-                              "Available times"
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                            margin: EdgeInsets.only(bottom: 50),
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.9,
-                              height: 400,
-                              child: ListView.builder(
-                                scrollDirection: Axis.vertical,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: 6,
-                                itemBuilder: (count, index){
-                                  return squareCard("10:30AM", "No extra charge", null);
-                                },
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    );
+                    ): TimePicker(order: order);
+                    // ): SingleChildScrollView(
+                    //   child: Column(
+                    //     mainAxisAlignment: MainAxisAlignment.start,
+                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                    //     children: [
+                    //       Padding(
+                    //         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    //         child: Text(
+                    //           "Suggested time",
+                    //           style: TextStyle(
+                    //             fontSize: regular,
+                    //             color: Colors.black
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       suggestedCard(),
+                    //       const Padding(
+                    //         padding: EdgeInsets.symmetric(horizontal: 20),
+                    //         child: Text(
+                    //           "Available times"
+                    //         ),
+                    //       ),
+                    //       Container(
+                    //         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    //         margin: const EdgeInsets.only(bottom: 50),
+                    //         child: SizedBox(
+                    //           width: MediaQuery.of(context).size.width * 0.9,
+                    //           height: 400,
+                    //           child: ListView.builder(
+                    //             scrollDirection: Axis.vertical,
+                    //             physics: const NeverScrollableScrollPhysics(),
+                    //             itemCount: order.times.length,
+                    //             itemBuilder: (count, index){
+                    //               return squareCard(order.times[index].time, order.times[index].extraCharge.toString(), null);
+                    //             },
+                    //           ),
+                    //         ),
+                    //       )
+                    //     ],
+                    //   ),
+                    // );
                   },
                 ),
               ),
