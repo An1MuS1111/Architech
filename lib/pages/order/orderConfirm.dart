@@ -2,9 +2,14 @@ import 'package:architech/components/cards.dart';
 import 'package:architech/components/form.dart';
 import 'package:architech/components/navBars.dart';
 import 'package:architech/config/theme.dart';
+import 'package:architech/models/orderModel.dart';
 import 'package:flutter/material.dart';
 
 class OrderConfirm extends StatefulWidget{
+  OrderConfirm({super.key, required this.order});
+
+  final OrderModel order;
+
   @override
   State<OrderConfirm> createState() => _OrderConfirmState();
 }
@@ -65,7 +70,7 @@ class _OrderConfirmState extends State<OrderConfirm> {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 5),
                     child: Text(
-                      "User Name",
+                      widget.order.dateConverter(),
                       style: TextStyle(
                         fontSize: subTitle,
                         color: Colors.white

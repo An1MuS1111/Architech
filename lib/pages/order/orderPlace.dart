@@ -1,6 +1,10 @@
+import 'package:architech/components/customDropdown.dart';
 import 'package:architech/components/form.dart';
 import 'package:architech/components/navBars.dart';
+import 'package:architech/models/orderModel.dart';
+import 'package:architech/models/parcelModel.dart';
 import 'package:architech/pages/order/orderCriteria.dart';
+import 'package:architech/pages/order/orderSchedule.dart';
 import 'package:flutter/material.dart';
 
 class OrderPlace extends StatefulWidget{
@@ -11,10 +15,92 @@ class OrderPlace extends StatefulWidget{
 }
 
 class _OrderPlace extends State<OrderPlace>{
-  TextEditingController controller = TextEditingController();
+  _OrderPlace(){
+    selectedValue = itemList[0];
+  }
+  
+  OrderModel order = OrderModel();
+  String selectedValue = "";
+
+  final itemList = ["Pick one", "OPC", "CPP", "ASN"];
+  late List<Widget> widgets;
+  late List<TextEditingController> trackingControllers;
+
+  late TextEditingController nameController;
+  late TextEditingController phoneController;
+  late TextEditingController pickupController;
+  late TextEditingController trackingController;
+  late TextEditingController centreController;
+
+  @override
+  void initState(){
+    super.initState();
+    widgets = [];
+    trackingControllers = [];
+
+    nameController = TextEditingController();
+    phoneController = TextEditingController();
+    pickupController = TextEditingController();
+    trackingController = TextEditingController();
+    centreController = TextEditingController();
+  }
+  
+  @override
+  void dispose(){
+    widgets = [];
+    trackingControllers = [];
+    order.parcels = [];
+
+    nameController.dispose();
+    phoneController.dispose();
+    pickupController.dispose();
+    for(TextEditingController trackingList in trackingControllers){
+      trackingList.dispose();
+    }
+    centreController.dispose();
+    super.dispose();
+  }
+
+  void createOrder(){
+    setState(() {
+      order.name = nameController.text;
+      order.phoneNumber = phoneController.text;
+      order.pickupLocation = pickupController.text;
+      order.deliveryCentre = centreController.text;
+      
+      for(var i = 0; i<trackingControllers.length; i++){
+        ParcelModel pm = ParcelModel(trackingControllers[i].text);
+
+        order.parcels.add(pm);
+      }
+    });
+  }
+
+  Widget displayAddParcels(widgets){
+    if(widgets != null){
+      return LimitedBox(
+        maxHeight: 400,
+        child: ListView.builder(
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: widgets.length,
+          itemBuilder: (context, index){
+            return Container(
+              child: widgets[index]
+            );
+          } 
+        ),
+      );
+    }else{
+      return const SizedBox(width: 0, height: 0);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    trackingControllers.add(trackingController);
+
     return Scaffold(
       appBar: titleBar(context, "Fill in your details", 60),
       floatingActionButton: InkWell(
@@ -23,23 +109,36 @@ class _OrderPlace extends State<OrderPlace>{
         },
         child: SizedBox(
           child: mainBtn(context, "Proceed", false, (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const OrderCriteria()));
+            createOrder();
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => OrderSchedule(order: order)));
           })
         ),
       ),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-          child: Column(
-            children: [
-              textFormField("Name", "Enter receiver's name", false, controller, (){}),
-              textFormField("Phone number", "Enter receiver's phone no", false, controller, (){}),
-              textFormField("Pickup location", "Where will you pick up your order? ", false, controller, (){}),
-              const SizedBox(height: 30),
-              textFormField("Parcel tracking no", "Enter tracking no", false, controller, (){}),
-              outlinedBtn(context, null, Icons.add, (){}),
-            ],
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 85),
+            child: Column(
+              children: [
+                textFormField("Name", "Enter receiver's name", false, nameController, (){}),
+                textFormField("Phone number", "Enter receiver's phone no", false, phoneController, (){}),
+                textFormField("Pickup location", "Where will you pick up your order? ", false, pickupController, (){}),
+                CustomDropDown(title: "Delivery Centre", selectedValue: selectedValue, itemList: itemList),
+                const SizedBox(height: 30),
+                textFormField("Parcel tracking no", "Enter tracking no", false, trackingControllers[0], (){}),
+                displayAddParcels(widgets),
+                outlinedBtn(context, null, Icons.add, (){
+                  setState(() {
+                    trackingControllers.add(TextEditingController());
+                    widgets.add(
+                      textFormField(null, "Enter tracking no", false, trackingControllers[trackingControllers.length-1], (){})
+                    );
+                  });
+                  print(trackingControllers.length);
+                }),
+              ],
+            ),
           ),
         ),
       )
