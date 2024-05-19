@@ -4,6 +4,25 @@ import 'package:architech/components/navBars.dart';
 import 'package:architech/config/theme.dart';
 import 'package:architech/models/lists.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'login.dart';
+
+
+class LogoutButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () async {
+        await FirebaseAuth.instance.signOut();
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const Login()),
+        );
+      },
+      child: Text('Logout'),
+    );
+  }
+ }
 
 class Profile extends StatefulWidget{
   const Profile({super.key});
@@ -92,7 +111,7 @@ class _ProfileState extends State<Profile>{
               fullBtn(Icons.wallet, "Languages", label[1]),
               fullBtn(Icons.wallet, "Settings", label[2]),
               const SizedBox(height: 30),
-              logoutBtn(),
+              LogoutButton(),
               Center(child: textLink(context, "Delete account", "", greyColour))
             ],
           ),
