@@ -8,6 +8,8 @@ class OrderModel extends ChangeNotifier{
   late DateTime selectedTime;
   // late double extraCharge;
   late List<ParcelModel> parcels = [];
+  double parcelPrice = 1.00;
+  double centrePrice = 1.00;
 
   // Testing
   final times = [
@@ -16,23 +18,34 @@ class OrderModel extends ChangeNotifier{
     TimesAvailable("14:30:00", 0),
   ];
 
-  double totalPrice(double totalParcels){
-    double parcelPrice = totalParcels * 1.0;
-    double centrePrice = totalParcels * 1.0;
+  double totalPrice(){
+    parcelPrice += (parcels.length + 1);
+    centrePrice += (parcels.length + 1);
 
     return parcelPrice + centrePrice;
   }
   
-  String dateConverter(){
+  dateConverter(bool toString){
     DateFormat dateFormat = DateFormat("dd MMM yyyy");
 
-    return dateFormat.format(selectedDate!);
+    if(toString == true){
+      return dateFormat.format(selectedDate!);
+
+    }else{
+      // To be changed
+      return dateFormat.parse("05:30");
+    }
   }
 
-  String timeConverter(){
-    DateFormat dateFormat = DateFormat("hh:mm");
+  timeConverter(bool toString, DateTime? time1, String time2){
+    DateFormat timeFormat = DateFormat("hh:mm");
 
-    return dateFormat.add_yMEd().add_jms().format(selectedTime);
+    if(toString == true){
+      return timeFormat.add_yMEd().add_jms().format(selectedTime);
+
+    }else{
+      return timeFormat.parse(time2);
+    }
   }
 }
 
@@ -42,5 +55,6 @@ class TimesAvailable{
   final String time;
   final double extraCharge;
 
+  @override
   String toString() => "TimeSlot { time: $time, charge: $extraCharge}";
 }

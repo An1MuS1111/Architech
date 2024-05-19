@@ -135,7 +135,6 @@ class _OrderPlace extends State<OrderPlace>{
                       textFormField(null, "Enter tracking no", false, trackingControllers[trackingControllers.length-1], (){})
                     );
                   });
-                  print(trackingControllers.length);
                 }),
               ],
             ),
