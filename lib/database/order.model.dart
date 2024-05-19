@@ -36,8 +36,7 @@ class OrderModel {
           data['pickUpLocation'] as Map<String, dynamic>?),
       selectedDateAndTime: data['selectedDate&TIme'] as Timestamp,
       selectedPaymentMethod: data['selectedPaymentMethod'] as DocumentReference,
-      status:
-          data['status'] ?? '', // Set default status if not provided
+      status: data['status'] ?? '', // Set default status if not provided
       totalPrice:
           data['totalPrice'] ?? null, // Set default total price if not provided
     );
@@ -46,22 +45,15 @@ class OrderModel {
 
 class PickUpLocation {
   final String address;
-  final String addressDetails;
-  final String name;
 
   PickUpLocation({
     required this.address,
-    required this.addressDetails,
-    required this.name,
   });
 
   factory PickUpLocation.fromMap(Map<String, dynamic>? data) {
-    if (data == null)
-      return PickUpLocation(address: '', addressDetails: '', name: '');
+    if (data == null) return PickUpLocation(address: '');
     return PickUpLocation(
       address: data['address'] ?? '',
-      addressDetails: data['addressDetails'] ?? '',
-      name: data['name'] ?? '',
     );
   }
 }
