@@ -10,8 +10,6 @@ import 'package:architech/pages/profile.dart';
 import 'package:architech/pages/signup.dart';
 import 'package:flutter/material.dart';
 
-import 'package:architech/my_order_screen.dart';
-
 // import 'package:architech/config/router.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -36,13 +34,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Architech',
       // home: LoadingPage(title: "Processing order...", note: "Please do not close the window or exit the application"),
-<<<<<<< HEAD
-      // home: OrderCriteria()
-      home: MainPage(),
-      // home: MyOrdersScreen(),
-=======
-      // home: OrderSchedule()
->>>>>>> origin/sprint-2
+      home: Login(),
     );
   }
 }
