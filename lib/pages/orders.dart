@@ -7,9 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:architech/database/database_service.dart';
 
 class Orders extends StatefulWidget {
-  // const Orders({Key? key, required this.title}) : super(key: key);
-
-  // final String title;
+  const Orders({super.key});
 
   @override
   State<Orders> createState() => _OrdersState();
@@ -17,9 +15,7 @@ class Orders extends StatefulWidget {
 
 class _OrdersState extends State<Orders> {
   DatabaseService service = DatabaseService();
-
-  Future<List<OrderModel>>? orderList;
-  List<OrderModel>? retrievedOrderList;
+  late Future<List<OrderModel>> orderList;
 
   @override
   void initState() {
@@ -28,13 +24,14 @@ class _OrdersState extends State<Orders> {
   }
 
   Future<void> _initRetrieval() async {
-    orderList = service.retrieveOrders();
-    retrievedOrderList = await service.retrieveOrders();
+    setState(() {
+      orderList = service.retrieveOrders();
+    });
   }
 
-// ***
-// Testing begins here
-// ***
+  Future<void> _refreshOrders() async {
+    await _initRetrieval();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,30 +46,34 @@ class _OrdersState extends State<Orders> {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const OrderPlace()));
           })),
-
-      //
-      //
-      body: SingleChildScrollView(
-        // onRefresh: _refresh,
+      body: RefreshIndicator(
+        onRefresh: _refreshOrders,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: FutureBuilder(
+          child: FutureBuilder<List<OrderModel>>(
             future: orderList,
             builder: (BuildContext context,
                 AsyncSnapshot<List<OrderModel>> snapshot) {
-              if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return Center(child: const Text('No data available'));
+              } else {
+                List<OrderModel> orders = snapshot.data!;
                 return ListView.separated(
-                    itemCount: retrievedOrderList!.length,
+                    itemCount: orders.length,
                     separatorBuilder: (context, index) => const SizedBox(
                           height: 10,
                         ),
                     itemBuilder: (context, index) {
                       return Dismissible(
-                        onDismissed: ((direction) async {
-                          await service.deleteOrder(
-                              retrievedOrderList![index].id.toString());
-                          // _dismiss();
-                        }),
+                        onDismissed: (direction) async {
+                          await service
+                              .deleteOrder(orders[index].id.toString());
+                          _refreshOrders();
+                        },
                         background: Container(
                           decoration: BoxDecoration(
                               color: Colors.red,
@@ -94,57 +95,27 @@ class _OrdersState extends State<Orders> {
                           child: ListTile(
                             onTap: () {
                               Navigator.pushNamed(context, "/edit",
-                                  arguments: retrievedOrderList![index]);
+                                  arguments: orders[index]);
                             },
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.0),
                             ),
-                            title: Text(retrievedOrderList![index].name),
+                            title: Text(orders[index].name),
                             subtitle: Text(
-                                "${retrievedOrderList![index].pickUpLocation.address.toString()}, ${retrievedOrderList![index].pickUpLocation.address.toString()}"),
+                                "${orders[index].pickUpLocation.address}, ${orders[index].pickUpLocation.address}"),
                             trailing: const Icon(Icons.arrow_right_sharp),
                           ),
                         ),
                       );
                     });
-              } else if (snapshot.connectionState == ConnectionState.done &&
-                  retrievedOrderList!.isEmpty) {
-                return Center(
-                  child: ListView(
-                    children: const <Widget>[
-                      Align(
-                          alignment: AlignmentDirectional.center,
-                          child: Text('No data available')),
-                    ],
-                  ),
-                );
-              } else {
-                return const Center(child: CircularProgressIndicator());
               }
             },
           ),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: (() {
-      //     Navigator.pushNamed(context, '/add');
-      //   }),
-      //   tooltip: 'add',
-      //   child: const Icon(Icons.add),
-      // ),
     );
   }
 }
-
-  
-
-
-
-
-
-
-
-
 
 
 
