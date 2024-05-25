@@ -179,7 +179,7 @@ class _OrderConfirmState extends State<OrderConfirm> {
                           ),
                         ),
                         Text(
-                          "RM" + widget.order.totalPrice().toString(),
+                          "RM${widget.order.totalPrice()}",
                           style: TextStyle(
                             fontSize: mainTitle,
                             fontWeight: FontWeight.w600
@@ -198,7 +198,7 @@ class _OrderConfirmState extends State<OrderConfirm> {
                         )
                       ),
                       Text(
-                        "RM" + widget.order.parcelPrice.toString() + " x " + (widget.order.parcels.length + 1).toString(),
+                        "RM${widget.order.parcelPrice} x ${widget.order.parcels.length}",
                         style: TextStyle(
                           color: greyColour
                         )
@@ -215,7 +215,7 @@ class _OrderConfirmState extends State<OrderConfirm> {
                         )
                       ),
                       Text(
-                          "RM" + widget.order.centrePrice.toString() + " x " + (widget.order.parcels.length + 1).toString(),
+                          "RM${widget.order.centrePrice} x ${widget.order.parcels.length}",
                         style: TextStyle(
                           color: greyColour
                         )

@@ -109,8 +109,8 @@ class _OrderPlace extends State<OrderPlace>{
         },
         child: SizedBox(
           child: mainBtn(context, "Proceed", false, (){
-            createOrder();
-            // Navigator.push(context, MaterialPageRoute(builder: (context) => OrderSchedule(order: order)));
+            // createOrder();
+            Navigator.push(context, MaterialPageRoute(builder: (context) => OrderSchedule(order: order)));
           })
         ),
       ),
