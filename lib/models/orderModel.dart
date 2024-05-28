@@ -3,13 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class OrderModel extends ChangeNotifier{
-  late String name, phoneNumber, pickupLocation, deliveryCentre;
+  late String orderId, name, phoneNumber, pickupLocation, deliveryCentre, selectedPayment;
+  late String status = "Order is placed";
   DateTime? selectedDate;
   late DateTime selectedTime;
-  // late double extraCharge;
   late List<ParcelModel> parcels = [];
   double parcelPrice = 1.00;
   double centrePrice = 1.00;
+  late double totalPaid;
+
+  // List<double> extraCharge = [];
+
+  // TODO: Generate random or reference id for orderId before submitting
 
   // Testing
   final times = [
@@ -19,10 +24,15 @@ class OrderModel extends ChangeNotifier{
   ];
 
   double totalPrice(){
-    parcelPrice += (parcels.length + 1);
-    centrePrice += (parcels.length + 1);
+    parcelPrice = parcels.length * 1;
+    centrePrice = parcels.length * 1;
 
-    return parcelPrice + centrePrice;
+    return totalPaid = parcelPrice + centrePrice;
+  }
+
+  // To be updated
+  String updateStatus(){
+    return status;
   }
   
   dateConverter(bool toString){
@@ -37,16 +47,29 @@ class OrderModel extends ChangeNotifier{
     }
   }
 
-  timeConverter(bool toString, DateTime? time1, String time2){
-    DateFormat timeFormat = DateFormat("hh:mm");
+  timeConverter(bool toString, String? time2){
+    DateFormat timeFormat = DateFormat();
 
     if(toString == true){
-      return timeFormat.add_yMEd().add_jms().format(selectedTime);
+      return timeFormat.add_jm().format(selectedTime);
 
     }else{
-      return timeFormat.parse(time2);
+      return timeFormat.parse(time2!);
     }
   }
+
+  Map<String, dynamic> toJson() => {
+    "name": name,
+    "phoneNumber": phoneNumber,
+    "pickupLocation": pickupLocation,
+    "deliveryCentre": deliveryCentre,
+    "parcels": parcels,
+    "selectedDate": selectedDate,
+    "selectedTime": selectedTime,
+    "selectedPayment": selectedPayment,
+    "totalPaid": 6,
+    "status": status,
+  };
 }
 
 class TimesAvailable{
