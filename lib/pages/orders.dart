@@ -1,7 +1,7 @@
 import 'package:architech/components/form.dart';
 import 'package:architech/components/navBars.dart';
 import 'package:architech/config/theme.dart';
-import 'package:architech/database/orderDB.dart';
+import 'package:architech/viewModel/orderViewModel.dart';
 import 'package:architech/models/orderModel.dart';
 import 'package:architech/models/parcelModel.dart';
 import 'package:architech/pages/order/orderDetails.dart';
@@ -28,7 +28,7 @@ class _OrdersState extends State<Orders>{
   // Testing
   late List<OrderModel> orders;
   late OrderModel order1, order2;
-  OrderDB db = OrderDB();
+  Orderviewmodel db = Orderviewmodel();
 
   @override
   void initState(){
