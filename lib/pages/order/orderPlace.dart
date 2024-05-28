@@ -109,8 +109,8 @@ class _OrderPlace extends State<OrderPlace>{
         },
         child: SizedBox(
           child: mainBtn(context, "Proceed", false, (){
-            createOrder();
-            // Navigator.push(context, MaterialPageRoute(builder: (context) => OrderSchedule(order: order)));
+            // createOrder();
+            Navigator.push(context, MaterialPageRoute(builder: (context) => OrderSchedule(order: order)));
           })
         ),
       ),
@@ -135,7 +135,6 @@ class _OrderPlace extends State<OrderPlace>{
                       textFormField(null, "Enter tracking no", false, trackingControllers[trackingControllers.length-1], (){})
                     );
                   });
-                  print(trackingControllers.length);
                 }),
               ],
             ),

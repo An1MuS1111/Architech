@@ -3,11 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class OrderModel extends ChangeNotifier{
-  late String name, phoneNumber, pickupLocation, deliveryCentre;
+  late String orderId, name, phoneNumber, pickupLocation, deliveryCentre, selectedPayment;
+  late String status = "Order is placed";
   DateTime? selectedDate;
   late DateTime selectedTime;
-  // late double extraCharge;
   late List<ParcelModel> parcels = [];
+  double parcelPrice = 1.00;
+  double centrePrice = 1.00;
+  late double totalPaid;
+
+  // List<double> extraCharge = [];
+
+  // TODO: Generate random or reference id for orderId before submitting
 
   // Testing
   final times = [
@@ -16,24 +23,53 @@ class OrderModel extends ChangeNotifier{
     TimesAvailable("14:30:00", 0),
   ];
 
-  double totalPrice(double totalParcels){
-    double parcelPrice = totalParcels * 1.0;
-    double centrePrice = totalParcels * 1.0;
+  double totalPrice(){
+    parcelPrice = parcels.length * 1;
+    centrePrice = parcels.length * 1;
 
-    return parcelPrice + centrePrice;
+    return totalPaid = parcelPrice + centrePrice;
+  }
+
+  // To be updated
+  String updateStatus(){
+    return status;
   }
   
-  String dateConverter(){
+  dateConverter(bool toString){
     DateFormat dateFormat = DateFormat("dd MMM yyyy");
 
-    return dateFormat.format(selectedDate!);
+    if(toString == true){
+      return dateFormat.format(selectedDate!);
+
+    }else{
+      // To be changed
+      return dateFormat.parse("05:30");
+    }
   }
 
-  String timeConverter(){
-    DateFormat dateFormat = DateFormat("hh:mm");
+  timeConverter(bool toString, String? time2){
+    DateFormat timeFormat = DateFormat();
 
-    return dateFormat.add_yMEd().add_jms().format(selectedTime);
+    if(toString == true){
+      return timeFormat.add_jm().format(selectedTime);
+
+    }else{
+      return timeFormat.parse(time2!);
+    }
   }
+
+  Map<String, dynamic> toJson() => {
+    "name": name,
+    "phoneNumber": phoneNumber,
+    "pickupLocation": pickupLocation,
+    "deliveryCentre": deliveryCentre,
+    "parcels": parcels,
+    "selectedDate": selectedDate,
+    "selectedTime": selectedTime,
+    "selectedPayment": selectedPayment,
+    "totalPaid": 6,
+    "status": status,
+  };
 }
 
 class TimesAvailable{
@@ -42,5 +78,6 @@ class TimesAvailable{
   final String time;
   final double extraCharge;
 
+  @override
   String toString() => "TimeSlot { time: $time, charge: $extraCharge}";
 }

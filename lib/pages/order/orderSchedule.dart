@@ -10,10 +10,10 @@ import 'package:architech/pages/order/orderConfirm.dart';
 import 'package:flutter/material.dart';
 
 class OrderSchedule extends StatefulWidget{
-  // OrderSchedule({super.key, required this.order});
-  // final OrderModel order;
+  OrderSchedule({super.key, required this.order});
+  final OrderModel order;
 
-  OrderSchedule({super.key});
+  // OrderSchedule({super.key});
 
   @override
   State<OrderSchedule> createState() => _OrderScheduleState();

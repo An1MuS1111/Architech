@@ -70,7 +70,7 @@ class _OrderConfirmState extends State<OrderConfirm> {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 5),
                     child: Text(
-                      widget.order.dateConverter(),
+                      widget.order.dateConverter(true),
                       style: TextStyle(
                         fontSize: subTitle,
                         color: Colors.white
@@ -80,7 +80,7 @@ class _OrderConfirmState extends State<OrderConfirm> {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 5),
                     child: Text(
-                      "User Phone No",
+                      widget.order.name,
                       style: TextStyle(
                         fontSize: subTitle,
                         color: Colors.white
@@ -90,7 +90,7 @@ class _OrderConfirmState extends State<OrderConfirm> {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 5),
                     child: Text(
-                      "User Pickup Location",
+                      widget.order.pickupLocation,
                       style: TextStyle(
                         fontSize: subTitle,
                         color: Colors.white
@@ -111,41 +111,52 @@ class _OrderConfirmState extends State<OrderConfirm> {
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: Text(
-                      "Parcel 1",
-                      style: TextStyle(
-                        fontSize: mainTitle
-                      ),
-                    ),
-                  ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Tracking no"
-                      ),
-                      Text(
-                        "MY1234567890"
-                      )
-                    ],
-                  ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Criterias"
-                      ),
-                      Text(
-                        "2-3kg, Fragile"
-                      )
-                    ],
-                  )
-                ],
+              child: LimitedBox(
+                maxHeight: 400,
+                child: ListView.builder(
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: widget.order.parcels.length,
+                  itemBuilder: (context, index){
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Text(
+                            widget.order.parcels[index].toString(),
+                            style: TextStyle(
+                              fontSize: mainTitle
+                            ),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "Tracking no"
+                            ),
+                            Text(
+                              widget.order.parcels[index].trackingNo
+                            )
+                          ],
+                        ),
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Criterias"
+                            ),
+                            Text(
+                              "2-3kg, Fragile"
+                            )
+                          ],
+                        )
+                      ],
+                    );
+                  } 
+                ),
               )
             ),
             const Divider(
@@ -168,7 +179,7 @@ class _OrderConfirmState extends State<OrderConfirm> {
                           ),
                         ),
                         Text(
-                          "RM6.00",
+                          "RM${widget.order.totalPrice()}",
                           style: TextStyle(
                             fontSize: mainTitle,
                             fontWeight: FontWeight.w600
@@ -187,7 +198,7 @@ class _OrderConfirmState extends State<OrderConfirm> {
                         )
                       ),
                       Text(
-                        "RM1.00 x 2",
+                        "RM${widget.order.parcelPrice} x ${widget.order.parcels.length}",
                         style: TextStyle(
                           color: greyColour
                         )
@@ -204,7 +215,7 @@ class _OrderConfirmState extends State<OrderConfirm> {
                         )
                       ),
                       Text(
-                        "RM1.00 x 2",
+                          "RM${widget.order.centrePrice} x ${widget.order.parcels.length}",
                         style: TextStyle(
                           color: greyColour
                         )

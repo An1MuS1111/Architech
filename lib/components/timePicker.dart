@@ -16,7 +16,7 @@ class _TimePickerState extends State<TimePicker> with AutomaticKeepAliveClientMi
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    
+
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -50,8 +50,32 @@ class _TimePickerState extends State<TimePicker> with AutomaticKeepAliveClientMi
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: widget.order.times.length,
                 itemBuilder: (count, index){
-                  return squareCard(widget.order.times[index].time, widget.order.times[index].extraCharge.toString(), null);
-                },
+                  return Container(
+                    padding: const EdgeInsets.all(20),
+                    margin: const EdgeInsets.only(bottom: 15),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black
+                      ),
+                      borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          widget.order.times[index].time,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 24
+                          ),
+                        ),
+                        Text(
+                          widget.order.times[index].extraCharge.toString()
+                        )
+                      ],
+                    )
+                  );
+                }
               ),
             ),
           )

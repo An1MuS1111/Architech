@@ -3,6 +3,7 @@ import 'package:architech/components/navBars.dart';
 import 'package:architech/config/theme.dart';
 import 'package:architech/database/order.model.dart';
 import 'package:architech/pages/order/orderPlace.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:architech/database/database_service.dart';
 
@@ -37,6 +38,111 @@ class _OrdersState extends State<Orders> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width * 0.9;
 
+    // return Scaffold(
+    //   appBar: topBar(context),
+    //   bottomNavigationBar: bottomBar(context),
+    //   floatingActionButton: SizedBox(
+    //     width: width,
+    //     child: outlinedBtn(context, "Place a new order", null, (){
+    //       Navigator.push(context, MaterialPageRoute(builder: (context) => const OrderPlace()));
+    //     })
+    //   ),
+    //   body: SingleChildScrollView(
+    //     child: Padding(
+    //       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+    //       child: Column(
+    //         crossAxisAlignment: CrossAxisAlignment.start,
+    //         children: [
+    //           const Center(
+    //             child: Text(
+    //               "Active Orders",
+    //               style: TextStyle(
+    //                 fontSize: 24
+    //               ),
+    //             ),
+    //           ),
+    //           Container(
+    //             height: 250,
+    //             padding: const EdgeInsets.symmetric(vertical: 10),
+    //             child: Column(
+    //               children: [
+    //                 if (widget.order == null && widget.order?.parcels == null) const Center(
+    //                   child: Text(
+    //                     "You have no active orders"
+    //                   ),
+    //                 ) else ListView.builder(
+    //                   padding: EdgeInsets.zero,
+    //                   shrinkWrap: true,
+    //                   physics: NeverScrollableScrollPhysics(),
+    //                   itemCount: widget.order?.parcels.length,
+    //                   itemBuilder: (context, index){
+    //                     return Container(
+    //                       margin: EdgeInsets.only(bottom: 8),
+    //                       child: Row(
+    //                         children: [
+    //                           Container(
+    //                             width: 290,
+    //                             decoration: BoxDecoration(
+    //                               border: Border.all(
+    //                                 color: Colors.black,
+    //                                 width: 1
+    //                               )
+    //                             ),
+    //                             child: Row(
+    //                               children: [
+    //                                 Column(
+    //                                   children: [
+    //                                     Text(
+    //                                       "Order no. ${widget.order!.parcels[index].trackingNo}"
+    //                                     ),
+    //                                   ],
+    //                                 ),
+    //                                 const Icon(
+    //                                   Icons.arrow_right_rounded,
+    //                                   color: Colors.black,
+    //                                 )
+    //                               ],
+    //                             )
+    //                           ),
+    //                           const Expanded(
+    //                             child: Text(
+    //                               "18 Apr"
+    //                             ),
+    //                           ),
+    //                         ],
+    //                       ),
+    //                     );  
+    //                   }
+    //                 )
+    //               ],
+    //             )
+    //           ),
+    //           Container(
+    //             padding: const EdgeInsets.symmetric(vertical: 10),
+    //             child: Column(
+    //               crossAxisAlignment: CrossAxisAlignment.start,
+    //               children: [
+    //                 Text(
+    //                   "Order history",
+    //                   style: TextStyle(
+    //                     fontSize: subTitle
+    //                   ),
+    //                 ),
+    //                 const SizedBox(height: 10),
+    //                 Text(
+    //                   "You have no past orders",
+    //                   style: TextStyle(
+    //                     fontSize: regular
+    //                   ),
+    //                 ),
+    //               ],
+    //             ),
+    //           ),
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    // );
     return Scaffold(
       appBar: topBar(context),
       bottomNavigationBar: bottomBar(context),

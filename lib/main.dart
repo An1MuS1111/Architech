@@ -4,10 +4,12 @@ import 'package:architech/pages/home.dart';
 import 'package:architech/pages/order/orderConfirm.dart';
 import 'package:architech/pages/order/orderCriteria.dart';
 import 'package:architech/pages/order/orderSchedule.dart';
+import 'package:architech/pages/order/orderTracking.dart';
 import 'package:architech/pages/orders.dart';
 import 'package:architech/pages/order/orderPlace.dart';
 import 'package:architech/pages/profile.dart';
 import 'package:architech/pages/signup.dart';
+import 'package:architech/pages/support/helpCentre.dart';
 import 'package:flutter/material.dart';
 
 // import 'package:architech/config/router.dart';
