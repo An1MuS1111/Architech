@@ -82,6 +82,7 @@ class OrderModel {
   final String name; // Assuming name refers to the customer's name
   final List<Parcel> parcels;
   final String phoneNumber;
+  final String pickupLocation;
 
   final Timestamp? selectedDateAndTime; // Make this field nullable
   final DocumentReference selectedPaymentMethod;
@@ -94,6 +95,7 @@ class OrderModel {
     required this.name,
     required this.parcels,
     required this.phoneNumber,
+    required this.pickupLocation,
     required this.selectedDateAndTime,
     required this.selectedPaymentMethod,
     required this.status,
@@ -106,6 +108,7 @@ class OrderModel {
       'name': name,
       'parcels': parcels.asMap(),
       'phoneNumber': phoneNumber,
+      'pickupLocation': pickupLocation,
       'selectedPaymentMethod': selectedPaymentMethod,
       'selectedDateAndTime': selectedDateAndTime,
       'status': status,
@@ -120,6 +123,7 @@ class OrderModel {
         parcels = List<Parcel>.from(
             doc.data()!["parcels"]), // Explicitly casting to List<String>
         phoneNumber = doc.data()!["phoneNumber"],
+        pickupLocation= doc.data()!["pickupLocation"],
         selectedPaymentMethod = doc.data()!["selectedPaymentMethod"],
         selectedDateAndTime =
             doc.data()?["selectedDateAndTime"], // Use null-aware operator
