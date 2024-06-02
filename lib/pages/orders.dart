@@ -3,9 +3,10 @@ import 'package:architech/components/navBars.dart';
 import 'package:architech/config/theme.dart';
 import 'package:architech/database/order.model.dart';
 import 'package:architech/pages/order/orderPlace.dart';
+import 'package:architech/viewModel/orderViewModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:architech/database/database_service.dart';
+import 'package:architech/database/orderViewModel.dart';
 
 class Orders extends StatefulWidget {
   const Orders({super.key});
@@ -15,7 +16,7 @@ class Orders extends StatefulWidget {
 }
 
 class _OrdersState extends State<Orders> {
-  DatabaseService service = DatabaseService();
+  OrderViewModel service = OrderViewModel();
   late Future<List<OrderModel>> orderList;
 
   @override
