@@ -55,16 +55,16 @@ class _SignupState extends State<Signup> {
                   ),
                 ),
                 const SizedBox(height: 30),
-                textFormField(
+                authTextFormField(
                   "UTM Email",
                   "Enter your registered email",
                   false,
                   emailController,
                   _emailValidator,
                 ),
-                textFormField("Password", "Enter your password", true,
+                authTextFormField("Password", "Enter your password", true,
                     passwordController, _passwordValidator),
-                textFormField(
+                authTextFormField(
                     "Confirm Password",
                     "Enter your password again",
                     true,

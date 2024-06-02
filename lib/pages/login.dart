@@ -63,9 +63,9 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 const SizedBox(height: 30),
-                textFormField("UTM Email", "Enter your registered email", false,
+                authTextFormField("UTM Email", "Enter your registered email", false,
                     emailController, _emailValidator),
-                textFormField("Password", "Enter your password", true,
+                authTextFormField("Password", "Enter your password", true,
                     passwordController, _passwordValidator),
                 Align(
                     alignment: Alignment.centerRight,

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 // Textfields
-Widget textFormField(String? text, String hintText, bool isPassword,
+Widget authTextFormField(String? text, String hintText, bool isPassword,
   TextEditingController controller, Function validatorFunction) {
   return Container(
     alignment: Alignment.bottomLeft,
@@ -57,6 +57,55 @@ Widget textFormField(String? text, String hintText, bool isPassword,
         keyboardType: isPassword
             ? TextInputType.visiblePassword
             : TextInputType.emailAddress,
+      ),
+      const SizedBox(height: 20),
+    ]),
+  );
+}
+
+Widget textFormField(String? text, String hintText,
+  TextEditingController controller, Function validatorFunction) {
+  return Container(
+    alignment: Alignment.bottomLeft,
+    child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+      text != null ? Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: SizedBox(
+          width: double.infinity,
+          child: Text(
+            text!,
+            style: TextStyle(
+              fontSize: regular,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ): const SizedBox(width: 0, height: 0),
+      TextFormField(
+        validator: (value) => validatorFunction(value),
+        controller: controller,
+        obscureText: false,
+        enableSuggestions: false,
+        autocorrect: true,
+        cursorColor: primaryColour,
+        decoration: InputDecoration(
+          hintText: hintText,
+          hintStyle: const TextStyle(
+            fontWeight: FontWeight.normal,
+            color: Colors.grey,
+          ),
+          isDense: true,
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              width: 2
+            )
+          ),
+          border: OutlineInputBorder(
+              borderSide:
+                  const BorderSide(width: 1, style: BorderStyle.solid),
+              borderRadius: BorderRadius.circular(4))),
+        keyboardType: TextInputType.name
       ),
       const SizedBox(height: 20),
     ]),

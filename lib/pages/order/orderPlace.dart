@@ -121,18 +121,18 @@ class _OrderPlace extends State<OrderPlace>{
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 85),
             child: Column(
               children: [
-                textFormField("Name", "Enter receiver's name", false, nameController, (){}),
-                textFormField("Phone number", "Enter receiver's phone no", false, phoneController, (){}),
-                textFormField("Pickup location", "Where will you pick up your order? ", false, pickupController, (){}),
+                textFormField("Name", "Enter receiver's name", nameController, (){}),
+                textFormField("Phone number", "Enter receiver's phone no", phoneController, (){}),
+                textFormField("Pickup location", "Where will you pick up your order? ", pickupController, (){}),
                 CustomDropDown(title: "Delivery Centre", selectedValue: selectedValue, itemList: itemList),
                 const SizedBox(height: 30),
-                textFormField("Parcel tracking no", "Enter tracking no", false, trackingControllers[0], (){}),
+                textFormField("Parcel tracking no", "Enter tracking no", trackingControllers[0], (){}),
                 displayAddParcels(widgets),
                 outlinedBtn(context, null, Icons.add, (){
                   setState(() {
                     trackingControllers.add(TextEditingController());
                     widgets.add(
-                      textFormField(null, "Enter tracking no", false, trackingControllers[trackingControllers.length-1], (){})
+                      textFormField(null, "Enter tracking no", trackingControllers[trackingControllers.length-1], (){})
                     );
                   });
                 }),

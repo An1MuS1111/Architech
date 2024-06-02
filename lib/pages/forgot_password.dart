@@ -56,7 +56,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               // ),
               // SizedBox(height: 20.0),
 
-              textFormField("UTM Email", "Enter your registered email", false,
+              authTextFormField("UTM Email", "Enter your registered email", false,
                   emailController, _emailValidator),
               ElevatedButton(
                 onPressed: resetPassword,
