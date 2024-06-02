@@ -2,21 +2,22 @@ import 'package:architech/components/form.dart';
 import 'package:architech/components/navBars.dart';
 import 'package:architech/config/theme.dart';
 import 'package:architech/models/orderModel.dart';
+import 'package:architech/pages/order/orderEdit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class OrderDetails extends StatefulWidget{
-  // OrderDetails({super.key});
-  OrderDetails({super.key, required this.order});
-
-  final OrderModelTest order;
+  OrderDetails({super.key});
 
   @override
   State<OrderDetails> createState() => _OrderDetailsState();
 }
 
 class _OrderDetailsState extends State<OrderDetails> {
+  // Testing
+  OrderModelTest order = OrderModelTest();
+  
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -31,7 +32,7 @@ class _OrderDetailsState extends State<OrderDetails> {
             SizedBox(
               width: width,
               child: Text(
-                "Order no: #${widget.order.status}",
+                "Order no: #${order.status}",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: subTitle,
@@ -39,34 +40,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 ),
               ),
             ),
-            Center(
-              child: Container(
-                width: 140,
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                margin: const EdgeInsets.only(top: 10, bottom: 5),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 1,
-                    color: greyColour
-                  ),
-                  borderRadius: BorderRadius.circular(8)
-                ),
-                child: InkWell(
-                  onTap: (){},
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Edit order"
-                      ),
-                      Icon(
-                        Icons.edit
-                      )
-                    ],
-                  )
-                )
-              ),
-            ),
+            ActionButtons(),
             Container(
               width: width,
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
@@ -92,7 +66,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         child: Text(
-                          widget.order.name,
+                          order.name,
                           style: TextStyle(
                             fontSize: regular,
                             color: Colors.white,
@@ -115,7 +89,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         child: Text(
-                          widget.order.phoneNumber,
+                          order.phoneNumber,
                           style: TextStyle(
                             fontSize: regular,
                             color: Colors.white,
@@ -138,7 +112,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         child: Text(
-                          widget.order.selectedPayment,
+                          order.selectedPayment,
                           style: TextStyle(
                             fontSize: regular,
                             color: Colors.white,
@@ -165,7 +139,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         child: Text(
-                          widget.order.parcels.length.toString(),
+                          order.parcels.length.toString(),
                           style: TextStyle(
                             fontSize: regular,
                             color: Colors.white,
@@ -188,7 +162,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         child: Text(
-                          "${widget.order.dateConverter(true)}, ${widget.order.timeConverter(true, null)}",
+                          "${order.dateConverter(true)}, ${order.timeConverter(true, null)}",
                           style: TextStyle(
                             fontSize: regular,
                             color: Colors.white,
@@ -211,7 +185,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         child: Text(
-                          widget.order.pickupLocation,
+                          order.pickupLocation,
                           style: TextStyle(
                             fontSize: regular,
                             color: Colors.white,
@@ -247,7 +221,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                               borderRadius: BorderRadius.circular(30)
                             ),
                             child: Text(
-                              widget.order.parcels[index].parcelStatus,
+                              order.parcels[index].parcelStatus,
                               style: const TextStyle(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w500
@@ -267,7 +241,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                   ),
                                 ),
                                 Text(
-                                  widget.order.dateConverter(true)
+                                  order.dateConverter(true)
                                 )
                               ],
                             ),
@@ -285,7 +259,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                   ),
                                 ),
                                 Text(
-                                  widget.order.parcels[index].trackingNo
+                                  order.parcels[index].trackingNo
                                 )
                               ],
                             ),
@@ -320,7 +294,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                   )
                                 ),
                               ),
-                              Positioned(
+                              SizedBox(
                                 child: InkWell(
                                   onTap: (){},
                                   child: Container(
@@ -380,6 +354,81 @@ class _OrderDetailsState extends State<OrderDetails> {
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ActionButtons extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: 160,
+            padding: const EdgeInsets.symmetric(vertical: 5),
+            margin: const EdgeInsets.only(top: 10, bottom: 5),
+            // decoration: BoxDecoration(
+            //   border: Border.all(
+            //     width: 1,
+            //     color: greyColour
+            //   ),
+            //   borderRadius: BorderRadius.circular(8)
+            // ),
+            child: InkWell(
+              onTap: (){},
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.delete_outline_rounded,
+                    size: 16
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    "Request cancel"
+                  ),
+                ],
+              )
+            )
+          ),
+          SizedBox(width: 40),
+          Container(
+            width: 130,
+            padding: const EdgeInsets.symmetric(vertical: 5),
+            margin: const EdgeInsets.only(top: 10, bottom: 5),
+            // decoration: BoxDecoration(
+            //   border: Border.all(
+            //     width: 1,
+            //     color: greyColour
+            //   ),
+            //   borderRadius: BorderRadius.circular(8)
+            // ),
+            child: InkWell(
+              onTap: (){
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(builder: (context) => OrderEdit())
+                );
+              },
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.edit,
+                    size: 16
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    "Edit order"
+                  ),
+                ],
+              )
+            )
+          ),
+        ],
       ),
     );
   }

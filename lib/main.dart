@@ -1,8 +1,11 @@
 import 'package:architech/components/processStatus.dart';
+import 'package:architech/controllers/formValidator.dart';
 import 'package:architech/pages/login.dart';
 import 'package:architech/pages/home.dart';
 import 'package:architech/pages/order/orderConfirm.dart';
 import 'package:architech/pages/order/orderCriteria.dart';
+import 'package:architech/pages/order/orderDetails.dart';
+import 'package:architech/pages/order/orderEdit.dart';
 import 'package:architech/pages/order/orderSchedule.dart';
 import 'package:architech/pages/order/orderTracking.dart';
 import 'package:architech/pages/orders.dart';
@@ -16,6 +19,7 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,9 +38,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Architech',
-      // home: LoadingPage(title: "Processing order...", note: "Please do not close the window or exit the application"),
-      home: OrderPlace(),
+      title: 'UniDash',
+      // home: OrderPlace(),
+      home: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (context) => FormValidator()
+          )
+        ],
+        child: OrderDetails(),
+      ),
     );
   }
 }
@@ -44,18 +55,19 @@ class MyApp extends StatelessWidget {
 class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: StreamBuilder<User?>(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Something went Wrong'));
-              } else if (snapshot.hasData) {
-                return Home();
-              } else {
-                return Login();
-              }
-            }),
-      );
+    body: StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Something went Wrong'));
+        } else if (snapshot.hasData) {
+          return Home();
+        } else {
+          return Login();
+        }
+      }
+    ),
+  );
 }
