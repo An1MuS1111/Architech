@@ -1,12 +1,12 @@
 import 'package:architech/components/form.dart';
 import 'package:architech/components/navBars.dart';
 import 'package:architech/config/theme.dart';
-import 'package:architech/database/order.model.dart';
+import 'package:architech/models/order.model.dart';
 import 'package:architech/pages/order/orderPlace.dart';
 import 'package:architech/viewModel/orderViewModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:architech/database/orderViewModel.dart';
+import 'package:architech/viewModel/orderViewModel.dart';
 
 class Orders extends StatefulWidget {
   const Orders({super.key});

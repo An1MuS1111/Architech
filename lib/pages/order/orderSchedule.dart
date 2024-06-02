@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 
 class OrderSchedule extends StatefulWidget{
   OrderSchedule({super.key, required this.order});
-  final OrderModel order;
+  final OrderModelTest order;
 
   // OrderSchedule({super.key});
 
@@ -22,7 +22,7 @@ class OrderSchedule extends StatefulWidget{
 class _OrderScheduleState extends State<OrderSchedule>{
   int current = 0;
 
-  OrderModel order = OrderModel();
+  OrderModelTest order = OrderModelTest();
 
   PageController pageController = PageController();
 

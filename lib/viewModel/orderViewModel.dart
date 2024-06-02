@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:architech/database/order.model.dart';
+import 'package:architech/models/order.model.dart';
 
 class OrderViewModel {
   final FirebaseFirestore _db = FirebaseFirestore.instance;

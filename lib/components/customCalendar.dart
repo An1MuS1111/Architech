@@ -6,7 +6,7 @@ import 'package:table_calendar/table_calendar.dart';
 class CustomCalendar extends StatefulWidget{
   CustomCalendar({super.key, required this.order});
 
-  final OrderModel order;
+  final OrderModelTest order;
 
   @override
   _CustomCalendarState createState() => _CustomCalendarState();

@@ -2,7 +2,7 @@ import 'package:architech/models/parcelModel.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class OrderModel extends ChangeNotifier{
+class OrderModelTest extends ChangeNotifier{
   late String orderId, name, phoneNumber, pickupLocation, deliveryCentre, selectedPayment;
   late String status = "Order is placed";
   DateTime? selectedDate;

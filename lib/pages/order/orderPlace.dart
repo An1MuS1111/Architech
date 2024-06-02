@@ -19,7 +19,7 @@ class _OrderPlace extends State<OrderPlace>{
     selectedValue = itemList[0];
   }
   
-  OrderModel order = OrderModel();
+  OrderModelTest order = OrderModelTest();
   String selectedValue = "";
 
   final itemList = ["Pick one", "OPC", "CPP", "ASN"];

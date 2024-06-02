@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class TimePicker extends StatefulWidget{
   TimePicker({super.key, required this.order});
 
-  final OrderModel order;
+  final OrderModelTest order;
 
   @override
   State<TimePicker> createState() => _TimePickerState();

@@ -10,7 +10,7 @@ class OrderDetails extends StatefulWidget{
   // OrderDetails({super.key});
   OrderDetails({super.key, required this.order});
 
-  final OrderModel order;
+  final OrderModelTest order;
 
   @override
   State<OrderDetails> createState() => _OrderDetailsState();
