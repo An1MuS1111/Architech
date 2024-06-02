@@ -16,7 +16,7 @@ class Orders extends StatefulWidget {
   State<Orders> createState() => _OrdersState();
 }
 
-class _OrdersState extends State<Orders> {
+class _OrdersState extends State<Orders>{
   OrderViewModel service = OrderViewModel();
   late Future<List<OrderModel>> orderList;
 

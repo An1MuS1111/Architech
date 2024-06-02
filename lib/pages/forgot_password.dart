@@ -1,7 +1,7 @@
 import 'package:architech/pages/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:architech/controllers/form_validator.dart';
+import 'package:architech/controllers/formValidator.dart';
 import 'package:architech/components/form.dart';
 import 'package:architech/services/auth.dart';
 

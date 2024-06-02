@@ -1,13 +1,13 @@
 import 'package:architech/components/form.dart';
 import 'package:architech/components/logos.dart';
 import 'package:architech/config/theme.dart';
-import 'package:architech/controllers/form_validator.dart';
+import 'package:architech/controllers/formValidator.dart';
 import 'package:architech/pages/home.dart';
 import 'package:architech/pages/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:architech/services/auth.dart';
-import 'package:architech/controllers/form_validator.dart';
+import 'package:architech/controllers/formValidator.dart';
 import 'package:architech/pages/forgot_password.dart';
 import 'package:architech/pages/orders.dart';
 

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:architech/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:architech/pages/home.dart';
-import 'package:architech/controllers/form_validator.dart';
+import 'package:architech/controllers/formValidator.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
