@@ -1,6 +1,7 @@
 import 'package:architech/components/processStatus.dart';
 import 'package:architech/controllers/formValidator.dart';
 import 'package:architech/controllers/providers/orderProvider.dart';
+import 'package:architech/pages/admin/adminHome.dart';
 import 'package:architech/pages/login.dart';
 import 'package:architech/pages/home.dart';
 import 'package:architech/pages/order/orderConfirm.dart';
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
           // ChangeNotifierProvider(create: (context) => OrderProvider()),
           // ChangeNotifierProvider(create: (context) => ParcelProvider()),
         ],
-        child: OrderPlace(),
+        child: AdminHome(),
       ),
     );
   }

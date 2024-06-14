@@ -3,18 +3,16 @@ import 'package:architech/components/labels.dart';
 import 'package:architech/components/navBars.dart';
 import 'package:architech/config/theme.dart';
 import 'package:architech/models/lists.dart';
+import 'package:architech/pages/login.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'login.dart';
 
-class Profile extends StatefulWidget{
-  const Profile({super.key});
-
+class AdminProfile extends StatefulWidget{
   @override
-  State<Profile> createState() => _ProfileState();
+  State<AdminProfile> createState() => _AdminProfileState();
 }
 
-class _ProfileState extends State<Profile>{
+class _AdminProfileState extends State<AdminProfile> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -22,7 +20,7 @@ class _ProfileState extends State<Profile>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: topBar(context),
-      bottomNavigationBar: bottomBar(context),
+      bottomNavigationBar: adminBottomBar(context),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
@@ -109,7 +107,7 @@ class LogoutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () async {
-        await FirebaseAuth.instance.signOut();
+        // await FirebaseAuth.instance.signOut();
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const Login()),
