@@ -1,3 +1,22 @@
+<<<<<<< Updated upstream
+=======
+import 'package:architech/components/processStatus.dart';
+import 'package:architech/controllers/formValidator.dart';
+import 'package:architech/controllers/providers/orderProvider.dart';
+import 'package:architech/pages/login.dart';
+import 'package:architech/pages/home.dart';
+import 'package:architech/pages/order/orderConfirm.dart';
+import 'package:architech/pages/order/orderCriteria.dart';
+import 'package:architech/pages/order/orderDetails.dart';
+import 'package:architech/pages/order/orderEdit.dart';
+import 'package:architech/pages/order/orderSchedule.dart';
+import 'package:architech/pages/order/orderTracking.dart';
+import 'package:architech/pages/orders.dart';
+import 'package:architech/pages/order/orderPlace.dart';
+import 'package:architech/pages/profile.dart';
+import 'package:architech/pages/signup.dart';
+import 'package:architech/pages/support/helpCentre.dart';
+>>>>>>> Stashed changes
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,6 +30,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+<<<<<<< Updated upstream
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -30,6 +50,18 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+=======
+      debugShowCheckedModeBanner: false,
+      title: 'UniDash',
+      // home: OrderPlace(),
+      home: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => FormValidator()),
+          ChangeNotifierProvider(create: (context) => OrderProvider()),
+          ChangeNotifierProvider(create: (context) => ParcelProvider()),
+        ],
+        child: OrderPlace(),
+>>>>>>> Stashed changes
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
