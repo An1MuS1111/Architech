@@ -1,6 +1,10 @@
 import 'package:architech/components/logos.dart';
 import 'package:architech/config/theme.dart';
 import 'package:architech/models/bottomAppBarModel.dart';
+import 'package:architech/pages/admin/adminHome.dart';
+import 'package:architech/pages/admin/adminOrders.dart';
+import 'package:architech/pages/admin/adminProfile.dart';
+import 'package:architech/pages/admin/adminUsers.dart';
 import 'package:architech/pages/home.dart';
 import 'package:architech/pages/orders.dart';
 import 'package:architech/pages/profile.dart';
@@ -48,7 +52,7 @@ AppBar titleBar(BuildContext context, String text, double margin){
   );
 }
 
-// Temporary
+// Temporary User Bottom Bar
 Container bottomBar(BuildContext context){
   return Container(
     height: 80,
@@ -87,6 +91,61 @@ Container bottomBar(BuildContext context){
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Profile()))
           },
           child: barItems[3].icon
+        ),
+        // List.generate(
+        //   4, (index) => SizedBox(
+        //     child: InkWell(
+        //       onTap: () => {
+        //         Navigator.of(context).push(barItems[index].route)
+        //       },
+        //       child: barItems[index].icon,
+        //     )
+        //   )
+        // ),
+      ]
+    ),
+  );
+}
+
+// Temporary Admin Bottom Bar
+Container adminBottomBar(BuildContext context){
+  return Container(
+    height: 80,
+    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+    margin: const EdgeInsets.symmetric(horizontal: 20),
+    decoration: const BoxDecoration(
+      color: Colors.black,
+      borderRadius: BorderRadius.only(
+        topRight: Radius.circular(20),
+        topLeft: Radius.circular(20)
+      ),
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        InkWell(
+          onTap: () => {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AdminHome()))
+          },
+          child: adminBarItems[0].icon
+        ),
+        InkWell(
+          onTap: () => {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => AdminOrders()))
+          },
+          child: adminBarItems[1].icon
+        ),
+        InkWell(
+          onTap: () => {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => AdminUsers()))
+          },
+          child: adminBarItems[2].icon
+        ),
+        InkWell(
+          onTap: () => {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => AdminProfile()))
+          },
+          child: adminBarItems[3].icon
         ),
         // List.generate(
         //   4, (index) => SizedBox(
