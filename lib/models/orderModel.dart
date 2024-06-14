@@ -8,6 +8,7 @@ class OrderModelTest extends ChangeNotifier{
   DateTime? selectedDate;
   late DateTime selectedTime;
   late List<ParcelModel> parcels = [];
+  double parcelPrice = 1.00;
   double centrePrice = 1.00;
   late double totalPaid;
 
@@ -39,11 +40,10 @@ class OrderModelTest extends ChangeNotifier{
   ];
 
   double totalPrice(){
-    // parcelPrice = parcels.length * 1;
+    parcelPrice = parcels.length * 1;
     centrePrice = parcels.length * 1;
 
-    // return totalPaid = parcelPrice + centrePrice;
-    return totalPaid = centrePrice;
+    return totalPaid = parcelPrice + centrePrice;
   }
 
   // To be updated

@@ -4,20 +4,18 @@ import 'package:architech/components/navBars.dart';
 import 'package:architech/controllers/formValidator.dart';
 import 'package:architech/models/orderModel.dart';
 import 'package:architech/models/parcelModel.dart';
-import 'package:architech/pages/order/orderCriteria.dart';
-import 'package:architech/pages/order/orderSchedule.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class OrderPlace extends StatefulWidget{
-  const OrderPlace({super.key});
+class OrderEdit extends StatefulWidget{
+  const OrderEdit({super.key});
 
   @override
-  State<OrderPlace> createState() => _OrderPlace();
+  State<OrderEdit> createState() => _OrderEdit();
 }
 
-class _OrderPlace extends State<OrderPlace>{
-  _OrderPlace(){
+class _OrderEdit extends State<OrderEdit>{
+  _OrderEdit(){
     selectedValue = itemList[0];
   }
   
@@ -38,7 +36,10 @@ class _OrderPlace extends State<OrderPlace>{
   void initState(){
     super.initState();
     widgets = [];
-    trackingControllers = [];
+    trackingControllers = [
+      TextEditingController(),
+      TextEditingController()
+    ];
 
     nameController = TextEditingController();
     phoneController = TextEditingController();
@@ -63,49 +64,28 @@ class _OrderPlace extends State<OrderPlace>{
     super.dispose();
   }
 
-  void createOrder(){
+  void updateOrder(){
     setState(() {
       order.name = nameController.text;
       order.phoneNumber = phoneController.text;
       order.pickupLocation = pickupController.text;
       order.deliveryCentre = centreController.text;
       
-      for(var i = 0; i<trackingControllers.length; i++){
-        ParcelModel pm = ParcelModel(trackingControllers[i].text);
+      // for(var i = 0; i<trackingControllers.length; i++){
+      //   ParcelModel pm = ParcelModel(trackingControllers[i].text);
 
-        order.parcels.add(pm);
-      }
+      //   order.parcels.add(pm);
+      // }
     });
-  }
-
-  Widget displayAddParcels(widgets){
-    if(widgets != null){
-      return LimitedBox(
-        maxHeight: 400,
-        child: ListView.builder(
-          padding: EdgeInsets.zero,
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: widgets.length,
-          itemBuilder: (context, index){
-            return Container(
-              child: widgets[index]
-            );
-          } 
-        ),
-      );
-    }else{
-      return const SizedBox(width: 0, height: 0);
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<FormValidator>;
+    // final state = context.watch<FormValidator>;
     trackingControllers.add(trackingController);
 
     return Scaffold(
-      appBar: titleBar(context, "Fill in your details", 60),
+      appBar: titleBar(context, "Edit Order ${order.orderId}", 90),
       floatingActionButton: InkWell(
         onTap: () => {
           Navigator.pop(context)
@@ -113,7 +93,7 @@ class _OrderPlace extends State<OrderPlace>{
         child: SizedBox(
           child: mainBtn(context, "Proceed", false, (){
             // createOrder();
-            Navigator.push(context, MaterialPageRoute(builder: (context) => OrderSchedule(order: order)));
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => OrderSchedule(order: order)));
           })
         ),
       ),
@@ -125,21 +105,30 @@ class _OrderPlace extends State<OrderPlace>{
             child: Column(
               children: [
                 // textFormField("Name", "Enter receiver's name", nameController, state.validateText.message),
-                textFormField("Name", "Enter receiver's name", nameController, (){}),
-                textFormField("Phone number", "Enter receiver's phone no", phoneController, (){}),
-                textFormField("Pickup location", "Where will you pick up your order? ", pickupController, (){}),
+                textFormField("Name", order.name, nameController, (){}),
+                textFormField("Phone number", order.phoneNumber, phoneController, (){}),
+                textFormField("Pickup location", order.pickupLocation, pickupController, (){}),
                 CustomDropDown(title: "Delivery Centre", selectedValue: selectedValue, itemList: itemList),
                 const SizedBox(height: 30),
-                textFormField("Parcel tracking no", "Enter tracking no", trackingControllers[0], (){}),
-                displayAddParcels(widgets),
-                outlinedBtn(context, null, Icons.add, (){
-                  setState(() {
-                    trackingControllers.add(TextEditingController());
-                    widgets.add(
-                      textFormField(null, "Enter tracking no", trackingControllers[trackingControllers.length-1], (){})
-                    );
-                  });
-                }),
+                LimitedBox(
+                  maxHeight: 300,
+                  child: ListView.builder(
+                    itemCount: order.parcels.length,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 8),
+                            child: Text("Parcel ${index + 1}")
+                          ),
+                          textFormField(null, order.parcels[index].trackingNo, trackingControllers[index], (){})
+                        ] 
+                      );
+                    }
+                  ),
+                )
               ],
             ),
           ),
