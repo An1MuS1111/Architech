@@ -21,7 +21,7 @@ class AdminHome extends StatelessWidget{
             width: MediaQuery.of(context).size.width,
             height: 300,
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            color: lightGrey,
+            color: secondaryColour,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

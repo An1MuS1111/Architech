@@ -2,6 +2,7 @@ import 'package:architech/components/processStatus.dart';
 import 'package:architech/controllers/formValidator.dart';
 import 'package:architech/controllers/providers/orderProvider.dart';
 import 'package:architech/pages/admin/adminHome.dart';
+import 'package:architech/pages/admin/adminReport.dart';
 import 'package:architech/pages/login.dart';
 import 'package:architech/pages/home.dart';
 import 'package:architech/pages/order/orderConfirm.dart';

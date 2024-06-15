@@ -55,7 +55,7 @@ AppBar titleBar(BuildContext context, String text, double margin){
 // Topbar for adminHome
 AppBar adminHomeTopBar(BuildContext context){
   return AppBar(
-    backgroundColor: lightGrey,
+    backgroundColor: secondaryColour,
     leading: Padding(
       padding: const EdgeInsets.only(left: 20),
       child: InkWell(
