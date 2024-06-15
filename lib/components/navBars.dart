@@ -52,6 +52,23 @@ AppBar titleBar(BuildContext context, String text, double margin){
   );
 }
 
+// Topbar for adminHome
+AppBar adminHomeTopBar(BuildContext context){
+  return AppBar(
+    backgroundColor: lightGrey,
+    leading: Padding(
+      padding: const EdgeInsets.only(left: 20),
+      child: InkWell(
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const Home()));
+        },
+        child: appLogo("assets/logo_small.png", 130)
+      ),
+    ),
+    leadingWidth: 160,
+  );
+}
+
 // Temporary User Bottom Bar
 Container bottomBar(BuildContext context){
   return Container(
