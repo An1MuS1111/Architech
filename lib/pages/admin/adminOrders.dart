@@ -56,7 +56,7 @@ class _AdminOrdersState extends State<AdminOrders> {
               SizedBox(height: 10),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10),
-                child: TextField(
+                child: TextFormField(
                   controller: searchController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -68,11 +68,11 @@ class _AdminOrdersState extends State<AdminOrders> {
                     contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
                     hintText: "Search"
                   ),
-                  onChanged: (value){
-                    setState(() {
-                      // userListOnSearch = userList.where((element) => element.contains(value)).toList();
-                    });
-                  },
+                  // onChanged: (value){
+                  //   setState(() {
+                  //     // userListOnSearch = userList.where((element) => element.contains(value)).toList();
+                  //   });
+                  // },
                 ),
               ),
               ListView.separated(

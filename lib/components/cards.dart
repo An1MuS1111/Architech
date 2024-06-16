@@ -89,30 +89,29 @@ Container suggestedCard(){
 }
 
 // 
-Container squareCard(String text1, String? text2, IconData? icon){
+Container squareCard(String text1, String? text2, IconData? icon,
+  {bool selected = false, bool selectedInitial = true}) {
   return Container(
     padding: const EdgeInsets.all(20),
     margin: const EdgeInsets.only(bottom: 15),
     decoration: BoxDecoration(
-      border: Border.all(
-        color: Colors.black
-      ),
-      borderRadius: BorderRadius.circular(10)
-    ),
+      color: !selectedInitial
+        ? selected
+            ? secondaryColour
+            : Colors.grey[300]
+        : Colors.white,
+      border: Border.all(color: Colors.black),
+      borderRadius: BorderRadius.circular(10)),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          text1
-        ),
-        text2 != null ?
-        Text(
-          text2
-        )
+        Text(text1),
+        text2 != null
+        ? Text(text2)
         : Icon(
-          icon,
-          color: Colors.black,
-        )
+            icon,
+            color: Colors.black,
+          )
       ],
     )
   );

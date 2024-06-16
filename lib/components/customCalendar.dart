@@ -4,9 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CustomCalendar extends StatefulWidget{
-  CustomCalendar({super.key, required this.order});
+  const CustomCalendar({
+    Key? key,
+    required this.order,
+    required this.initialDate,
+    required this.onDateSelected,
+  }) : super(key: key);
 
   final OrderModelTest order;
+  final DateTime initialDate;
+  final ValueChanged<DateTime?> onDateSelected;
 
   @override
   _CustomCalendarState createState() => _CustomCalendarState();
@@ -19,6 +26,7 @@ class _CustomCalendarState extends State<CustomCalendar> with AutomaticKeepAlive
   @override
   void initState() {
     super.initState();
+    _selectedDate = widget.initialDate;
   }
 
   @override
@@ -27,11 +35,11 @@ class _CustomCalendarState extends State<CustomCalendar> with AutomaticKeepAlive
   }
 
   void _onDaySelected(DateTime day, DateTime focusedDay){
-    if(!isSameDay(_selectedDate, day)){
+    if(!isSameDay(_selectedDate, day) && !day.isBefore(today)){
       setState(() {
         _selectedDate = day;
-        widget.order.selectedDate = _selectedDate;
-        print(widget.order.selectedDate);
+        widget.order.selectedDate = _selectedDate ?? DateTime.now();
+        widget.onDateSelected(_selectedDate);
       });
     }
   }
@@ -40,7 +48,7 @@ class _CustomCalendarState extends State<CustomCalendar> with AutomaticKeepAlive
   Widget build(BuildContext context) {
     super.build(context);
 
-    return Container(
+    return SizedBox(
       height: 400,
       child: TableCalendar(
         locale: "en_US",
@@ -49,7 +57,7 @@ class _CustomCalendarState extends State<CustomCalendar> with AutomaticKeepAlive
         lastDay: DateTime.utc(2024, 7, 31),
         rowHeight: 50,
         headerStyle: HeaderStyle(
-          headerMargin: EdgeInsets.only(bottom: 20),
+          headerMargin: const EdgeInsets.only(bottom: 20),
           headerPadding: EdgeInsets.zero,
           titleCentered: true,
           formatButtonVisible: false,
@@ -75,18 +83,23 @@ class _CustomCalendarState extends State<CustomCalendar> with AutomaticKeepAlive
           ),
           selectedTextStyle: const TextStyle(
             color: Colors.black
-          )
+          ),
+          disabledTextStyle: const TextStyle(
+            color: Colors.grey
+          ),
         ),
         onDaySelected: _onDaySelected,
-        onPageChanged:(focusedDay) {
+        onPageChanged: (focusedDay) {
           _selectedDate = focusedDay;
         },
         selectedDayPredicate: (day) => isSameDay(_selectedDate, day),
+        enabledDayPredicate: (day) {
+          return !day.isBefore(today); // Disable past dates
+        },
       ),
     );
   }
   
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }
