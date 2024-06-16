@@ -125,8 +125,8 @@ class _LoginState extends State<Login> {
       print("User is successfully created");
 
       // Change to the MyOrderScreen();
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => Orders()));
+      // Navigator.push(
+      //     context, MaterialPageRoute(builder: (context) => Orders()));
     } else {
       print("some error");
     }

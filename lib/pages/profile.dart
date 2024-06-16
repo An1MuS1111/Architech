@@ -8,7 +8,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'login.dart';
 
 class Profile extends StatefulWidget{
-  const Profile({super.key});
+  Profile({Key? key, required this.tab}) : super(key: key);
+  
+  final int tab;
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -22,7 +24,6 @@ class _ProfileState extends State<Profile>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: topBar(context),
-      bottomNavigationBar: bottomBar(context),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),

@@ -24,7 +24,6 @@ class _OrderDetailsState extends State<OrderDetails> {
 
     return Scaffold(
       appBar: titleBar(context, "Order details", 75),
-      bottomNavigationBar: bottomBar(context),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

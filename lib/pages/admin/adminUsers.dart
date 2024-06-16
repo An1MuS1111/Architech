@@ -6,6 +6,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AdminUsers extends StatefulWidget{
+  AdminUsers({Key? key, required this.tab}) : super(key: key);
+  
+  final int tab;
+
   @override
   State<AdminUsers> createState() => _AdminUsersState();
 }
@@ -34,7 +38,7 @@ class _AdminUsersState extends State<AdminUsers> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: topBar(context),
-        bottomNavigationBar: adminBottomBar(context),
+        // bottomNavigationBar: adminBottomBar(context),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),

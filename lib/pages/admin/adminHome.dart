@@ -4,16 +4,15 @@ import 'package:architech/pages/admin/adminReport.dart';
 import 'package:flutter/material.dart';
 
 class AdminHome extends StatelessWidget{
-  // const AdminHome({super.key, required this.email});
-  const AdminHome({super.key});
-
-  // final String email;
+  AdminHome({Key? key, required this.tab}) : super(key: key);
+  
+  final int tab;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: adminHomeTopBar(context),
-      bottomNavigationBar: adminBottomBar(context),
+      // bottomNavigationBar: adminBottomBar(context),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

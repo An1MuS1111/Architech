@@ -6,6 +6,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AdminOrders extends StatefulWidget{
+  AdminOrders({Key? key, required this.tab}) : super(key: key);
+  
+  final int tab;
+
   @override
   State<AdminOrders> createState() => _AdminOrdersState();
 }
@@ -38,7 +42,7 @@ class _AdminOrdersState extends State<AdminOrders> {
 
     return Scaffold(
       appBar: topBar(context),
-      bottomNavigationBar: adminBottomBar(context),
+      // bottomNavigationBar: adminBottomBar(context),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),

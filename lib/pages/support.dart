@@ -5,7 +5,9 @@ import 'package:architech/pages/support/helpCentre.dart';
 import 'package:flutter/material.dart';
 
 class Support extends StatelessWidget{
-  const Support({super.key});
+  Support({Key? key, required this.tab}) : super(key: key);
+  
+  final int tab;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,7 @@ class Support extends StatelessWidget{
 
     return Scaffold(
       appBar: topBar(context),
-      bottomNavigationBar: bottomBar(context),
+      // bottomNavigationBar: bottomBar(context),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),

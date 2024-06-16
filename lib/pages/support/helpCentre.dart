@@ -14,7 +14,6 @@ class _HelpCentreState extends State<HelpCentre> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: titleBar(context, "Help Centre", 90),
-      bottomNavigationBar: bottomBar(context),
       body: SingleChildScrollView(
         child: SliverList(
             delegate: SliverChildBuilderDelegate(
@@ -23,8 +22,6 @@ class _HelpCentreState extends State<HelpCentre> {
       )
     );
   }
-
-  
 }
 
 class QuestionItem extends StatefulWidget{
@@ -43,7 +40,6 @@ class _QuestionItemState extends State<QuestionItem> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: titleBar(context, "Help Centre", 90),
-      bottomNavigationBar: bottomBar(context),
       body: SingleChildScrollView(
         child: Column(
           children: [

@@ -8,6 +8,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AdminProfile extends StatefulWidget{
+  AdminProfile({Key? key, required this.tab}) : super(key: key);
+  
+  final int tab;
+
   @override
   State<AdminProfile> createState() => _AdminProfileState();
 }
@@ -20,7 +24,7 @@ class _AdminProfileState extends State<AdminProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: topBar(context),
-      bottomNavigationBar: adminBottomBar(context),
+      // bottomNavigationBar: adminBottomBar(context),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
