@@ -1,6 +1,10 @@
 import 'package:architech/components/processStatus.dart';
 import 'package:architech/controllers/formValidator.dart';
+import 'package:architech/controllers/providers/orderConfimProvider.dart';
+import 'package:architech/controllers/providers/orderCriteriaProvider.dart';
+import 'package:architech/controllers/providers/orderPlaceProvider.dart';
 import 'package:architech/controllers/providers/orderProvider.dart';
+import 'package:architech/controllers/providers/orderScheduleProvider.dart';
 import 'package:architech/pages/admin/adminHome.dart';
 import 'package:architech/pages/admin/adminReport.dart';
 import 'package:architech/pages/login.dart';
@@ -32,7 +36,14 @@ Future main() async {
       // options: DefaultFirebaseOptions.currentPlatform,
       );
   await FirebaseApi().initNotifications();
-  runApp(const MyApp());
+
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (context) => FormValidator()),
+    ChangeNotifierProvider(create: (context) => OrderPlaceProvider()),
+    ChangeNotifierProvider(create: (context) => OrderCriteriaProvider()),
+    ChangeNotifierProvider(create: (context) => OrderScheduleProvider()),
+    ChangeNotifierProvider(create: (context) => OrderConfirmProvider()),
+  ], child: const MyApp()));
 }
 
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -46,33 +57,28 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'UniDash',
       // home: OrderPlace(),
-      home: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (context) => FormValidator()),
-          // ChangeNotifierProvider(create: (context) => OrderProvider()),
-          // ChangeNotifierProvider(create: (context) => ParcelProvider()),
-        ],
-        child: AdminHome(),
-      ),
+      home: Orders()
     );
   }
 }
 
 class MainPage extends StatelessWidget {
+  const MainPage({super.key});
+  
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: StreamBuilder<User?>(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Something went Wrong'));
-              } else if (snapshot.hasData) {
-                return Home();
-              } else {
-                return Login();
-              }
-            }),
-      );
+    body: StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Something went Wrong'));
+        } else if (snapshot.hasData) {
+          return Home();
+        } else {
+          return Login();
+        }
+      }),
+  );
 }
