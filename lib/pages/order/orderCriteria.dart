@@ -135,7 +135,7 @@ class _OrderCriteria
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+          padding: const EdgeInsets.fromLTRB(20, 10, 20, 50),
           child: Column(
             children: [
               Center(
