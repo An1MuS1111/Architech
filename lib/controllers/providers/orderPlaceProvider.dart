@@ -68,26 +68,6 @@ class OrderPlaceProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void addCriteriaList(String value, int index,
-  //     {String? parcelName, required List<String> criteria}) {
-  //   for (int i = 0; i < widgets.length; i++) {
-  //     print("worked $i $index");
-  //     if (i == index) {
-  //       print("worked");
-  //       widgets[index] = ParcelTextField(
-  //         key: UniqueKey(),
-  //         text: parcelName,
-  //         controller: trackingControllers[index],
-  //         validatorFunction: () {},
-  //         enableCriteria: false,
-  //         criteria: criteria,
-  //         indexSelected: index,
-  //       );
-  //       notifyListeners();
-  //     }
-  //   }
-  //   notifyListeners();
-  // }
   void addCriteriaList(String value, int index,
       {String? parcelName, required List<String> criteria}) {
     if (index >= 0 && index < widgets.length) {
@@ -120,11 +100,11 @@ class OrderPlaceProvider extends ChangeNotifier {
   void proceedFillDetailsFunction(BuildContext context) {
     isLoadingFunction(true);
     if (nameController.text.isEmpty) {
-      showSnackBar(context, "Enter your name");
+      showSnackBar(context, "Please enter your name");
     } else if (phoneController.text.isEmpty) {
-      showSnackBar(context, "Enter your phone");
-    } else if (phoneController.text.isEmpty) {
-      showSnackBar(context, "Enter your location");
+      showSnackBar(context, "Please enter your phone");
+    } else if (pickupController.text.isEmpty) {
+      showSnackBar(context, "Please enter your location");
     } else {
       Navigator.push(
         context,

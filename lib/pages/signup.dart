@@ -3,6 +3,7 @@ import 'package:architech/components/logos.dart';
 import 'package:architech/config/theme.dart';
 import 'package:architech/pages/login.dart';
 import 'package:architech/pages/verify_email.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:architech/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,6 +23,7 @@ class _SignupState extends State<Signup> {
   final FormValidator _formValidator = FormValidator();
 
   TextEditingController emailController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
@@ -58,6 +60,13 @@ class _SignupState extends State<Signup> {
                 authTextFormField(
                   "UTM Email",
                   "Enter your registered email",
+                  false,
+                  emailController,
+                  _emailValidator,
+                ),
+                authTextFormField(
+                  "Username",
+                  "Enter your username",
                   false,
                   emailController,
                   _emailValidator,

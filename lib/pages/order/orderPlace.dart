@@ -64,20 +64,13 @@ class _OrderPlace extends State<OrderPlace> {
                       orderScheduleProvider, _) {
                 return Column(
                   children: [
-                    textFormField("Name", "Enter receiver's name",orderPlaceProvider.nameController, () {}),
+                    textFormField("Name", "Enter receiver's name", orderPlaceProvider.nameController, () {}),
                     textFormField("Phone number", "Enter receiver's phone no", orderPlaceProvider.phoneController, () {}, keyboardType: TextInputType.number),
-                    textFormField("Pickup location", "Where will you pick up your order? ", orderPlaceProvider.pickupController,() {}),
+                    // textFormField("Pickup location", "Where will you pick up your order? ", orderPlaceProvider.pickupController,() {}),
                     SearchLocation(),
+                    const SizedBox(height: 30),
                     CustomDropDown(title: "Delivery Centre", selectedValue: orderPlaceProvider.selectedValue, itemList: orderPlaceProvider.itemList),
                     const SizedBox(height: 30),
-                    // ParcelTextField(
-                    //   text: "Parcel tracking no",
-                    //   controller:
-                    //       orderPlaceProvider.trackingControllers[0],
-                    //   validatorFunction: () {},
-                    //   enableCriteria: false,
-                    //   criteria: const [],
-                    // ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8),
                       child: SizedBox(
@@ -92,7 +85,7 @@ class _OrderPlace extends State<OrderPlace> {
                       ),
                     ),
                     displayAddParcels(orderPlaceProvider.widgets),
-                    outlinedBtn(context,null,Icons.add,() {
+                    outlinedBtn(context, null, Icons.add,() {
                         orderPlaceProvider
                           .trackingParcelTextFiledCreator();
                       },

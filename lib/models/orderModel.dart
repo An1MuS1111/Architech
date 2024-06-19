@@ -18,17 +18,17 @@ class OrderModelTest extends ChangeNotifier {
   late double totalPaid;
 
   // Mock Data
-  OrderModelTest() {
-    orderId = "1";
-    name = "Mariam Suriya";
-    phoneNumber = "0198762371";
-    pickupLocation = "KTC B01";
-    deliveryCentre = "OPC";
-    selectedPayment = "COD";
-    selectedDate = DateTime.now();
-    selectedTime = DateTime.now();
-    parcels = [ParcelModel("MP1234"), ParcelModel("UI7923")];
-  }
+  // OrderModelTest() {
+  //   orderId = "1";
+  //   name = "Mariam Suriya";
+  //   phoneNumber = "0198762371";
+  //   pickupLocation = "KTC B01";
+  //   deliveryCentre = "OPC";
+  //   selectedPayment = "COD";
+  //   selectedDate = DateTime.now();
+  //   selectedTime = DateTime.now();
+  //   parcels = [ParcelModel("MP1234"), ParcelModel("UI7923")];
+  // }
 
   // List<double> extraCharge = [];
   // TODO: Generate random or reference id for orderId before submitting
@@ -47,8 +47,8 @@ class OrderModelTest extends ChangeNotifier {
   }
 
   // To be updated
-  String updateStatus() {
-    return status;
+  String updateStatus(String newStatus) {
+    return status = newStatus;
   }
 
   dateConverter(bool toString) {
