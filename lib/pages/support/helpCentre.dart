@@ -15,19 +15,17 @@ class _HelpCentreState extends State<HelpCentre> {
     return Scaffold(
       appBar: titleBar(context, "Help Centre", 90),
       body: SingleChildScrollView(
-        child: SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) => QuestionItem(index: index)),
-          ),
+        child: QuestionItem()
       )
     );
   }
 }
 
 class QuestionItem extends StatefulWidget{
-  QuestionItem({super.key, required this.index});
+  // QuestionItem({super.key, required this.index});
+  QuestionItem({super.key});
 
-  int index;
+  // int index;
 
   @override
   State<QuestionItem> createState() => _QuestionItemState();

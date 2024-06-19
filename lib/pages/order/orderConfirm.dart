@@ -295,8 +295,8 @@ class OrderConfirm extends StatefulWidget {
 }
 
 class _OrderConfirmState extends State<OrderConfirm> {
-  List<String> paymentOptions = ["Cash on Delivery", "QR Payment"];
-  List paymentAvailability = [null, "Coming soon"];
+  List<String> paymentOptions = ["Cash on Delivery", "RazorPay"];
+  List paymentAvailability = [null, "New"];
   List paymentIcons = [Icons.attach_money_outlined, null];
   @override
   Widget build(BuildContext context) {
@@ -349,14 +349,14 @@ class _OrderConfirmState extends State<OrderConfirm> {
                             TextStyle(fontSize: subTitle, color: Colors.white),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      child: Text(
-                        orderPlaceProvider.pickupController.text,
-                        style:
-                            TextStyle(fontSize: subTitle, color: Colors.white),
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(vertical: 5),
+                    //   child: Text(
+                    //     orderPlaceProvider.pickupController.text,
+                    //     style:
+                    //         TextStyle(fontSize: subTitle, color: Colors.white),
+                    //   ),
+                    // ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 5),
                       child: Text(
@@ -428,11 +428,10 @@ class _OrderConfirmState extends State<OrderConfirm> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text(
-                                    "criteria",
+                                    "Criteria",
                                   ),
                                   SizedBox(
-                                    width:
-                                        (data.criteriaList?.length ?? 0) * 63,
+                                    width: 200,
                                     height: 30,
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
@@ -441,10 +440,16 @@ class _OrderConfirmState extends State<OrderConfirm> {
                                         var datas = data.criteriaList?[index];
                                         return Center(
                                           child: Container(
-                                            padding: const EdgeInsets.only(
-                                              right: 10,
+                                            decoration: BoxDecoration(
+                                              color: secondaryColour,
+                                              borderRadius: BorderRadius.circular(10)
                                             ),
-                                            child: Text(datas.toString()),
+                                            padding: EdgeInsets.symmetric(vertical: 2, horizontal: 10),
+                                            margin: EdgeInsets.symmetric(horizontal: 5),
+                                            child: Text(
+                                              datas.toString(),
+                                              textAlign: TextAlign.end,
+                                            ),
                                           ),
                                         );
                                       },

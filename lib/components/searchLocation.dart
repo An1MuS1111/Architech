@@ -16,7 +16,7 @@ class SearchLocation extends StatefulWidget{
 
 class _SearchLocationState extends State<SearchLocation>{
   List<AutoCompletePredictionModel> placePredictions = [];
-  TextEditingController controller = TextEditingController();
+  TextEditingController searchController = TextEditingController();
 
   Position? currentLocation;
   String? currentAddress;
@@ -84,7 +84,7 @@ class _SearchLocationState extends State<SearchLocation>{
 
           setState(() {
             currentAddress = '${place.name}, ${place.thoroughfare}, ${place.postalCode}, ${place.locality}, ${place.administrativeArea}';
-            controller.text = currentAddress!;
+            searchController.text = currentAddress!;
           });
 
           return placemarks;
@@ -116,7 +116,7 @@ class _SearchLocationState extends State<SearchLocation>{
               ),
               TextFormField(
                 // validator: (value) => validatorFunction(value),
-                controller: controller,
+                controller: searchController,
                 obscureText: false,
                 enableSuggestions: false,
                 autocorrect: true,
@@ -178,7 +178,7 @@ class _SearchLocationState extends State<SearchLocation>{
             location: placePredictions[index].description!,
             onPressed: (){
               setState(() {
-                controller.text = placePredictions[index].description!;
+                searchController.text = placePredictions[index].description!;
               });
             },
           ),

@@ -133,399 +133,401 @@ class _OrderCriteria
           }));
         }),
       ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-        child: Column(
-          children: [
-            Center(
-              child: Text(
-                "Parcel ${widget.parcelName}",
-                style: const TextStyle(fontWeight: FontWeight.w600),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+          child: Column(
+            children: [
+              Center(
+                child: Text(
+                  "Parcel ${widget.parcelName}",
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ),
               ),
-            ),
-            SizedBox(
-              width: 250,
-              height: 500,
-              child: Stack(
-                alignment: AlignmentDirectional.center,
-                clipBehavior: Clip.none,
-                children: [
-                  Positioned(
-                    top: 50,
-                    left: -20,
-                    child: InkWell(
-                      onTap: () {
-                        if (selectedCriteria.contains("Medium")) {
-                          setState(() {
-                            selectedList[0] = "false";
-                            selectedList[1] = "false";
-                            selectedList[2] = "false";
-                            colorList[0] = Colors.white;
-                            colorList[1] = Colors.white;
-                            colorList[2] = Colors.white;
-                            borderList[0] = Colors.black;
-                            borderList[1] = Colors.black;
-                            borderList[2] = Colors.black;
-                            selectedCriteria.remove("Medium");
-                          });
-                          // colorList[0] = Colors.white;
-                        } else {
-                          if (selectedList[0] == "false" &&
-                              (selectedList[1] == "false" ||
-                                  selectedList[2] == "false")) {
+              SizedBox(
+                width: 250,
+                height: 500,
+                child: Stack(
+                  alignment: AlignmentDirectional.center,
+                  clipBehavior: Clip.none,
+                  children: [
+                    Positioned(
+                      top: 50,
+                      left: -20,
+                      child: InkWell(
+                        onTap: () {
+                          if (selectedCriteria.contains("Medium")) {
                             setState(() {
-                              colorList[0] = secondaryColour;
-                              colorList[1] = lightGrey;
-                              colorList[2] = lightGrey;
-                              borderList[1] = lightGrey;
-                              borderList[2] = lightGrey;
-                              selectedList[0] = "true";
-                              selectedList[1] = "disabled";
-                              selectedList[2] = "disabled";
-                              selectedCriteria.add("Medium");
+                              selectedList[0] = "false";
+                              selectedList[1] = "false";
+                              selectedList[2] = "false";
+                              colorList[0] = Colors.white;
+                              colorList[1] = Colors.white;
+                              colorList[2] = Colors.white;
+                              borderList[0] = Colors.black;
+                              borderList[1] = Colors.black;
+                              borderList[2] = Colors.black;
+                              selectedCriteria.remove("Medium");
                             });
-                          } else if (selectedList[0] == "false" &&
-                              (selectedList[1] == "true" ||
-                                  selectedList[2] == "true")) {
-                            setState(() {
-                              colorList[0] = lightGrey;
-                              selectedList[0] = "disabled";
-                            });
-                            null;
+                            // colorList[0] = Colors.white;
+                          } else {
+                            if (selectedList[0] == "false" &&
+                                (selectedList[1] == "false" ||
+                                    selectedList[2] == "false")) {
+                              setState(() {
+                                colorList[0] = secondaryColour;
+                                colorList[1] = lightGrey;
+                                colorList[2] = lightGrey;
+                                borderList[1] = lightGrey;
+                                borderList[2] = lightGrey;
+                                selectedList[0] = "true";
+                                selectedList[1] = "disabled";
+                                selectedList[2] = "disabled";
+                                selectedCriteria.add("Medium");
+                              });
+                            } else if (selectedList[0] == "false" &&
+                                (selectedList[1] == "true" ||
+                                    selectedList[2] == "true")) {
+                              setState(() {
+                                colorList[0] = lightGrey;
+                                selectedList[0] = "disabled";
+                              });
+                              null;
+                            }
                           }
-                        }
-                      },
-                      radius: 20,
-                      child: Container(
-                          width: 120,
-                          height: 125,
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 1,
-                                  color: selectedList[0] == "true"
-                                      ? borderList[0] = secondaryColour
-                                      : borderList[0]),
-                              borderRadius: BorderRadius.circular(20),
-                              color: colorList[0]),
-                          child: const Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "4-7kg",
-                                style: TextStyle(fontSize: 24),
-                              ),
-                              Text("Medium"),
-                            ],
-                          )),
+                        },
+                        radius: 20,
+                        child: Container(
+                            width: 120,
+                            height: 125,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 1,
+                                    color: selectedList[0] == "true"
+                                        ? borderList[0] = secondaryColour
+                                        : borderList[0]),
+                                borderRadius: BorderRadius.circular(20),
+                                color: colorList[0]),
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "4-7kg",
+                                  style: TextStyle(fontSize: 24),
+                                ),
+                                Text("Medium"),
+                              ],
+                            )),
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    top: 30,
-                    right: -10,
-                    child: InkWell(
-                      onTap: () {
-                        if (selectedCriteria.contains("Small")) {
-                          setState(() {
-                            selectedList[0] = "false";
-                            selectedList[1] = "false";
-                            selectedList[2] = "false";
-                            colorList[0] = Colors.white;
-                            colorList[1] = Colors.white;
-                            colorList[2] = Colors.white;
-                            borderList[0] = Colors.black;
-                            borderList[1] = Colors.black;
-                            borderList[2] = Colors.black;
-                            selectedCriteria.remove("Small");
-                          });
-                        } else {
-                          if (selectedList[1] == "false" &&
-                              (selectedList[0] == "false" ||
-                                  selectedList[2] == "false")) {
+                    Positioned(
+                      top: 30,
+                      right: -10,
+                      child: InkWell(
+                        onTap: () {
+                          if (selectedCriteria.contains("Small")) {
                             setState(() {
-                              colorList[1] = secondaryColour;
-                              colorList[0] = lightGrey;
-                              colorList[2] = lightGrey;
-                              borderList[0] = lightGrey;
-                              borderList[2] = lightGrey;
-                              selectedList[1] = "true";
-                              selectedList[0] = "disabled";
-                              selectedList[2] = "disabled";
-                              selectedCriteria.add("Small");
+                              selectedList[0] = "false";
+                              selectedList[1] = "false";
+                              selectedList[2] = "false";
+                              colorList[0] = Colors.white;
+                              colorList[1] = Colors.white;
+                              colorList[2] = Colors.white;
+                              borderList[0] = Colors.black;
+                              borderList[1] = Colors.black;
+                              borderList[2] = Colors.black;
+                              selectedCriteria.remove("Small");
                             });
-                          } else if (selectedList[1] == "false" &&
-                              (selectedList[0] == "true" ||
-                                  selectedList[2] == "true")) {
-                            setState(() {
-                              colorList[1] = lightGrey;
-                              selectedList[1] = "disabled";
-                            });
-                            null;
+                          } else {
+                            if (selectedList[1] == "false" &&
+                                (selectedList[0] == "false" ||
+                                    selectedList[2] == "false")) {
+                              setState(() {
+                                colorList[1] = secondaryColour;
+                                colorList[0] = lightGrey;
+                                colorList[2] = lightGrey;
+                                borderList[0] = lightGrey;
+                                borderList[2] = lightGrey;
+                                selectedList[1] = "true";
+                                selectedList[0] = "disabled";
+                                selectedList[2] = "disabled";
+                                selectedCriteria.add("Small");
+                              });
+                            } else if (selectedList[1] == "false" &&
+                                (selectedList[0] == "true" ||
+                                    selectedList[2] == "true")) {
+                              setState(() {
+                                colorList[1] = lightGrey;
+                                selectedList[1] = "disabled";
+                              });
+                              null;
+                            }
                           }
-                        }
-                      },
-                      radius: 20,
-                      child: Container(
-                          width: 110,
-                          height: 120,
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 1,
-                                  color: selectedList[1] == "true"
-                                      ? borderList[1] = secondaryColour
-                                      : borderList[1]),
-                              borderRadius: BorderRadius.circular(20),
-                              color: colorList[1]),
-                          child: const Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "0.1-3kg",
-                                style: TextStyle(fontSize: 24),
-                              ),
-                              Text("Small"),
-                            ],
-                          )),
+                        },
+                        radius: 20,
+                        child: Container(
+                            width: 110,
+                            height: 120,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 1,
+                                    color: selectedList[1] == "true"
+                                        ? borderList[1] = secondaryColour
+                                        : borderList[1]),
+                                borderRadius: BorderRadius.circular(20),
+                                color: colorList[1]),
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "0.1-3kg",
+                                  style: TextStyle(fontSize: 24),
+                                ),
+                                Text("Small"),
+                              ],
+                            )),
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    bottom: 150,
-                    left: -50,
-                    child: InkWell(
-                      onTap: () {
-                        if (selectedCriteria.contains("Heavy")) {
-                          setState(() {
-                            selectedList[0] = "false";
-                            selectedList[1] = "false";
-                            selectedList[2] = "false";
-                            colorList[0] = Colors.white;
-                            colorList[1] = Colors.white;
-                            colorList[2] = Colors.white;
-                            borderList[0] = Colors.black;
-                            borderList[1] = Colors.black;
-                            borderList[2] = Colors.black;
-                            selectedCriteria.remove("Heavy");
-                          });
-                        } else {
-                          if (selectedList[2] == "false" &&
-                              (selectedList[0] == "false" ||
-                                  selectedList[1] == "false")) {
+                    Positioned(
+                      bottom: 150,
+                      left: -50,
+                      child: InkWell(
+                        onTap: () {
+                          if (selectedCriteria.contains("Heavy")) {
                             setState(() {
-                              colorList[2] = secondaryColour;
-                              colorList[0] = lightGrey;
-                              colorList[1] = lightGrey;
-
-                              borderList[0] = lightGrey;
-                              borderList[1] = lightGrey;
-
-                              selectedList[2] = "true";
-                              selectedList[0] = "disabled";
-                              selectedList[1] = "disabled";
-
-                              selectedCriteria.add("Heavy");
+                              selectedList[0] = "false";
+                              selectedList[1] = "false";
+                              selectedList[2] = "false";
+                              colorList[0] = Colors.white;
+                              colorList[1] = Colors.white;
+                              colorList[2] = Colors.white;
+                              borderList[0] = Colors.black;
+                              borderList[1] = Colors.black;
+                              borderList[2] = Colors.black;
+                              selectedCriteria.remove("Heavy");
                             });
-                          } else if (selectedList[2] == "false" &&
-                              (selectedList[0] == "true" ||
-                                  selectedList[1] == "true")) {
-                            setState(() {
-                              colorList[2] = lightGrey;
-                              selectedList[2] = "disabled";
-                            });
-                            null;
+                          } else {
+                            if (selectedList[2] == "false" &&
+                                (selectedList[0] == "false" ||
+                                    selectedList[1] == "false")) {
+                              setState(() {
+                                colorList[2] = secondaryColour;
+                                colorList[0] = lightGrey;
+                                colorList[1] = lightGrey;
+        
+                                borderList[0] = lightGrey;
+                                borderList[1] = lightGrey;
+        
+                                selectedList[2] = "true";
+                                selectedList[0] = "disabled";
+                                selectedList[1] = "disabled";
+        
+                                selectedCriteria.add("Heavy");
+                              });
+                            } else if (selectedList[2] == "false" &&
+                                (selectedList[0] == "true" ||
+                                    selectedList[1] == "true")) {
+                              setState(() {
+                                colorList[2] = lightGrey;
+                                selectedList[2] = "disabled";
+                              });
+                              null;
+                            }
                           }
-                        }
-                      },
-                      radius: 20,
-                      child: Container(
-                          width: 140,
-                          height: 155,
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 1,
-                                  color: selectedList[2] == "true"
-                                      ? borderList[2] = secondaryColour
-                                      : borderList[2]),
-                              borderRadius: BorderRadius.circular(20),
-                              color: colorList[2]),
-                          child: const Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "8kg+",
-                                style: TextStyle(fontSize: 24),
-                              ),
-                              Text("Heavy"),
-                            ],
-                          )),
+                        },
+                        radius: 20,
+                        child: Container(
+                            width: 140,
+                            height: 155,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 1,
+                                    color: selectedList[2] == "true"
+                                        ? borderList[2] = secondaryColour
+                                        : borderList[2]),
+                                borderRadius: BorderRadius.circular(20),
+                                color: colorList[2]),
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "8kg+",
+                                  style: TextStyle(fontSize: 24),
+                                ),
+                                Text("Heavy"),
+                              ],
+                            )),
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    top: 180,
-                    right: -50,
-                    child: InkWell(
-                      onTap: () {
-                        if (selectedCriteria.contains("No receipt")) {
-                          setState(() {
-                            selectedList[3] = "false";
-                            selectedList[5] = "false";
-                            colorList[5] = Colors.black;
-                            borderList[5] = Colors.black;
-                            borderList[3] = Colors.black;
-                            colorList[3] = Colors.white;
-                            colorList[5] = Colors.white;
-                            selectedCriteria.remove("No receipt");
-                          });
-                        } else {
-                          if (selectedList[3] == "false" &&
-                              selectedList[5] == "false") {
+                    Positioned(
+                      top: 180,
+                      right: -50,
+                      child: InkWell(
+                        onTap: () {
+                          if (selectedCriteria.contains("No receipt")) {
                             setState(() {
-                              colorList[3] = secondaryColour;
-                              colorList[5] = lightGrey;
-                              borderList[5] = lightGrey;
-                              selectedList[3] = "true";
-                              selectedList[5] = "disabled";
-                              selectedCriteria.add("No receipt");
+                              selectedList[3] = "false";
+                              selectedList[5] = "false";
+                              colorList[5] = Colors.black;
+                              borderList[5] = Colors.black;
+                              borderList[3] = Colors.black;
+                              colorList[3] = Colors.white;
+                              colorList[5] = Colors.white;
+                              selectedCriteria.remove("No receipt");
                             });
-                          } else if (selectedList[3] == "false" &&
-                              selectedList[5] == "true") {
-                            setState(() {
-                              colorList[3] = lightGrey;
-                              selectedList[3] = "disabled";
-                            });
-                            null;
+                          } else {
+                            if (selectedList[3] == "false" &&
+                                selectedList[5] == "false") {
+                              setState(() {
+                                colorList[3] = secondaryColour;
+                                colorList[5] = lightGrey;
+                                borderList[5] = lightGrey;
+                                selectedList[3] = "true";
+                                selectedList[5] = "disabled";
+                                selectedCriteria.add("No receipt");
+                              });
+                            } else if (selectedList[3] == "false" &&
+                                selectedList[5] == "true") {
+                              setState(() {
+                                colorList[3] = lightGrey;
+                                selectedList[3] = "disabled";
+                              });
+                              null;
+                            }
                           }
-                        }
-                      },
-                      radius: 20,
-                      child: Container(
-                          width: 180,
-                          height: 100,
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 1,
-                                  color: selectedList[3] == "true"
-                                      ? borderList[3] = secondaryColour
-                                      : borderList[3]),
-                              borderRadius: BorderRadius.circular(20),
-                              color: colorList[3]),
-                          child: const Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "No Centre Receipt",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 24),
-                              ),
-                            ],
-                          )),
+                        },
+                        radius: 20,
+                        child: Container(
+                            width: 180,
+                            height: 100,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 1,
+                                    color: selectedList[3] == "true"
+                                        ? borderList[3] = secondaryColour
+                                        : borderList[3]),
+                                borderRadius: BorderRadius.circular(20),
+                                color: colorList[3]),
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "No Centre Receipt",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 24),
+                                ),
+                              ],
+                            )),
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    bottom: 120,
-                    right: -45,
-                    child: InkWell(
-                      onTap: () {
-                        if (selectedCriteria.contains("Fragile")) {
-                          setState(() {
-                            colorList[4] = Colors.white;
-                            borderList[4] = Colors.black;
-                            selectedList[4] = "false";
-                            selectedCriteria.remove("Fragile");
-                          });
-                        } else {
-                          setState(() {
-                            colorList[4] = secondaryColour;
-                            selectedList[4] = "true";
-                            selectedCriteria.add("Fragile");
-                          });
-                        }
-                      },
-                      radius: 20,
-                      child: Container(
-                          width: 130,
-                          height: 80,
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 1,
-                                  color: selectedList[4] == "true"
-                                      ? borderList[4] = secondaryColour
-                                      : borderList[4]),
-                              borderRadius: BorderRadius.circular(20),
-                              color: colorList[4]),
-                          child: const Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Fragile",
-                                style: TextStyle(fontSize: 24),
-                              ),
-                            ],
-                          )),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 30,
-                    left: -30,
-                    child: InkWell(
-                      onTap: () {
-                        if (selectedCriteria.contains("Has receipt")) {
-                          setState(() {
-                            selectedList[3] = "false";
-                            selectedList[5] = "false";
-                            borderList[5] = Colors.black;
-                            borderList[3] = Colors.black;
-                            colorList[3] = Colors.white;
-                            colorList[5] = Colors.white;
-                            selectedCriteria.remove("Has receipt");
-                          });
-                        } else {
-                          if (selectedList[5] == "false" &&
-                              selectedList[3] == "false") {
+                    Positioned(
+                      bottom: 120,
+                      right: -45,
+                      child: InkWell(
+                        onTap: () {
+                          if (selectedCriteria.contains("Fragile")) {
                             setState(() {
-                              colorList[5] = secondaryColour;
-                              colorList[3] = lightGrey;
-                              borderList[3] = lightGrey;
-                              selectedList[5] = "true";
-                              selectedList[3] = "disabled";
-                              selectedCriteria.add("Has receipt");
+                              colorList[4] = Colors.white;
+                              borderList[4] = Colors.black;
+                              selectedList[4] = "false";
+                              selectedCriteria.remove("Fragile");
                             });
-                          } else if (selectedList[5] == "false" &&
-                              selectedList[3] == "true") {
+                          } else {
                             setState(() {
-                              colorList[5] = lightGrey;
-                              selectedList[5] = "disabled";
+                              colorList[4] = secondaryColour;
+                              selectedList[4] = "true";
+                              selectedCriteria.add("Fragile");
                             });
-                            null;
                           }
-                        }
-                      },
-                      radius: 20,
-                      child: Container(
-                          width: 180,
-                          height: 100,
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 1,
-                                  color: selectedList[5] == "true"
-                                      ? borderList[5] = secondaryColour
-                                      : borderList[5]),
-                              borderRadius: BorderRadius.circular(20),
-                              color: colorList[5]),
-                          child: const Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Has Centre Receipt",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 24),
-                              ),
-                            ],
-                          )),
+                        },
+                        radius: 20,
+                        child: Container(
+                            width: 130,
+                            height: 80,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 1,
+                                    color: selectedList[4] == "true"
+                                        ? borderList[4] = secondaryColour
+                                        : borderList[4]),
+                                borderRadius: BorderRadius.circular(20),
+                                color: colorList[4]),
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Fragile",
+                                  style: TextStyle(fontSize: 24),
+                                ),
+                              ],
+                            )),
+                      ),
                     ),
-                  ),
-                ],
+                    Positioned(
+                      bottom: 30,
+                      left: -30,
+                      child: InkWell(
+                        onTap: () {
+                          if (selectedCriteria.contains("Has receipt")) {
+                            setState(() {
+                              selectedList[3] = "false";
+                              selectedList[5] = "false";
+                              borderList[5] = Colors.black;
+                              borderList[3] = Colors.black;
+                              colorList[3] = Colors.white;
+                              colorList[5] = Colors.white;
+                              selectedCriteria.remove("Has receipt");
+                            });
+                          } else {
+                            if (selectedList[5] == "false" &&
+                                selectedList[3] == "false") {
+                              setState(() {
+                                colorList[5] = secondaryColour;
+                                colorList[3] = lightGrey;
+                                borderList[3] = lightGrey;
+                                selectedList[5] = "true";
+                                selectedList[3] = "disabled";
+                                selectedCriteria.add("Has receipt");
+                              });
+                            } else if (selectedList[5] == "false" &&
+                                selectedList[3] == "true") {
+                              setState(() {
+                                colorList[5] = lightGrey;
+                                selectedList[5] = "disabled";
+                              });
+                              null;
+                            }
+                          }
+                        },
+                        radius: 20,
+                        child: Container(
+                            width: 180,
+                            height: 100,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 1,
+                                    color: selectedList[5] == "true"
+                                        ? borderList[5] = secondaryColour
+                                        : borderList[5]),
+                                borderRadius: BorderRadius.circular(20),
+                                color: colorList[5]),
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Has Centre Receipt",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 24),
+                                ),
+                              ],
+                            )),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

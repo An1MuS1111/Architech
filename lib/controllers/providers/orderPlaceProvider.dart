@@ -103,9 +103,10 @@ class OrderPlaceProvider extends ChangeNotifier {
       showSnackBar(context, "Please enter your name");
     } else if (phoneController.text.isEmpty) {
       showSnackBar(context, "Please enter your phone");
-    } else if (pickupController.text.isEmpty) {
-      showSnackBar(context, "Please enter your location");
-    } else {
+    // } else if (pickupController.text.isEmpty) {
+    //   showSnackBar(context, "Please enter your location");
+    // } else {
+    } else{
       Navigator.push(
         context,
         MaterialPageRoute(
