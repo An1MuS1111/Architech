@@ -2,7 +2,7 @@ import 'package:architech/components/customDropdown.dart';
 import 'package:architech/components/form.dart';
 import 'package:architech/components/navBars.dart';
 import 'package:architech/controllers/formValidator.dart';
-import 'package:architech/models/orderModel.dart';
+import 'package:architech/models/orderModelTest.dart';
 import 'package:architech/models/parcelModel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

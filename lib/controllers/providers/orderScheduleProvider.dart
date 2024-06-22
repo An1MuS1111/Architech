@@ -1,7 +1,6 @@
+import 'package:architech/models/orderModelTest.dart';
 import 'package:architech/models/parcelModel.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../models/orderModel.dart';
 
 class OrderScheduleProvider extends ChangeNotifier {
   int current = 0;
@@ -77,6 +76,8 @@ class OrderScheduleProvider extends ChangeNotifier {
       selectedTime = true;
       initialTimeSelect = false;
     }
+    print((selectedTimeValue?.time.toString() ?? "") + "   maintime");
     notifyListeners();
   }
 }
+

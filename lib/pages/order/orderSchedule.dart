@@ -246,7 +246,7 @@ import 'package:architech/components/timePicker.dart';
 import 'package:architech/config/theme.dart';
 import 'package:architech/controllers/providers/orderConfimProvider.dart';
 import 'package:architech/controllers/providers/orderScheduleProvider.dart';
-import 'package:architech/models/orderModel.dart';
+import 'package:architech/models/orderModelTest.dart';
 import 'package:architech/pages/order/orderConfirm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

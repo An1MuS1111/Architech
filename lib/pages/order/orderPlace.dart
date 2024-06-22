@@ -49,6 +49,7 @@ class _OrderPlace extends State<OrderPlace> {
                 () {
                   orderScheduleProvider.changeInitalTime();
                   orderPlaceProvider.proceedFillDetailsFunction(context);
+                  orderPlaceProvider.proceedButtonAddParcel();
                 },
               ),
             ),

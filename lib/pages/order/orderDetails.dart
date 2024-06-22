@@ -1,7 +1,7 @@
 import 'package:architech/components/form.dart';
 import 'package:architech/components/navBars.dart';
 import 'package:architech/config/theme.dart';
-import 'package:architech/models/orderModel.dart';
+import 'package:architech/models/orderModelTest.dart';
 import 'package:architech/pages/order/orderEdit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

@@ -1,279 +1,3 @@
-// import 'package:architech/components/cards.dart';
-// import 'package:architech/components/form.dart';
-// import 'package:architech/components/navBars.dart';
-// import 'package:architech/config/theme.dart';
-// import 'package:architech/models/orderModel.dart';
-// import 'package:flutter/material.dart';
-
-// class OrderConfirm extends StatefulWidget{
-//   OrderConfirm({super.key, required this.order});
-
-//   final OrderModelTest order;
-
-//   @override
-//   State<OrderConfirm> createState() => _OrderConfirmState();
-// }
-
-// class _OrderConfirmState extends State<OrderConfirm> {
-//   List<String> paymentOptions = [
-//     "Cash on Delivery",
-//     "QR Payment"
-//   ];
-
-//   List paymentAvailability = [
-//     null,
-//     "Coming soon"
-//   ];
-
-//   List paymentIcons = [
-//     Icons.attach_money_outlined,
-//     null
-//   ];
-
-//   @override
-//   Widget build(BuildContext context) {
-//     double width = MediaQuery.of(context).size.width;
-
-//     return Scaffold(
-//       appBar: titleBar(context, "Fill in your details", 60),
-//       floatingActionButton: InkWell(
-//         onTap: () => {
-//           Navigator.pop(context)
-//         },
-//         child: SizedBox(
-//           child: mainBtn(context, "Proceed", false, (){
-//             // Navigator.push(context, MaterialPageRoute(builder: (context) => OrderConfirm()));
-//           })
-//         ),
-//       ),
-//       body: SingleChildScrollView(
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             SizedBox(
-//               width: width,
-//               child: const Text(
-//                 "Your order",
-//                 textAlign: TextAlign.center,
-//                 style: TextStyle(
-//                   fontSize: 16
-//                 ),
-//               ),
-//             ),
-//             Container(
-//               width: width,
-//               padding: const EdgeInsets.symmetric(vertical: 20),
-//               margin: const EdgeInsets.symmetric(vertical: 10),
-//               color: Colors.black,
-//               child: Column(
-//                 children: [
-//                   Padding(
-//                     padding: EdgeInsets.symmetric(vertical: 5),
-//                     child: Text(
-//                       widget.order.dateConverter(true),
-//                       style: TextStyle(
-//                         fontSize: subTitle,
-//                         color: Colors.white
-//                       ),
-//                     ),
-//                   ),
-//                   Padding(
-//                     padding: EdgeInsets.symmetric(vertical: 5),
-//                     child: Text(
-//                       widget.order.name,
-//                       style: TextStyle(
-//                         fontSize: subTitle,
-//                         color: Colors.white
-//                       ),
-//                     ),
-//                   ),
-//                   Padding(
-//                     padding: EdgeInsets.symmetric(vertical: 5),
-//                     child: Text(
-//                       widget.order.pickupLocation,
-//                       style: TextStyle(
-//                         fontSize: subTitle,
-//                         color: Colors.white
-//                       ),
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//             Padding(
-//               padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-//               child: Text(
-//                 "Registered parcels",
-//                 style: TextStyle(
-//                   fontSize: regular
-//                 ),
-//               ),
-//             ),
-//             Padding(
-//               padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-//               child: LimitedBox(
-//                 maxHeight: 400,
-//                 child: ListView.builder(
-//                   padding: EdgeInsets.zero,
-//                   shrinkWrap: true,
-//                   physics: NeverScrollableScrollPhysics(),
-//                   itemCount: widget.order.parcels.length,
-//                   itemBuilder: (context, index){
-//                     Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         Padding(
-//                           padding: const EdgeInsets.only(bottom: 10),
-//                           child: Text(
-//                             widget.order.parcels[index].toString(),
-//                             style: TextStyle(
-//                               fontSize: mainTitle
-//                             ),
-//                           ),
-//                         ),
-//                         Row(
-//                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                           children: [
-//                             const Text(
-//                               "Tracking no"
-//                             ),
-//                             Text(
-//                               widget.order.parcels[index].trackingNo
-//                             )
-//                           ],
-//                         ),
-//                         const Row(
-//                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                           children: [
-//                             Text(
-//                               "Criterias"
-//                             ),
-//                             Text(
-//                               "2-3kg, Fragile"
-//                             )
-//                           ],
-//                         )
-//                       ],
-//                     );
-//                   } 
-//                 ),
-//               )
-//             ),
-//             const Divider(
-//               indent: 20,
-//               endIndent: 20,
-//             ),
-//             Padding(
-//               padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-//               child: Column(
-//                 children: [
-//                   Padding(
-//                     padding: const EdgeInsets.only(bottom: 10),
-//                     child: Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                       children: [
-//                         Text(
-//                           "Total",
-//                           style: TextStyle(
-//                             fontSize: mainTitle
-//                           ),
-//                         ),
-//                         Text(
-//                           "RM${widget.order.totalPrice()}",
-//                           style: TextStyle(
-//                             fontSize: mainTitle,
-//                             fontWeight: FontWeight.w600
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                   Row(
-//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                     children: [
-//                       Text(
-//                         "Parcel Price",
-//                         style: TextStyle(
-//                           color: greyColour
-//                         )
-//                       ),
-//                       Text(
-//                         "RM${widget.order.parcelPrice} x ${widget.order.parcels.length}",
-//                         style: TextStyle(
-//                           color: greyColour
-//                         )
-//                       ),
-//                     ],
-//                   ),
-//                   Row(
-//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                     children: [
-//                       Text(
-//                         "Delivery centre charge",
-//                         style: TextStyle(
-//                           color: greyColour
-//                         )
-//                       ),
-//                       Text(
-//                           "RM${widget.order.centrePrice} x ${widget.order.parcels.length}",
-//                         style: TextStyle(
-//                           color: greyColour
-//                         )
-//                       ),
-//                     ],
-//                   ),
-//                   Row(
-//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                     children: [
-//                       Text(
-//                         "Criteria (2-3kg) charge",
-//                         style: TextStyle(
-//                           color: greyColour
-//                         )
-//                       ),
-//                       Text(
-//                         "RM2.00",
-//                         style: TextStyle(
-//                           color: greyColour
-//                         )
-//                       ),
-//                     ],
-//                   ),
-//                 ],
-//               ),
-//             ),
-//             Padding(
-//               padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
-//               child: Text(
-//                 "Registered parcels",
-//                 style: TextStyle(
-//                   fontSize: regular
-//                 ),
-//               ),
-//             ),
-//             Container(
-//               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-//               margin: const EdgeInsets.only(bottom: 50),
-//               child: SizedBox(
-//                 width: MediaQuery.of(context).size.width * 0.9,
-//                 height: 170,
-//                 child: ListView.builder(
-//                   scrollDirection: Axis.vertical,
-//                   physics: NeverScrollableScrollPhysics(),
-//                   itemCount: 2,
-//                   itemBuilder: (count, index){
-//                     return squareCard(paymentOptions[index], paymentAvailability[index], paymentIcons[index]);
-//                   },
-//                 ),
-//               ),
-//             )
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:architech/components/cards.dart';
 import 'package:architech/components/form.dart';
 import 'package:architech/components/navBars.dart';
@@ -282,6 +6,7 @@ import 'package:architech/controllers/providers/orderConfimProvider.dart';
 import 'package:architech/controllers/providers/orderPlaceProvider.dart';
 import 'package:architech/controllers/providers/orderScheduleProvider.dart';
 import 'package:architech/models/orderModel.dart';
+import 'package:architech/models/orderModelTest.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -295,8 +20,8 @@ class OrderConfirm extends StatefulWidget {
 }
 
 class _OrderConfirmState extends State<OrderConfirm> {
-  List<String> paymentOptions = ["Cash on Delivery", "RazorPay"];
-  List paymentAvailability = [null, "New"];
+  List<String> paymentOptions = ["Cash on Delivery", "QR Payment"];
+  List paymentAvailability = [null, "Coming soon"];
   List paymentIcons = [Icons.attach_money_outlined, null];
   @override
   Widget build(BuildContext context) {
@@ -304,13 +29,58 @@ class _OrderConfirmState extends State<OrderConfirm> {
 
     return Scaffold(
       appBar: titleBar(context, "Confirm your order", 60),
-      floatingActionButton: InkWell(
-        onTap: () => {Navigator.pop(context)},
-        child: SizedBox(
-            child: mainBtn(context, "Proceed", false, () {
-          // Navigator.push(context, MaterialPageRoute(builder: (context) => OrderConfirm()));
-        })),
-      ),
+      floatingActionButton: Consumer3<OrderPlaceProvider,
+              OrderScheduleProvider, OrderConfirmProvider>(
+          builder: (context, orderPlaceProvider, orderScheduleProvider,
+              orderConfirmProvider, _) {
+        return InkWell(
+          onTap: () => {Navigator.pop(context)},
+          child: SizedBox(
+              child: mainBtn(
+                  isLoading: orderConfirmProvider.isLoading,
+                  context,
+                  "Proceed",
+                  false, () async {
+            //finded
+            await orderConfirmProvider.addOrderToFirestore(
+              context: context,
+              OrderModel(
+                orderId: generateOrderId(),
+                userId: generateOrderId1(),
+                name: orderPlaceProvider.nameController.text,
+                phoneNumber: orderPlaceProvider.phoneController.text,
+                pickLocation: PickLocation(
+                  address: orderPlaceProvider.selectedPickAddress,
+                  latitude: orderPlaceProvider.latitude,
+                  longitude: orderPlaceProvider.longitude,
+                ),
+                deliveryLocation: PickLocation(
+                  address: orderPlaceProvider.selectedPickAddress,
+                  latitude: orderPlaceProvider.latitude,
+                  longitude: orderPlaceProvider.longitude,
+                ),
+                selectedDate: orderScheduleProvider.order.selectedDate.toString(),
+                selectedTime:
+                    (orderScheduleProvider.selectedTimeValue?.time.toString() ??
+                        ""),
+                paymentMethod:
+                    orderConfirmProvider.selectedPayment == 0 ? "Cash" : "Qr",
+                status: "true",
+                parcels: orderPlaceProvider.parcelsMain,
+                deliveryCharge:
+                    (orderPlaceProvider.parcelsMain.length * 1).toString(),
+                totalPrice: (double.parse(
+                            orderConfirmProvider.calculatedPriceCriteriaList(
+                                orderPlaceProvider.parcelsMain)) +
+                        (orderPlaceProvider.parcelsMain.length * 1) +
+                        (orderPlaceProvider.parcelsMain.length * 1))
+                    .toString(),
+              ),
+            );
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => OrderConfirm()));
+          })),
+        );
+      }),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -349,14 +119,14 @@ class _OrderConfirmState extends State<OrderConfirm> {
                             TextStyle(fontSize: subTitle, color: Colors.white),
                       ),
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(vertical: 5),
-                    //   child: Text(
-                    //     orderPlaceProvider.pickupController.text,
-                    //     style:
-                    //         TextStyle(fontSize: subTitle, color: Colors.white),
-                    //   ),
-                    // ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      child: Text(
+                        orderPlaceProvider.pickupController.text,
+                        style:
+                            TextStyle(fontSize: subTitle, color: Colors.white),
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 5),
                       child: Text(
@@ -428,10 +198,11 @@ class _OrderConfirmState extends State<OrderConfirm> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text(
-                                    "Criteria",
+                                    "criteria",
                                   ),
                                   SizedBox(
-                                    width: 200,
+                                    width:
+                                        (data.criteriaList?.length ?? 0) * 63,
                                     height: 30,
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
@@ -440,16 +211,10 @@ class _OrderConfirmState extends State<OrderConfirm> {
                                         var datas = data.criteriaList?[index];
                                         return Center(
                                           child: Container(
-                                            decoration: BoxDecoration(
-                                              color: secondaryColour,
-                                              borderRadius: BorderRadius.circular(10)
+                                            padding: const EdgeInsets.only(
+                                              right: 10,
                                             ),
-                                            padding: EdgeInsets.symmetric(vertical: 2, horizontal: 10),
-                                            margin: EdgeInsets.symmetric(horizontal: 5),
-                                            child: Text(
-                                              datas.toString(),
-                                              textAlign: TextAlign.end,
-                                            ),
+                                            child: Text(datas.toString()),
                                           ),
                                         );
                                       },
@@ -468,95 +233,121 @@ class _OrderConfirmState extends State<OrderConfirm> {
                 ),
               );
             }),
-            Padding(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-                child: LimitedBox(
-                  maxHeight: 400,
-                  child: ListView.builder(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: widget.order.parcels.length,
-                      itemBuilder: (context, index) {
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 10),
-                              child: Text(
-                                widget.order.parcels[index].toString(),
-                                style: TextStyle(fontSize: mainTitle),
+            Consumer3<OrderPlaceProvider, OrderScheduleProvider,
+                    OrderConfirmProvider>(
+                builder: (context, orderPlaceProvider, orderScheduleProvider,
+                    orderConfirmProvider, _) {
+              return Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+                  child: LimitedBox(
+                    maxHeight: 400,
+                    child: ListView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: widget.order.parcels.length,
+                        itemBuilder: (context, index) {
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 10),
+                                child: Text(
+                                  widget.order.parcels[index].toString(),
+                                  style: TextStyle(fontSize: mainTitle),
+                                ),
                               ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text("Tracking no"),
-                                Text(widget.order.parcels[index].trackingNo)
-                              ],
-                            ),
-                            const Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("Criterias"),
-                                Text("2-3kg, Fragile")
-                              ],
-                            )
-                          ],
-                        );
-                      }),
-                )),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: Row(
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text("Tracking no"),
+                                  Text(widget.order.parcels[index].trackingNo)
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text("Criterias"),
+                                  Text("2-3Kg, Fragile")
+                                ],
+                              )
+                            ],
+                          );
+                        }),
+                  ));
+            }),
+            Consumer3<OrderPlaceProvider, OrderScheduleProvider,
+                    OrderConfirmProvider>(
+                builder: (context, orderPlaceProvider, orderScheduleProvider,
+                    orderConfirmProvider, _) {
+              return Padding(
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Total",
+                            style: TextStyle(fontSize: mainTitle),
+                          ),
+                          Text(
+                            "RM  ${(double.parse(orderConfirmProvider.calculatedPriceCriteriaList(orderPlaceProvider.parcelsMain)) + (orderPlaceProvider.parcelsMain.length * 1) + (orderPlaceProvider.parcelsMain.length * 1)).toString()}",
+                            style: TextStyle(
+                                fontSize: mainTitle,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 6,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Parcel Price",
+                            style: TextStyle(color: greyColour)),
+                        Text(
+                            "RM 1 x ${orderPlaceProvider.parcelsMain.length}",
+                            style: TextStyle(color: greyColour)),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 6,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Delivery centre charge",
+                            style: TextStyle(color: greyColour)),
+                        Text(
+                            "RM 1 x ${(orderPlaceProvider.parcelsMain.length * 1).toString()}",
+                            style: TextStyle(color: greyColour)),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 6,
+                    ),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Total",
-                          style: TextStyle(fontSize: mainTitle),
-                        ),
+                            "Criteria (${orderPlaceProvider.calculateKg(orderPlaceProvider.totalKg)}kg) charge",
+                            style: TextStyle(color: greyColour)),
                         Text(
-                          "RM${widget.order.totalPrice()}",
-                          style: TextStyle(
-                              fontSize: mainTitle, fontWeight: FontWeight.w600),
-                        ),
+                            "RM ${orderConfirmProvider.calculatedPriceCriteriaList(orderPlaceProvider.parcelsMain)}",
+                            style: TextStyle(color: greyColour)),
                       ],
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Parcel Price", style: TextStyle(color: greyColour)),
-                      Text(
-                          "RM${widget.order.parcelPrice} x ${widget.order.parcels.length}",
-                          style: TextStyle(color: greyColour)),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Delivery centre charge",
-                          style: TextStyle(color: greyColour)),
-                      Text(
-                          "RM${widget.order.centrePrice} x ${widget.order.parcels.length}",
-                          style: TextStyle(color: greyColour)),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Criteria (2-3kg) charge",
-                          style: TextStyle(color: greyColour)),
-                      Text("RM2.00", style: TextStyle(color: greyColour)),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+                  ],
+                ),
+              );
+            }),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
               child: Text(

@@ -1,7 +1,7 @@
 import 'package:architech/components/form.dart';
 import 'package:architech/components/navBars.dart';
 import 'package:architech/config/theme.dart';
-import 'package:architech/models/order.model.dart';
+import 'package:architech/models/orderModel.dart';
 import 'package:architech/pages/order/orderPlace.dart';
 import 'package:architech/viewModel/orderViewModel.dart';
 import 'package:flutter/material.dart';
@@ -159,7 +159,7 @@ class _OrdersState extends State<Orders> {
                                                           Text(
                                                               "Order no. ${orders[index].status}"),
                                                           Text(
-                                                              "Parcel ${index + 1} is ${orders[index].parcels[index].parcelStatus}"),
+                                                              "Parcel ${index + 1} is ${orders[index].parcels[index].trackingNumber}"),
                                                         ],
                                                       ),
                                                       const Icon(

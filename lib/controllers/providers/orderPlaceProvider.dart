@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:architech/components/parcelTextField.dart';
 import 'package:architech/components/snackBar.dart';
-import 'package:architech/models/orderModel.dart';
+import 'package:architech/models/orderModelTest.dart';
 import 'package:architech/models/parcelModel.dart';
+import "package:architech/models/orderModel.dart"
+    as parcel;
 import 'package:architech/pages/order/orderSchedule.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +15,101 @@ class OrderPlaceProvider extends ChangeNotifier {
   TextEditingController pickupController = TextEditingController();
   TextEditingController trackingController = TextEditingController();
   TextEditingController centreController = TextEditingController();
+  String longitude = '';
+  String latitude = '';
+  String selectedPickAddress = '';
+  List<parcel.Parcel> parcelsMain = [];
+  List<String> totalKg = [];
+
+  void proceedButtonAddParcel() {
+    parcelsMain.clear();
+    totalKg = [];
+    for (int i = 0; i < parcelListModel.length; i++) {
+      parcel.Parcel parcelTemp = parcel.Parcel(
+          parcelId: i.toString(),
+          trackingNumber: parcelListModel[i].name.toString(),
+          criteria: parcelListModel[i].criteriaList ?? [],
+          timeCharge: "1",
+          criteriaCharge:
+              calculatedPriceCriteriaList(parcelListModel[i].criteriaList),
+          parcelCharge: "1",
+          totalParcels: parcelListModel.length.toString());
+      parcelsMain.add(parcelTemp);
+      totalKg.add(
+          calculatedPriceCriteriaListKgGet(parcelListModel[i].criteriaList));
+      print(totalKg.toString() + " totalkg");
+      print(
+        calculatedPriceCriteriaList(parcelListModel[i].criteriaList)
+                .toString() +
+            '  dslfkjsdlfkjsldf',
+      );
+    }
+
+    notifyListeners();
+  }
+
+  String calculatedPriceCriteriaList(List<String>? criteriaList) {
+    double mainValue = 0;
+    if (criteriaList != null) {
+      for (String value in criteriaList) {
+        print(value.toString());
+        if (value == "Medium") {
+          mainValue += 1;
+        }
+        if (value == "Heavy") {
+          mainValue += 2;
+        }
+        if (value == "Fragile") {
+          mainValue += 0.50;
+        }
+      }
+    }
+    return mainValue.toString();
+  }
+
+  String calculatedPriceCriteriaListKgGet(List<String>? criteriaList) {
+    double mainValue = 0;
+    if (criteriaList != null) {
+      for (String value in criteriaList) {
+        print(value.toString());
+        if (value == "Medium") {
+          mainValue += 7;
+        }
+        if (value == "Small") {
+          mainValue += 3;
+        }
+        if (value == "Heavy") {
+          mainValue += 8;
+        }
+        if (value == "Fragile") {
+          mainValue += 1;
+        }
+      }
+    }
+    return mainValue.toString();
+  }
+
+  String calculateKg(List<String> kgCalculate) {
+    double mainValue = 0;
+    if (kgCalculate != null) {
+      for (int i = 0; i < kgCalculate.length; i++) {
+        mainValue += double.parse(kgCalculate[i]);
+      }
+    }
+    return mainValue.toString();
+  }
+
+  void addLatLong(
+      {required String longitudes,
+      required String latitudes,
+      required String address}) {
+    longitude = longitudes;
+    latitude = latitudes;
+    selectedPickAddress = address;
+    log(longitude.toString(), name: "longitude1");
+    log(latitude.toString(), name: "latitude1");
+    notifyListeners();
+  }
 
   OrderModelTest order = OrderModelTest();
   String selectedValue = "Pick one";
@@ -18,6 +117,7 @@ class OrderPlaceProvider extends ChangeNotifier {
   List<Widget> widgets = [];
   List<TextEditingController> trackingControllers = [];
   List<ParcelModelList> parcelListModel = [];
+
   initFunction() {
     selectedValue = itemList[0];
     // trackingControllers.add(trackingController);
@@ -68,6 +168,26 @@ class OrderPlaceProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // void addCriteriaList(String value, int index,
+  //     {String? parcelName, required List<String> criteria}) {
+  //   for (int i = 0; i < widgets.length; i++) {
+  //     print("worked $i $index");
+  //     if (i == index) {
+  //       print("worked");
+  //       widgets[index] = ParcelTextField(
+  //         key: UniqueKey(),
+  //         text: parcelName,
+  //         controller: trackingControllers[index],
+  //         validatorFunction: () {},
+  //         enableCriteria: false,
+  //         criteria: criteria,
+  //         indexSelected: index,
+  //       );
+  //       notifyListeners();
+  //     }
+  //   }
+  //   notifyListeners();
+  // }
   void addCriteriaList(String value, int index,
       {String? parcelName, required List<String> criteria}) {
     if (index >= 0 && index < widgets.length) {
@@ -100,13 +220,14 @@ class OrderPlaceProvider extends ChangeNotifier {
   void proceedFillDetailsFunction(BuildContext context) {
     isLoadingFunction(true);
     if (nameController.text.isEmpty) {
-      showSnackBar(context, "Please enter your name");
+      showSnackBar(context, "Enter your name");
     } else if (phoneController.text.isEmpty) {
-      showSnackBar(context, "Please enter your phone");
-    // } else if (pickupController.text.isEmpty) {
-    //   showSnackBar(context, "Please enter your location");
-    // } else {
-    } else{
+      showSnackBar(context, "Enter your phone");
+    } else if (phoneController.text.isEmpty) {
+      showSnackBar(context, "Enter your number");
+    } else if (latitude.isEmpty || longitude.isEmpty) {
+      showSnackBar(context, "Enter your location");
+    } else {
       Navigator.push(
         context,
         MaterialPageRoute(

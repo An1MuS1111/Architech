@@ -1,102 +1,96 @@
-import 'package:architech/models/parcelModel.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+class OrderModel {
+  final String orderId;
+  final String userId;
+  final String name;
+  final String phoneNumber;
+  final PickLocation pickLocation;
+  final PickLocation deliveryLocation;
+  final String selectedDate;
+  final String selectedTime;
+  final String paymentMethod;
+  final String status;
+  final List<Parcel> parcels; // Changed from 'parcel' to 'parcels'
+  final String deliveryCharge;
+  final String totalPrice;
 
-class OrderModelTest extends ChangeNotifier {
-  late String orderId,
-    name,
-    phoneNumber,
-    pickupLocation,
-    deliveryCentre,
-    selectedPayment;
-  late String status = "Order is placed";
-  DateTime selectedDate = DateTime.now();
-  late DateTime selectedTime;
-  late List<ParcelModel> parcels = [];
-  double parcelPrice = 1.00;
-  double centrePrice = 1.00;
-  late double totalPaid;
+  OrderModel({
+    required this.orderId,
+    required this.userId,
+    required this.name,
+    required this.phoneNumber,
+    required this.pickLocation,
+    required this.deliveryLocation,
+    required this.selectedDate,
+    required this.selectedTime,
+    required this.paymentMethod,
+    required this.status,
+    required this.parcels,
+    required this.deliveryCharge,
+    required this.totalPrice,
+  });
 
-  // Mock Data
-  // OrderModelTest() {
-  //   orderId = "1";
-  //   name = "Mariam Suriya";
-  //   phoneNumber = "0198762371";
-  //   pickupLocation = "KTC B01";
-  //   deliveryCentre = "OPC";
-  //   selectedPayment = "COD";
-  //   selectedDate = DateTime.now();
-  //   selectedTime = DateTime.now();
-  //   parcels = [ParcelModel("MP1234"), ParcelModel("UI7923")];
-  // }
-
-  // List<double> extraCharge = [];
-  // TODO: Generate random or reference id for orderId before submitting
-  // Testing
-  final times = [
-    TimesAvailable("10:30:00", 1),
-    TimesAvailable("11:30:00", 0),
-    TimesAvailable("14:30:00", 0),
-  ];
-
-  double totalPrice() {
-    parcelPrice = parcels.length * 1;
-    centrePrice = parcels.length * 1;
-
-    return totalPaid = parcelPrice + centrePrice;
-  }
-
-  // To be updated
-  String updateStatus(String newStatus) {
-    return status = newStatus;
-  }
-
-  dateConverter(bool toString) {
-    DateFormat dateFormat = DateFormat("dd MMM yyyy");
-
-    if (toString == true) {
-      return dateFormat.format(selectedDate!);
-    } else {
-      // To be changed
-      return dateFormat.parse("05:30");
-    }
-  }
-
-  timeConverter(bool toString, String? time2) {
-    DateFormat timeFormat = DateFormat();
-
-    if (toString == true) {
-      return timeFormat.add_jm().format(selectedTime);
-    } else {
-      return timeFormat.parse(time2!);
-    }
-  }
-
+  // Convert object to JSON format for Firestore
   Map<String, dynamic> toJson() => {
+        "orderId": orderId,
+        "userId": userId,
         "name": name,
         "phoneNumber": phoneNumber,
-        "pickupLocation": pickupLocation,
-        "deliveryCentre": deliveryCentre,
-        "parcels": parcels,
+        "pickLocation": pickLocation.toJson(),
+        "deliveryLocation": deliveryLocation.toJson(),
         "selectedDate": selectedDate,
         "selectedTime": selectedTime,
-        "selectedPayment": selectedPayment,
-        "totalPaid": 6,
+        "paymentMethod": paymentMethod,
         "status": status,
+        "parcels": parcels.map((parcel) => parcel.toJson()).toList(),
+        "deliveryCharge": deliveryCharge,
+        "totalPrice": totalPrice,
       };
 }
 
-class TimesAvailable {
-  TimesAvailable(this.time, this.extraCharge);
+class Parcel {
+  final String parcelId;
+  final String trackingNumber;
+  final List<String> criteria;
+  final String timeCharge;
+  final String criteriaCharge;
+  final String parcelCharge;
+  final String totalParcels;
 
-  final String time;
-  final double extraCharge;
+  Parcel({
+    required this.parcelId,
+    required this.trackingNumber,
+    required this.criteria,
+    required this.timeCharge,
+    required this.criteriaCharge,
+    required this.parcelCharge,
+    required this.totalParcels,
+  });
 
-  @override
-  String toString() => "TimeSlot { time: $time, charge: $extraCharge}";
+  Map<String, dynamic> toJson() => {
+        "parcelId": parcelId,
+        "trackingNumber": trackingNumber,
+        "criteria": criteria,
+        "timeCharge": timeCharge,
+        "criteriaCharge": criteriaCharge,
+        "parcelCharge": parcelCharge,
+        "totalParcels": totalParcels,
+      };
 }
 
-String dateFormatter(DateTime date) {
-  DateFormat dateFormat = DateFormat("dd MMM yyyy");
-  return dateFormat.format(date);
+class PickLocation {
+  final String address;
+  final String latitude;
+  final String longitude;
+
+  PickLocation({
+    required this.address,
+    required this.latitude,
+    required this.longitude,
+  });
+
+  Map<String, dynamic> toJson() => {
+        "address": address,
+        "latitude": latitude,
+        "longitude": longitude,
+      };
 }
