@@ -1,10 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class OrderModel {
   final String orderId;
   final String userId;
   final String name;
   final String phoneNumber;
-  final PickLocation pickLocation;
-  final PickLocation deliveryLocation;
+  final PickLocation pickupLocation;
+  final PickLocation deliveryCentre;
   final String selectedDate;
   final String selectedTime;
   final String paymentMethod;
@@ -18,8 +20,8 @@ class OrderModel {
     required this.userId,
     required this.name,
     required this.phoneNumber,
-    required this.pickLocation,
-    required this.deliveryLocation,
+    required this.pickupLocation,
+    required this.deliveryCentre,
     required this.selectedDate,
     required this.selectedTime,
     required this.paymentMethod,
@@ -35,8 +37,8 @@ class OrderModel {
         "userId": userId,
         "name": name,
         "phoneNumber": phoneNumber,
-        "pickLocation": pickLocation.toJson(),
-        "deliveryLocation": deliveryLocation.toJson(),
+        "pickupLocation": pickupLocation.toJson(),
+        "deliveryCentre": deliveryCentre.toJson(),
         "selectedDate": selectedDate,
         "selectedTime": selectedTime,
         "paymentMethod": paymentMethod,
@@ -45,6 +47,22 @@ class OrderModel {
         "deliveryCharge": deliveryCharge,
         "totalPrice": totalPrice,
       };
+
+  OrderModel.fromDocumentSnapshot(DocumentSnapshot<Map<String, dynamic>> doc)
+      : orderId = doc.id,
+        userId = doc.data()!["userId"],
+        deliveryCentre = doc.data()!["deliveryCentre"],
+        name = doc.data()!["name"],
+        phoneNumber = doc.data()!["phoneNumber"],
+        pickupLocation= doc.data()!["pickupLocation"],
+        // selectedDateAndTime = doc.data()?["selectedDateAndTime"], // Use null-aware operator
+        selectedDate = doc.data()!["selectedDate"],
+        selectedTime = doc.data()!["selectedTime"],
+        paymentMethod = doc.data()!["paymentMethod"],
+        status = doc.data()!["status"],
+        parcels = List<Parcel>.from( doc.data()!["parcels"]), // Explicitly casting to List<String>
+        deliveryCharge = doc.data()!["deliveryCharge"],
+        totalPrice = doc.data()!["totalPrice"];
 }
 
 class Parcel {

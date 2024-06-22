@@ -4,9 +4,11 @@ import 'package:architech/components/navBars.dart';
 import 'package:architech/config/theme.dart';
 import 'package:architech/controllers/providers/orderConfimProvider.dart';
 import 'package:architech/controllers/providers/orderPlaceProvider.dart';
+import 'package:architech/controllers/providers/orderProvider.dart';
 import 'package:architech/controllers/providers/orderScheduleProvider.dart';
 import 'package:architech/models/orderModel.dart';
 import 'package:architech/models/orderModelTest.dart';
+import 'package:architech/pages/order/orderPayment.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -39,48 +41,52 @@ class _OrderConfirmState extends State<OrderConfirm> {
               child: mainBtn(
                   isLoading: orderConfirmProvider.isLoading,
                   context,
-                  "Proceed",
+                  "Proceed to Pay",
                   false, () async {
-            //finded
-            await orderConfirmProvider.addOrderToFirestore(
-              context: context,
-              OrderModel(
-                orderId: generateOrderId(),
-                userId: generateOrderId1(),
-                name: orderPlaceProvider.nameController.text,
-                phoneNumber: orderPlaceProvider.phoneController.text,
-                pickLocation: PickLocation(
-                  address: orderPlaceProvider.selectedPickAddress,
-                  latitude: orderPlaceProvider.latitude,
-                  longitude: orderPlaceProvider.longitude,
-                ),
-                deliveryLocation: PickLocation(
-                  address: orderPlaceProvider.selectedPickAddress,
-                  latitude: orderPlaceProvider.latitude,
-                  longitude: orderPlaceProvider.longitude,
-                ),
-                selectedDate: orderScheduleProvider.order.selectedDate.toString(),
-                selectedTime:
-                    (orderScheduleProvider.selectedTimeValue?.time.toString() ??
-                        ""),
-                paymentMethod:
-                    orderConfirmProvider.selectedPayment == 0 ? "Cash" : "Qr",
-                status: "true",
-                parcels: orderPlaceProvider.parcelsMain,
-                deliveryCharge:
-                    (orderPlaceProvider.parcelsMain.length * 1).toString(),
-                totalPrice: (double.parse(
-                            orderConfirmProvider.calculatedPriceCriteriaList(
-                                orderPlaceProvider.parcelsMain)) +
-                        (orderPlaceProvider.parcelsMain.length * 1) +
-                        (orderPlaceProvider.parcelsMain.length * 1))
-                    .toString(),
+                    //finded
+                    await orderConfirmProvider.addOrderToFirestore(
+                      context: context,
+                      OrderModel(
+                        orderId: generateOrderId(),
+                        userId: generateOrderId1(),
+                        name: orderPlaceProvider.nameController.text,
+                        phoneNumber: orderPlaceProvider.phoneController.text,
+                        pickupLocation: PickLocation(
+                          address: orderPlaceProvider.selectedPickAddress,
+                          latitude: orderPlaceProvider.latitude,
+                          longitude: orderPlaceProvider.longitude,
+                        ),
+                        deliveryCentre: PickLocation(
+                          address: orderPlaceProvider.selectedPickAddress,
+                          latitude: orderPlaceProvider.latitude,
+                          longitude: orderPlaceProvider.longitude,
+                        ),
+                        selectedDate: orderScheduleProvider.order.selectedDate.toString(),
+                        selectedTime:
+                            (orderScheduleProvider.selectedTimeValue?.time.toString() ??
+                                ""),
+                        paymentMethod:
+                            orderConfirmProvider.selectedPayment == 0 ? "Cash" : "Qr",
+                        status: "true",
+                        parcels: orderPlaceProvider.parcelsMain,
+                        deliveryCharge:
+                            (orderPlaceProvider.parcelsMain.length * 1).toString(),
+                        totalPrice: (double.parse(
+                                    orderConfirmProvider.calculatedPriceCriteriaList(
+                                        orderPlaceProvider.parcelsMain)) +
+                                (orderPlaceProvider.parcelsMain.length * 1) +
+                                (orderPlaceProvider.parcelsMain.length * 1))
+                            .toString(),
+                      ),
+                    );
+
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => RazorPayPage()));
+                  }
+                )
               ),
             );
-            // Navigator.push(context, MaterialPageRoute(builder: (context) => OrderConfirm()));
-          })),
-        );
-      }),
+          }
+        ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,50 +101,169 @@ class _OrderConfirmState extends State<OrderConfirm> {
             ),
             Container(
               width: width,
-              padding: const EdgeInsets.symmetric(vertical: 20),
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
               margin: const EdgeInsets.symmetric(vertical: 10),
               color: Colors.black,
               child: Consumer2<OrderPlaceProvider, OrderScheduleProvider>(
                   builder: (context, orderPlaceProvider,
                       orderScheduleProvider, _) {
                 return Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      child: Text(
-                        orderPlaceProvider.nameController.text,
-                        style:
-                            TextStyle(fontSize: subTitle, color: Colors.white),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      child: Text(
-                        orderPlaceProvider.phoneController.text,
-                        style:
-                            TextStyle(fontSize: subTitle, color: Colors.white),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      child: Text(
-                        orderPlaceProvider.pickupController.text,
-                        style:
-                            TextStyle(fontSize: subTitle, color: Colors.white),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      child: Text(
-                        dateFormatter(
-                          orderScheduleProvider.order.selectedDate,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 170,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              child: Text(
+                                "Name",
+                                style: TextStyle(
+                                  fontSize: regular,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w300
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              child: Text(
+                                orderPlaceProvider.nameController.text,
+                                style: TextStyle(
+                                  fontSize: regular,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        style:
-                            TextStyle(fontSize: subTitle, color: Colors.white),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            child: Text(
+                              "Phone number",
+                              style: TextStyle(
+                                fontSize: regular,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w300
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            child: Text(
+                              orderPlaceProvider.phoneController.text,
+                              style: TextStyle(
+                                fontSize: regular,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 170,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              child: Text(
+                                "Number of parcels",
+                                style: TextStyle(
+                                  fontSize: regular,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w300
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              child: Text(
+                                orderScheduleProvider.order.parcels.length.toString(),
+                                style: TextStyle(
+                                  fontSize: regular,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            child: Text(
+                              "Delivery time",
+                              style: TextStyle(
+                                fontSize: regular,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w300
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            child: Text(
+                              dateFormatter(
+                                orderScheduleProvider.order.selectedDate,
+                              ) + ", " + order.timeConverter(true, null, orderScheduleProvider.order.selectedTime),
+                              style: TextStyle(
+                                fontSize: regular,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    child: Text(
+                      "Drop-off location",
+                      style: TextStyle(
+                        fontSize: regular,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300
                       ),
                     ),
-                  ],
-                );
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    child: Text(
+                      orderPlaceProvider.selectedPickAddress,
+                      style: TextStyle(
+                        fontSize: regular,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500
+                      ),
+                      maxLines: 3,
+                    ),
+                  ),
+                ],
+              ); 
               }),
             ),
             Padding(
@@ -187,6 +312,9 @@ class _OrderConfirmState extends State<OrderConfirm> {
                                   ),
                                   Text(
                                     data.name.toString(),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600
+                                    ),
                                   ),
                                 ],
                               ),
@@ -198,11 +326,11 @@ class _OrderConfirmState extends State<OrderConfirm> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text(
-                                    "criteria",
+                                    "Criteria",
                                   ),
                                   SizedBox(
                                     width:
-                                        (data.criteriaList?.length ?? 0) * 63,
+                                        (data.criteriaList?.length ?? 0) * 80,
                                     height: 30,
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
@@ -211,8 +339,11 @@ class _OrderConfirmState extends State<OrderConfirm> {
                                         var datas = data.criteriaList?[index];
                                         return Center(
                                           child: Container(
-                                            padding: const EdgeInsets.only(
-                                              right: 10,
+                                            padding: EdgeInsets.symmetric(horizontal: 10),
+                                            margin: EdgeInsets.only(right: 5),
+                                            decoration: BoxDecoration(
+                                              color: secondaryColour,
+                                              borderRadius: BorderRadius.circular(10)
                                             ),
                                             child: Text(datas.toString()),
                                           ),
@@ -313,7 +444,7 @@ class _OrderConfirmState extends State<OrderConfirm> {
                         Text("Parcel Price",
                             style: TextStyle(color: greyColour)),
                         Text(
-                            "RM 1 x ${orderPlaceProvider.parcelsMain.length}",
+                            "RM 1.0 x ${orderPlaceProvider.parcelsMain.length}",
                             style: TextStyle(color: greyColour)),
                       ],
                     ),
@@ -326,7 +457,7 @@ class _OrderConfirmState extends State<OrderConfirm> {
                         Text("Delivery centre charge",
                             style: TextStyle(color: greyColour)),
                         Text(
-                            "RM 1 x ${(orderPlaceProvider.parcelsMain.length * 1).toString()}",
+                            "RM 1.0 x ${(orderPlaceProvider.parcelsMain.length * 1).toString()}",
                             style: TextStyle(color: greyColour)),
                       ],
                     ),

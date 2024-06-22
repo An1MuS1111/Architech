@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class RazorPayPage extends StatefulWidget {
   const RazorPayPage({Key? key}) : super(key: key);
@@ -34,21 +33,21 @@ class _RazorPayPageState extends State<RazorPayPage> {
   }
 
   void handlePaymentSucess(PaymentSuccessResponse response) {
-    Fluttertoast.showToast(
-        msg: " Payment Sucessful " + response.paymentId!,
-        toastLength: Toast.LENGTH_SHORT);
+    // Fluttertoast.showToast(
+    //     msg: " Payment Sucessful " + response.paymentId!,
+    //     toastLength: Toast.LENGTH_SHORT);
   }
 
   void handlePaymentError(PaymentFailureResponse response) {
-    Fluttertoast.showToast(
-        msg: " Payment Fail " + response.message!,
-        toastLength: Toast.LENGTH_SHORT);
+    // Fluttertoast.showToast(
+    //     msg: " Payment Fail " + response.message!,
+    //     toastLength: Toast.LENGTH_SHORT);
   }
 
   void handleExternalWallet(ExternalWalletResponse response) {
-    Fluttertoast.showToast(
-        msg: " External Wallet " + response.walletName!,
-        toastLength: Toast.LENGTH_SHORT);
+    // Fluttertoast.showToast(
+    //     msg: " External Wallet " + response.walletName!,
+    //     toastLength: Toast.LENGTH_SHORT);
   }
 
   @override

@@ -161,7 +161,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         child: Text(
-                          "${order.dateConverter(true)}, ${order.timeConverter(true, null)}",
+                          "${order.dateConverter(true)}, ${order.timeConverter(true, null, null)}",
                           style: TextStyle(
                             fontSize: regular,
                             color: Colors.white,

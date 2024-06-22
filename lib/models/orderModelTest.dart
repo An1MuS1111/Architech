@@ -11,7 +11,7 @@ class OrderModelTest extends ChangeNotifier {
     selectedPayment;
   late String status = "Order is placed";
   DateTime selectedDate = DateTime.now();
-  late DateTime selectedTime;
+  late DateTime selectedTime = DateTime.now();
   late List<ParcelModel> parcels = [];
   double parcelPrice = 1.00;
   double centrePrice = 1.00;
@@ -62,13 +62,13 @@ class OrderModelTest extends ChangeNotifier {
     }
   }
 
-  timeConverter(bool toString, String? time2) {
+  timeConverter(bool toString, String? stringTime, DateTime? dateTimeTime) {
     DateFormat timeFormat = DateFormat();
 
     if (toString == true) {
-      return timeFormat.add_jm().format(selectedTime);
+      return timeFormat.add_jm().format(dateTimeTime!);
     } else {
-      return timeFormat.parse(time2!);
+      return timeFormat.parse(stringTime!);
     }
   }
 
