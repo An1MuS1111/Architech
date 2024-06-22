@@ -15,7 +15,7 @@ class Orders extends StatefulWidget {
 }
 
 class _OrdersState extends State<Orders> {
-  OrderViewModel service = OrderViewModel();
+  // OrderViewModel service = OrderViewModel();
   late Future<List<OrderModel>> orderList;
 
   @override
@@ -26,7 +26,7 @@ class _OrdersState extends State<Orders> {
 
   Future<void> _initRetrieval() async {
     setState(() {
-      orderList = service.retrieveOrders();
+      // orderList = service.retrieveOrders();
     });
   }
 
