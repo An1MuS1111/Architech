@@ -17,11 +17,14 @@ class OrderViewModel {
   }
 
   Future<List<OrderModel>> retrieveOrders() async {
-    QuerySnapshot<Map<String, dynamic>> snapshot =
-        await _db.collection("orders").get();
+    // QuerySnapshot<Map<String, dynamic>> snapshot =
+    //     await _db.collection("orders").get();
         
-    return snapshot.docs
-        .map((docSnapshot) => OrderModel.fromDocumentSnapshot(docSnapshot))
-        .toList();
+    // return snapshot.docs
+    //     .map((docSnapshot) => OrderModel.fromDocumentSnapshot(docSnapshot))
+    //     .toList();
+    QuerySnapshot snapshot = await _db.collection("orders").get();
+
+    return snapshot.docs.map((doc) => OrderModel.fromDocumentSnapshot(doc as DocumentSnapshot<Map<String, dynamic>>)).toList();
   }
 }

@@ -2,6 +2,7 @@ import 'package:architech/components/customDialog.dart';
 import 'package:architech/components/navBars.dart';
 import 'package:architech/config/theme.dart';
 import 'package:architech/models/lists.dart';
+import 'package:architech/models/orderModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -28,6 +29,8 @@ class _AdminOrdersState extends State<AdminOrders> {
   @override
   void initState(){
     super.initState();
+
+    List<OrderModel> retrieveOrders;
   }
 
   @override

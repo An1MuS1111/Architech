@@ -34,6 +34,7 @@ class OrderModel {
     required this.deliveryCharge,
     required this.totalPrice,
   });
+  
 
   // Convert object to JSON format for Firestore
   Map<String, dynamic> toJson() => {
@@ -67,8 +68,8 @@ class OrderModel {
         selectedTime = doc.data()!["selectedTime"],
         paymentMethod = doc.data()!["paymentMethod"],
         status = doc.data()!["status"],
-        parcels = List<Parcel>.from(doc.data()!["parcels"]), // Explicitly casting to List<String>
-        // parcels = Parcel.fromJson(doc.data()!['']),
+        // parcels = List<Parcel>.from(doc.data()!["parcels"]), // Explicitly casting to List<String>
+        parcels = (doc.data()!["parcels"] as List).map((p) => Parcel.fromJson(p)).toList(),
         deliveryCharge = doc.data()!["deliveryCharge"],
         totalPrice = doc.data()!["totalPrice"];
 }

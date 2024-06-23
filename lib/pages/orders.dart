@@ -22,12 +22,12 @@ class _OrdersState extends State<Orders> {
   @override
   void initState() {
     super.initState();
-    _initRetrieval();
+    orderList = service.retrieveOrders() as Future<List<OrderModel>>;
   }
 
   Future<void> _initRetrieval() async {
     setState(() {
-      orderList = service.retrieveOrders();
+      orderList = service.retrieveOrders() as Future<List<OrderModel>>;;
     });
   }
 
