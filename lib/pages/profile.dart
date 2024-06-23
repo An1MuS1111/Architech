@@ -113,19 +113,3 @@ class _ProfileState extends State<Profile>{
     );
   }
 }
-
-class LogoutButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () async {
-        await FirebaseAuth.instance.signOut();
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const Login()),
-        );
-      },
-      child: Text('Logout'),
-    );
-  }
-}

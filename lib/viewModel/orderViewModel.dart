@@ -19,6 +19,7 @@ class OrderViewModel {
   Future<List<OrderModel>> retrieveOrders() async {
     QuerySnapshot<Map<String, dynamic>> snapshot =
         await _db.collection("orders").get();
+        
     return snapshot.docs
         .map((docSnapshot) => OrderModel.fromDocumentSnapshot(docSnapshot))
         .toList();

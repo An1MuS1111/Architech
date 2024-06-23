@@ -89,55 +89,56 @@ class _MyAppState extends State<MyApp> {
   // TODO: Set up validation to show bottomNav for admin based on auth
   @override
   Widget build(BuildContext context) {
-    // return MaterialApp(
-    //   debugShowCheckedModeBanner: false,
-    //   title: 'UniDash',
-    //   home: Scaffold(
-    //     bottomNavigationBar: BottomNavBar(
-    //       pageIndex: selectedTab,
-    //       onTap: (index){
-    //         if(index == selectedTab){
-    //           userPages[index].navKey.currentState?.popUntil((route) => route.isFirst);
-    //           // adminPages[index].navKey.currentState?.popUntil((route) => route.isFirst);
-      
-    //         } else{
-    //           setState(() {
-    //             selectedTab = index;
-    //           });
-    //         }
-    //       },
-    //     ),
-    //     body: IndexedStack(
-    //       index: selectedTab,
-    //       children: 
-    //         userPages.map((page) => Navigator(
-    //           key: page.navKey,
-    //           onGenerateInitialRoutes: (navigator, initialRoute){
-    //             return [
-    //               MaterialPageRoute(builder: (context) => page.page)
-    //             ];
-    //           },
-    //         )).toList()
-    //         // adminPages.map((page) => Navigator(
-    //         //   key: page.navKey,
-    //         //   onGenerateInitialRoutes: (navigator, initialRoute){
-    //         //     return [
-    //         //       MaterialPageRoute(builder: (context) => page.page)
-    //         //     ];
-    //         //   },
-    //         // )).toList()
-    //     ),
-    //   ),
-    // );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'UniDash',
-      // home: OrderPlace(),
-      home: MainPage()
+      home: Scaffold(
+        bottomNavigationBar: BottomNavBar(
+          pageIndex: selectedTab,
+          onTap: (index){
+            if(index == selectedTab){
+              // userPages[index].navKey.currentState?.popUntil((route) => route.isFirst);
+              adminPages[index].navKey.currentState?.popUntil((route) => route.isFirst);
+      
+            } else{
+              setState(() {
+                selectedTab = index;
+              });
+            }
+          },
+        ),
+        body: IndexedStack(
+          index: selectedTab,
+          children: 
+            // userPages.map((page) => Navigator(
+            //   key: page.navKey,
+            //   onGenerateInitialRoutes: (navigator, initialRoute){
+            //     return [
+            //       MaterialPageRoute(builder: (context) => page.page)
+            //     ];
+            //   },
+            // )).toList()
+            adminPages.map((page) => Navigator(
+              key: page.navKey,
+              onGenerateInitialRoutes: (navigator, initialRoute){
+                return [
+                  MaterialPageRoute(builder: (context) => page.page)
+                ];
+              },
+            )).toList()
+        ),
+      ),
     );
+    // return MaterialApp(
+    //   debugShowCheckedModeBanner: false,
+    //   title: 'UniDash',
+    //   // home: OrderPlace(),
+    //   home: MainPage()
+    // );
   }
 }
 
+// TODO: Check auth based on role and display corresponding pages
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 

@@ -2,8 +2,10 @@ import 'package:architech/components/form.dart';
 import 'package:architech/components/navBars.dart';
 import 'package:architech/config/theme.dart';
 import 'package:architech/models/orderModel.dart';
+import 'package:architech/pages/order/orderDetails.dart';
 import 'package:architech/pages/order/orderPlace.dart';
 import 'package:architech/viewModel/orderViewModel.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Orders extends StatefulWidget {
@@ -90,7 +92,7 @@ class _OrdersState extends State<Orders> {
                                       child: const Text('No data available'));
                                 } else {
                                   List<OrderModel> orders = snapshot.data!;
-
+                                  
                                   return ListView.builder(
                                       padding: EdgeInsets.zero,
                                       shrinkWrap: true,
@@ -117,10 +119,10 @@ class _OrdersState extends State<Orders> {
                                                 right: -15,
                                                 child: InkWell(
                                                   onTap: () {
-                                                    // Navigator.push(
-                                                    //   context,
-                                                    //   MaterialPageRoute(builder: (context) => OrderDetails(order: orders[index]))
-                                                    // );
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(builder: (context) => OrderDetails(order: orders[index]))
+                                                    );
                                                   },
                                                   borderRadius:
                                                       BorderRadius.circular(15),

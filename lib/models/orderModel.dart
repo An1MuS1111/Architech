@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class OrderModel {
@@ -7,6 +9,8 @@ class OrderModel {
   final String phoneNumber;
   final PickLocation pickupLocation;
   final PickLocation deliveryCentre;
+  // final List<PickLocation> pickupLocation;
+  // final List<PickLocation> deliveryCentre;
   final String selectedDate;
   final String selectedTime;
   final String paymentMethod;
@@ -51,16 +55,20 @@ class OrderModel {
   OrderModel.fromDocumentSnapshot(DocumentSnapshot<Map<String, dynamic>> doc)
       : orderId = doc.id,
         userId = doc.data()!["userId"],
-        deliveryCentre = doc.data()!["deliveryCentre"],
+        // deliveryCentre = doc.data()!["deliveryCentre"],
+        deliveryCentre = PickLocation.fromJson(doc.data()!["deliveryCentre"]),
         name = doc.data()!["name"],
         phoneNumber = doc.data()!["phoneNumber"],
-        pickupLocation= doc.data()!["pickupLocation"],
+        // pickupLocation= doc.data()!["pickupLocation"],
+        pickupLocation = PickLocation.fromJson(doc.data()!["pickupLocation"]),
+        // pickupLocation= PickLocation.fromJson(doc.data()!['pickupLocation'][0] as Map<String, dynamic>),
         // selectedDateAndTime = doc.data()?["selectedDateAndTime"], // Use null-aware operator
         selectedDate = doc.data()!["selectedDate"],
         selectedTime = doc.data()!["selectedTime"],
         paymentMethod = doc.data()!["paymentMethod"],
         status = doc.data()!["status"],
-        parcels = List<Parcel>.from( doc.data()!["parcels"]), // Explicitly casting to List<String>
+        parcels = List<Parcel>.from(doc.data()!["parcels"]), // Explicitly casting to List<String>
+        // parcels = Parcel.fromJson(doc.data()!['']),
         deliveryCharge = doc.data()!["deliveryCharge"],
         totalPrice = doc.data()!["totalPrice"];
 }
@@ -93,6 +101,17 @@ class Parcel {
         "parcelCharge": parcelCharge,
         "totalParcels": totalParcels,
       };
+
+  factory Parcel.fromJson(Map<String, dynamic> json) =>
+    Parcel(
+      parcelId: json['parcelId'],
+      trackingNumber: json['trackingNumber'],
+      criteria: json['criteria'],
+      timeCharge: json['timeCharge'],
+      criteriaCharge: json['criteriaCharge'],
+      parcelCharge: json['parcelCharge'],
+      totalParcels: json['totalParcels'],
+    );
 }
 
 class PickLocation {
@@ -111,4 +130,11 @@ class PickLocation {
         "latitude": latitude,
         "longitude": longitude,
       };
+
+  factory PickLocation.fromJson(Map<String, dynamic> json) =>
+    PickLocation(
+      address: json['address'], 
+      latitude: json['latitude'], 
+      longitude: json['longitude']
+    );
 }
