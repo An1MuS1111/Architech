@@ -8,6 +8,7 @@ import 'package:architech/models/bottomNavBarModel.dart';
 import 'package:architech/pages/orders.dart';
 import 'package:architech/pages/profile.dart';
 import 'package:architech/pages/support.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:architech/pages/login.dart';

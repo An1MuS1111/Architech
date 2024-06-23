@@ -4,13 +4,15 @@ class User {
   final String email;
   final String password;
   final String username;
-  final Timestamp accountCreatedAt;
+  final String role;
+  // final Timestamp accountCreatedAt;
 
   User({
     required this.email,
     required this.password,
     required this.username,
-    required this.accountCreatedAt,
+    required this.role
+    // required this.accountCreatedAt,
   });
 
   factory User.fromFirestore(DocumentSnapshot doc) {
@@ -19,7 +21,8 @@ class User {
       email: data['email'] ?? '',
       password: data['password'] ?? '',
       username: data['username'] ?? '',
-      accountCreatedAt: data['accountCreatedAt'] ?? Timestamp.now(),
+      role: data['role'] ?? ''
+      // accountCreatedAt: data['accountCreatedAt'] ?? Timestamp.now(),
     );
   }
 
@@ -28,7 +31,8 @@ class User {
       'email': email,
       'password': password,
       'username': username,
-      'accountCreatedAt': accountCreatedAt,
+      'role': role
+      // 'accountCreatedAt': accountCreatedAt,
     };
   }
 }

@@ -95,8 +95,17 @@ class _ProfileState extends State<Profile>{
               fullBtn(Icons.wallet, "Languages", label[1]),
               fullBtn(Icons.wallet, "Settings", label[2]),
               const SizedBox(height: 30),
-              LogoutButton(),
-              Center(child: textLink(context, "Delete account", "", greyColour))
+              logoutBtn(() async{
+                await FirebaseAuth.instance.signOut();
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Login()),
+                );
+              }),
+              InkWell(
+                onTap: (){},
+                child: Center(child: textLink(context, "Delete account", "", greyColour))
+              )
             ],
           ),
         ),

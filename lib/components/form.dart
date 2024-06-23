@@ -293,9 +293,11 @@ Widget fullBtn(IconData icon, String text, Color colour) {
 }
 
 // Logout Button
-Widget logoutBtn() {
+Widget logoutBtn(Function onClick) {
   return TextButton(
-    onPressed: () => {},
+    onPressed: (){
+      onClick();
+    },
     style: ButtonStyle(
       padding: MaterialStateProperty.all<EdgeInsets>(
           const EdgeInsets.symmetric(vertical: 12, horizontal: 25)),

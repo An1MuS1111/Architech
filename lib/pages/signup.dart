@@ -46,7 +46,7 @@ class _SignupState extends State<Signup> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.fromLTRB(20, height * 0.1, 20, 0),
+            padding: EdgeInsets.fromLTRB(20, height * 0.1, 20, 20),
             child: Column(
               children: [
                 appLogo("assets/logo_full.png", 300),
@@ -126,9 +126,10 @@ class _SignupState extends State<Signup> {
 
   void _signUp() async {
     String email = emailController.text;
+    String username = usernameController.text;
     String password = passwordController.text;
 
-    User? user = await _auth.registerWithEmailAndPassword(email, password);
+    User? user = await _auth.registerWithEmailAndPassword(email, username, password, context);
 
     if (user != null) {
       print("User is successfully created");

@@ -133,14 +133,40 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'UniDash',
       // home: OrderPlace(),
-      home: RazorPayPage()
+      home: MainPage()
     );
   }
 }
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   const MainPage({super.key});
-  
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  int selectedTab = 0;
+  List<BottomNavBarModel> userPages = [];
+  List<BottomNavBarModel> adminPages = [];
+
+  void initState(){
+    super.initState();
+    userPages = [
+      BottomNavBarModel(navKey: homeNavKey, page: Home(tab: 1,)),
+      BottomNavBarModel(navKey: orderNavKey, page: Orders(tab: 2)),
+      BottomNavBarModel(navKey: supportNavKey, page: Support(tab: 3)),
+      BottomNavBarModel(navKey: settingsNavKey, page: Profile(tab: 4))
+    ];
+
+    adminPages = [
+      BottomNavBarModel(navKey: homeNavKey, page: AdminHome(tab: 1)),
+      BottomNavBarModel(navKey: orderNavKey, page: AdminOrders(tab: 2)),
+      BottomNavBarModel(navKey: supportNavKey, page: AdminUsers(tab: 3)),
+      BottomNavBarModel(navKey: settingsNavKey, page: AdminProfile(tab: 4))
+    ];
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
     body: StreamBuilder<User?>(
@@ -151,7 +177,46 @@ class MainPage extends StatelessWidget {
         } else if (snapshot.hasError) {
           return const Center(child: Text('Something went Wrong'));
         } else if (snapshot.hasData) {
-          return Home(tab: 1);
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'UniDash',
+            home: Scaffold(
+              bottomNavigationBar: BottomNavBar(
+                pageIndex: selectedTab,
+                onTap: (index){
+                  if(index == selectedTab){
+                    userPages[index].navKey.currentState?.popUntil((route) => route.isFirst);
+                    // adminPages[index].navKey.currentState?.popUntil((route) => route.isFirst);
+            
+                  } else{
+                    setState(() {
+                      selectedTab = index;
+                    });
+                  }
+                },
+              ),
+              body: IndexedStack(
+                index: selectedTab,
+                children: 
+                  userPages.map((page) => Navigator(
+                    key: page.navKey,
+                    onGenerateInitialRoutes: (navigator, initialRoute){
+                      return [
+                        MaterialPageRoute(builder: (context) => page.page)
+                      ];
+                    },
+                  )).toList()
+                  // adminPages.map((page) => Navigator(
+                  //   key: page.navKey,
+                  //   onGenerateInitialRoutes: (navigator, initialRoute){
+                  //     return [
+                  //       MaterialPageRoute(builder: (context) => page.page)
+                  //     ];
+                  //   },
+                  // )).toList()
+              ),
+            ),
+          );
         } else {
           return const Login();
         }
