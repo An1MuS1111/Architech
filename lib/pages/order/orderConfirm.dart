@@ -57,9 +57,9 @@ class _OrderConfirmState extends State<OrderConfirm> {
                           longitude: orderPlaceProvider.longitude,
                         ),
                         deliveryCentre: PickLocation(
-                          address: orderPlaceProvider.selectedPickAddress,
-                          latitude: orderPlaceProvider.latitude,
-                          longitude: orderPlaceProvider.longitude,
+                          address: orderPlaceProvider.deliveryAddress,
+                          latitude: orderPlaceProvider.deliveryLat,
+                          longitude: orderPlaceProvider.deliveryLong,
                         ),
                         selectedDate: orderScheduleProvider.order.selectedDate.toString(),
                         selectedTime:

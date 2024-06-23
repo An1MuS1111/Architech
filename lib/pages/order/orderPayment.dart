@@ -1,3 +1,6 @@
+import 'package:architech/components/form.dart';
+import 'package:architech/components/logos.dart';
+import 'package:architech/config/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
@@ -68,25 +71,19 @@ class _RazorPayPageState extends State<RazorPayPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 100,
             ),
-            Image.network(
-              'https://www.google.com/url?sa=i&url=https%3A%2F%2Frazorpay.com%2Fnewsroom%2Frazorpay-launches-indias-first-moneysaver-export-account-set-to-save-indian-exporters-more-than-50-in-bank-transfers%2F&psig=AOvVaw1YXzWzlPT552C7EAvLkwcB&ust=1718880354396000&source=images&cd=vfe&opi=89978449&ved=0CA8QjRxqFwoTCOjjpLm-54YDFQAAAAAdAAAAABAE',
-              height: 100,
-              width: 300,
-            ),
-            SizedBox(
+            appLogo("assets/razorpay_logo.png", 200),
+            const SizedBox(
               height: 10,
             ),
-            Text(
+            const Text(
               "Welcome to Razor Payment Gateway",
               style: TextStyle(
-                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 18),
               textAlign: TextAlign.center,
@@ -94,16 +91,16 @@ class _RazorPayPageState extends State<RazorPayPage> {
             SizedBox(
               height: 30,
             ),
-            Padding(
+            Container(
               padding: EdgeInsets.all(8.0),
+              margin: EdgeInsets.symmetric(horizontal: 10),
               child: TextFormField(
                   cursorColor: Colors.white,
                   autofocus: false,
-                  style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                       labelText: 'Enter amount to pay',
                       labelStyle:
-                          TextStyle(fontSize: 15.0, color: Colors.white),
+                          TextStyle(fontSize: 15.0),
                       border: OutlineInputBorder(
                           borderSide: BorderSide(
                         color: Colors.white,
@@ -111,7 +108,6 @@ class _RazorPayPageState extends State<RazorPayPage> {
                       )),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                        color: Colors.white,
                         width: 1.0,
                       )),
                       errorStyle:
@@ -125,22 +121,41 @@ class _RazorPayPageState extends State<RazorPayPage> {
                   }),
             ),
             SizedBox(
-              height: 30,
+              height: 20,
             ),
-            ElevatedButton(
-              onPressed: () {
-                if (amtController.text.toString().isNotEmpty) {
-                  setState(() {
-                    int amount = int.parse(amtController.text.toString());
-                    openCheckout(amount);
-                  });
-                }
-              },
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text('Make Payment'),
-              ),
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     if (amtController.text.toString().isNotEmpty) {
+            //       setState(() {
+            //         int amount = int.parse(amtController.text.toString());
+            //         openCheckout(amount);
+            //       });
+            //     }
+            //   },
+            //   child: Padding(
+            //     padding: EdgeInsets.all(8.0),
+            //     child: Text(
+            //       'Make Payment'
+            //     ),
+            //   ),
+            //   style: ElevatedButton.styleFrom(backgroundColor: primaryColour),
+            // )
+            mainBtn(context, "Make Payment", false, (){
+              if (amtController.text.toString().isNotEmpty) {
+                setState(() {
+                  int amount = int.parse(amtController.text.toString());
+                  openCheckout(amount);
+                });
+              }
+            }),
+            InkWell(
+              onTap: (){},
+              child: Container(
+                margin: EdgeInsets.symmetric(vertical: 15),
+                child: Text(
+                  "Cancel Process"
+                ),
+              )
             )
           ],
         ),

@@ -18,6 +18,9 @@ class OrderPlaceProvider extends ChangeNotifier {
   String longitude = '';
   String latitude = '';
   String selectedPickAddress = '';
+  String deliveryAddress = '';
+  String deliveryLat = '';
+  String deliveryLong = '';
   List<parcel.Parcel> parcelsMain = [];
   List<String> totalKg = [];
 
@@ -109,6 +112,26 @@ class OrderPlaceProvider extends ChangeNotifier {
     log(longitude.toString(), name: "longitude1");
     log(latitude.toString(), name: "latitude1");
     notifyListeners();
+  }
+
+  void addDeliveryCentreLatLong({required String address}){
+    if (address != null) {
+      if (address == "OPC") {
+        deliveryAddress = address;
+        deliveryLat = "1.557927121224273";
+        deliveryLong = "103.63291330904681";
+      }
+      if (address == "CPP") {
+        deliveryAddress = address;
+        deliveryLat = "1.5620671715372982";
+        deliveryLong = "103.63209795562753";
+      }
+      if (address == "ASN") {
+        deliveryAddress = address;
+        deliveryLat = "1.5693706783993944";
+        deliveryLong = "103.63395376992884";
+      }
+    }
   }
 
   OrderModelTest order = OrderModelTest();

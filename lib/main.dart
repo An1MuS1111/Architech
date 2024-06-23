@@ -20,6 +20,7 @@ import 'package:architech/pages/order/orderConfirm.dart';
 import 'package:architech/pages/order/orderCriteria.dart';
 import 'package:architech/pages/order/orderDetails.dart';
 import 'package:architech/pages/order/orderEdit.dart';
+import 'package:architech/pages/order/orderPayment.dart';
 import 'package:architech/pages/order/orderSchedule.dart';
 import 'package:architech/pages/order/orderTracking.dart';
 import 'package:architech/pages/orders.dart';
@@ -88,52 +89,52 @@ class _MyAppState extends State<MyApp> {
   // TODO: Set up validation to show bottomNav for admin based on auth
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'UniDash',
-      home: Scaffold(
-        bottomNavigationBar: BottomNavBar(
-          pageIndex: selectedTab,
-          onTap: (index){
-            if(index == selectedTab){
-              userPages[index].navKey.currentState?.popUntil((route) => route.isFirst);
-              // adminPages[index].navKey.currentState?.popUntil((route) => route.isFirst);
-      
-            } else{
-              setState(() {
-                selectedTab = index;
-              });
-            }
-          },
-        ),
-        body: IndexedStack(
-          index: selectedTab,
-          children: 
-            userPages.map((page) => Navigator(
-              key: page.navKey,
-              onGenerateInitialRoutes: (navigator, initialRoute){
-                return [
-                  MaterialPageRoute(builder: (context) => page.page)
-                ];
-              },
-            )).toList()
-            // adminPages.map((page) => Navigator(
-            //   key: page.navKey,
-            //   onGenerateInitialRoutes: (navigator, initialRoute){
-            //     return [
-            //       MaterialPageRoute(builder: (context) => page.page)
-            //     ];
-            //   },
-            // )).toList()
-        ),
-      ),
-    );
     // return MaterialApp(
     //   debugShowCheckedModeBanner: false,
     //   title: 'UniDash',
-    //   // home: OrderPlace(),
-    //   home: Home()
+    //   home: Scaffold(
+    //     bottomNavigationBar: BottomNavBar(
+    //       pageIndex: selectedTab,
+    //       onTap: (index){
+    //         if(index == selectedTab){
+    //           userPages[index].navKey.currentState?.popUntil((route) => route.isFirst);
+    //           // adminPages[index].navKey.currentState?.popUntil((route) => route.isFirst);
+      
+    //         } else{
+    //           setState(() {
+    //             selectedTab = index;
+    //           });
+    //         }
+    //       },
+    //     ),
+    //     body: IndexedStack(
+    //       index: selectedTab,
+    //       children: 
+    //         userPages.map((page) => Navigator(
+    //           key: page.navKey,
+    //           onGenerateInitialRoutes: (navigator, initialRoute){
+    //             return [
+    //               MaterialPageRoute(builder: (context) => page.page)
+    //             ];
+    //           },
+    //         )).toList()
+    //         // adminPages.map((page) => Navigator(
+    //         //   key: page.navKey,
+    //         //   onGenerateInitialRoutes: (navigator, initialRoute){
+    //         //     return [
+    //         //       MaterialPageRoute(builder: (context) => page.page)
+    //         //     ];
+    //         //   },
+    //         // )).toList()
+    //     ),
+    //   ),
     // );
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'UniDash',
+      // home: OrderPlace(),
+      home: RazorPayPage()
+    );
   }
 }
 

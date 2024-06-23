@@ -32,7 +32,16 @@ class FormValidator extends ChangeNotifier{
     } else if (!emailRegex.hasMatch(email)) {
       return 'Please enter a valid email address.';
     }
-    return null;
+
+    // return null;
+  }
+
+  String? validateUsername(String? username){
+    if (username!.isEmpty){
+      return 'Please enter your username';
+    } else if (username.length < 5){
+      return 'Username must be at least 5 characters long';
+    }
   }
 
   String? validatePassword(String? password) {
@@ -42,7 +51,7 @@ class FormValidator extends ChangeNotifier{
       return 'Password must be at least 6 characters long.';
     }
 
-    return null;
+    // return null;
   }
 
   String? validateConfirmPassword(String? confirmPassword, String password) {
@@ -51,7 +60,7 @@ class FormValidator extends ChangeNotifier{
     } else if (confirmPassword != password) {
       return 'Password must match';
     }
-    return null;
+    // return null;
   }
 
 }

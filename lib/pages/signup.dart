@@ -32,6 +32,7 @@ class _SignupState extends State<Signup> {
     // TODO: implement dispose
 
     emailController.dispose();
+    usernameController.dispose();
     passwordController.dispose();
     super.dispose();
   }
@@ -68,8 +69,8 @@ class _SignupState extends State<Signup> {
                   "Username",
                   "Enter your username",
                   false,
-                  emailController,
-                  _emailValidator,
+                  usernameController,
+                  _usernameValidator,
                 ),
                 authTextFormField("Password", "Enter your password", true,
                     passwordController, _passwordValidator),
@@ -102,6 +103,12 @@ class _SignupState extends State<Signup> {
     String email = emailController.text;
 
     _formValidator.validateEmail(email);
+  }
+
+  void _usernameValidator() async {
+    String username = usernameController.text;
+
+    _formValidator.validateUsername(username);
   }
 
   void _passwordValidator() async {
