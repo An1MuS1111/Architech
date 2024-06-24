@@ -68,8 +68,9 @@ class OrderModel {
         selectedTime = doc.data()!["selectedTime"],
         paymentMethod = doc.data()!["paymentMethod"],
         status = doc.data()!["status"],
-        // parcels = List<Parcel>.from(doc.data()!["parcels"]), // Explicitly casting to List<String>
-        parcels = (doc.data()!["parcels"] as List).map((p) => Parcel.fromJson(p)).toList(),
+        parcels = (doc.data()?["parcels"] as List<dynamic>)
+            .map((parcel) => Parcel.fromJson(parcel as Map<String, dynamic>))
+            .toList(),
         deliveryCharge = doc.data()!["deliveryCharge"],
         totalPrice = doc.data()!["totalPrice"];
 }
@@ -107,7 +108,7 @@ class Parcel {
     Parcel(
       parcelId: json['parcelId'],
       trackingNumber: json['trackingNumber'],
-      criteria: json['criteria'],
+      criteria: List<String>.from(json['criteria']),
       timeCharge: json['timeCharge'],
       criteriaCharge: json['criteriaCharge'],
       parcelCharge: json['parcelCharge'],

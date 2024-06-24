@@ -97,8 +97,8 @@ class _MyAppState extends State<MyApp> {
           pageIndex: selectedTab,
           onTap: (index){
             if(index == selectedTab){
-              userPages[index].navKey.currentState?.popUntil((route) => route.isFirst);
-              // adminPages[index].navKey.currentState?.popUntil((route) => route.isFirst);
+              // userPages[index].navKey.currentState?.popUntil((route) => route.isFirst);
+              adminPages[index].navKey.currentState?.popUntil((route) => route.isFirst);
       
             } else{
               setState(() {
@@ -110,15 +110,7 @@ class _MyAppState extends State<MyApp> {
         body: IndexedStack(
           index: selectedTab,
           children: 
-            userPages.map((page) => Navigator(
-              key: page.navKey,
-              onGenerateInitialRoutes: (navigator, initialRoute){
-                return [
-                  MaterialPageRoute(builder: (context) => page.page)
-                ];
-              },
-            )).toList()
-            // adminPages.map((page) => Navigator(
+            // userPages.map((page) => Navigator(
             //   key: page.navKey,
             //   onGenerateInitialRoutes: (navigator, initialRoute){
             //     return [
@@ -126,6 +118,14 @@ class _MyAppState extends State<MyApp> {
             //     ];
             //   },
             // )).toList()
+            adminPages.map((page) => Navigator(
+              key: page.navKey,
+              onGenerateInitialRoutes: (navigator, initialRoute){
+                return [
+                  MaterialPageRoute(builder: (context) => page.page)
+                ];
+              },
+            )).toList()
         ),
       ),
     );
@@ -186,8 +186,8 @@ class _MainPageState extends State<MainPage> {
                 pageIndex: selectedTab,
                 onTap: (index){
                   if(index == selectedTab){
-                    userPages[index].navKey.currentState?.popUntil((route) => route.isFirst);
-                    // adminPages[index].navKey.currentState?.popUntil((route) => route.isFirst);
+                    // userPages[index].navKey.currentState?.popUntil((route) => route.isFirst);
+                    adminPages[index].navKey.currentState?.popUntil((route) => route.isFirst);
             
                   } else{
                     setState(() {
@@ -199,15 +199,7 @@ class _MainPageState extends State<MainPage> {
               body: IndexedStack(
                 index: selectedTab,
                 children: 
-                  userPages.map((page) => Navigator(
-                    key: page.navKey,
-                    onGenerateInitialRoutes: (navigator, initialRoute){
-                      return [
-                        MaterialPageRoute(builder: (context) => page.page)
-                      ];
-                    },
-                  )).toList()
-                  // adminPages.map((page) => Navigator(
+                  // userPages.map((page) => Navigator(
                   //   key: page.navKey,
                   //   onGenerateInitialRoutes: (navigator, initialRoute){
                   //     return [
@@ -215,6 +207,14 @@ class _MainPageState extends State<MainPage> {
                   //     ];
                   //   },
                   // )).toList()
+                  adminPages.map((page) => Navigator(
+                    key: page.navKey,
+                    onGenerateInitialRoutes: (navigator, initialRoute){
+                      return [
+                        MaterialPageRoute(builder: (context) => page.page)
+                      ];
+                    },
+                  )).toList()
               ),
             ),
           );

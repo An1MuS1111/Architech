@@ -2,6 +2,7 @@ import 'package:architech/components/form.dart';
 import 'package:architech/components/logos.dart';
 import 'package:architech/config/theme.dart';
 import 'package:architech/controllers/formValidator.dart';
+import 'package:architech/main.dart';
 import 'package:architech/pages/home.dart';
 import 'package:architech/pages/signup.dart';
 import 'package:flutter/material.dart';
@@ -122,11 +123,11 @@ class _LoginState extends State<Login> {
     User? user = await _auth.signInWithEmailAndPassword(email, password);
 
     if (user != null) {
-      print("User is successfully created");
+      print("User is successfully logged in");
 
       // Change to the MyOrderScreen();
-      // Navigator.push(
-      //     context, MaterialPageRoute(builder: (context) => Orders()));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => MainPage()));
     } else {
       print("some error");
     }

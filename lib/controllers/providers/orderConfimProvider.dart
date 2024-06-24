@@ -58,7 +58,7 @@ class OrderConfirmProvider extends ChangeNotifier {
         .doc(order.orderId)
         .set(order.toJson())
         .then((value) {
-      showSnackBar(context, "Order Added Success Fully");
+      showSnackBar(context, "Order Added Successfully");
     }).catchError((error) {
       showSnackBar(context, error);
       print("Failed to add order: $error");
