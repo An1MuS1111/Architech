@@ -30,29 +30,26 @@ import 'package:architech/pages/signup.dart';
 import 'package:architech/pages/support.dart';
 import 'package:architech/pages/support/helpCentre.dart';
 import 'package:flutter/material.dart';
-
-// import 'package:architech/config/router.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:architech/api/firebase_api.dart';
 
-Future main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  await Firebase.initializeApp(
-      // options: DefaultFirebaseOptions.currentPlatform,
-      );
+  await Firebase.initializeApp();
   await FirebaseApi().initNotifications();
 
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (context) => FormValidator()),
-    ChangeNotifierProvider(create: (context) => OrderPlaceProvider()),
-    ChangeNotifierProvider(create: (context) => OrderCriteriaProvider()),
-    ChangeNotifierProvider(create: (context) => OrderScheduleProvider()),
-    ChangeNotifierProvider(create: (context) => OrderConfirmProvider()),
-  ], child: const MyApp()));
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => FormValidator()),
+      ChangeNotifierProvider(create: (context) => OrderPlaceProvider()),
+      ChangeNotifierProvider(create: (context) => OrderCriteriaProvider()),
+      ChangeNotifierProvider(create: (context) => OrderScheduleProvider()),
+      ChangeNotifierProvider(create: (context) => OrderConfirmProvider()),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -69,24 +66,24 @@ class _MyAppState extends State<MyApp> {
   List<BottomNavBarModel> userPages = [];
   List<BottomNavBarModel> adminPages = [];
 
-  void initState(){
+  @override
+  void initState() {
     super.initState();
     userPages = [
-      BottomNavBarModel(navKey: homeNavKey, page: Home(tab: 1,)),
+      BottomNavBarModel(navKey: homeNavKey, page: Home(tab: 1)),
       BottomNavBarModel(navKey: orderNavKey, page: Orders(tab: 2)),
       BottomNavBarModel(navKey: supportNavKey, page: Support(tab: 3)),
-      BottomNavBarModel(navKey: settingsNavKey, page: Profile(tab: 4))
+      BottomNavBarModel(navKey: settingsNavKey, page: Profile(tab: 4)),
     ];
 
     adminPages = [
       BottomNavBarModel(navKey: homeNavKey, page: AdminHome(tab: 1)),
       BottomNavBarModel(navKey: orderNavKey, page: AdminOrders(tab: 2)),
       BottomNavBarModel(navKey: supportNavKey, page: AdminUsers(tab: 3)),
-      BottomNavBarModel(navKey: settingsNavKey, page: AdminProfile(tab: 4))
+      BottomNavBarModel(navKey: settingsNavKey, page: AdminProfile(tab: 4)),
     ];
   }
-  
-  // TODO: Set up validation to show bottomNav for admin based on auth
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -129,16 +126,9 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
-    // return MaterialApp(
-    //   debugShowCheckedModeBanner: false,
-    //   title: 'UniDash',
-    //   // home: OrderPlace(),
-    //   home: MainPage()
-    // );
   }
 }
 
-// TODO: Check auth based on role and display corresponding pages
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
@@ -151,20 +141,21 @@ class _MainPageState extends State<MainPage> {
   List<BottomNavBarModel> userPages = [];
   List<BottomNavBarModel> adminPages = [];
 
-  void initState(){
+  @override
+  void initState() {
     super.initState();
     userPages = [
-      BottomNavBarModel(navKey: homeNavKey, page: Home(tab: 1,)),
+      BottomNavBarModel(navKey: homeNavKey, page: Home(tab: 1)),
       BottomNavBarModel(navKey: orderNavKey, page: Orders(tab: 2)),
       BottomNavBarModel(navKey: supportNavKey, page: Support(tab: 3)),
-      BottomNavBarModel(navKey: settingsNavKey, page: Profile(tab: 4))
+      BottomNavBarModel(navKey: settingsNavKey, page: Profile(tab: 4)),
     ];
 
     adminPages = [
       BottomNavBarModel(navKey: homeNavKey, page: AdminHome(tab: 1)),
       BottomNavBarModel(navKey: orderNavKey, page: AdminOrders(tab: 2)),
       BottomNavBarModel(navKey: supportNavKey, page: AdminUsers(tab: 3)),
-      BottomNavBarModel(navKey: settingsNavKey, page: AdminProfile(tab: 4))
+      BottomNavBarModel(navKey: settingsNavKey, page: AdminProfile(tab: 4)),
     ];
   }
 
@@ -216,12 +207,13 @@ class _MainPageState extends State<MainPage> {
                     },
                   )).toList()
               ),
-            ),
+            )
           );
-        } else {
-          return const Login();
-        }
-      }
-    ),
-  );
+          } else {
+            return const Login();
+          }
+        },
+      ),
+    );
 }
+
