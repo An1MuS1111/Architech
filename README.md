@@ -1,6 +1,6 @@
 # architech
 
-A new Flutter project.
+You may find the apk file titled app-release.apk in the root directory.
 
 ## Getting Started
 
