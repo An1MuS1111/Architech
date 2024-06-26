@@ -80,7 +80,7 @@ class _OrderConfirmState extends State<OrderConfirm> {
                       ),
                     );
 
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => RazorPayPage(order: orderPlaceProvider.order)));
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => RazorPayPage(order: orderPlaceProvider.order)));
                   }
                 )
               ),
